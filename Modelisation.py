@@ -84,3 +84,9 @@ def algo_face6():
     face6[6].set_compass(nord=(face, 4), sud=(5, 9), ouest=(2, 9), est=(face, 8))
     face6[7].set_compass(nord=(face, 5), sud=(5, 8), ouest=(face, 7), est=(face, 9))
     face6[8].set_compass(nord=(face, 6), sud=(5, 7), ouest=(face, 8), est=(4, 9))
+
+
+def modelisation_cube():
+    algo_remplissage = [algo_face1(), algo_face2(), algo_face3(), algo_face4(),algo_face5(), algo_face6()]
+    for face in range(0, 6): # ordre par face
+        algo_remplissage[face]

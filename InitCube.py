@@ -1,4 +1,4 @@
-couleurs = ["Blanc"]*9 + ["Bleu"]*9 + ["Orange"]*9+ ["Vert"]*9 + ["Rouge"]*9  + ["Jaune"]*9   
+from SortColors import new_colors
 
 ####################### CARRE
 
@@ -71,15 +71,22 @@ class Carré():
         }
         return dico_coordonnées
   
-def init_cub(couleurs):
-    cube = []
-    id = 0
-    for numéro_face in range(1, 7):
-        for numéro_carré in range(1, 10):
-            cube.append(Carré(couleurs[id], numéro_face, numéro_carré, id + 1))
-            id +=1
-    return cube
 
+def print_info_cube():
+    faces = cube.get_faces()
+    for index, face in enumerate(faces, start=1): # ordre par face
+        print("\n🌸 Face ", index)
+        for i in range(0, 9):
+            print(f"case n°{face[i].get_numéro_carré()} -> {face[i].get_couleur()} {face[i].get_around()}")
+
+
+def print_face(face):
+    i = 0
+    return print(f"""
+{face[i].get_couleur()} {face[i+1].get_couleur()} {face[i+2].get_couleur()}
+{face[i+3].get_couleur()} {face[i+4].get_couleur()} {face[i+5].get_couleur()}
+{face[i+6].get_couleur()} {face[i+7].get_couleur()} {face[i+8].get_couleur()}
+""")
 
 
 ####################### CUBE
@@ -116,15 +123,38 @@ class Cube():
                 return carré
         return None
      
-    def print_info_cube(self):
+
+    
+    def print_cube(self):
         faces = cube.get_faces()
-        for index, face in enumerate(faces, start=1): # ordre par face
-            print("\n🌸 Face ", index)
-            for i in range(0, 9):
-                print(f"case n°{face[i].get_numéro_carré()} -> {face[i].get_couleur()} {face[i].get_around()}")
+        print(f"""
+          {faces[0][0].get_couleur()} {faces[0][1].get_couleur()} {faces[0][2].get_couleur()}
+          {faces[0][3].get_couleur()} {faces[0][4].get_couleur()} {faces[0][5].get_couleur()}
+          {faces[0][6].get_couleur()} {faces[0][7].get_couleur()} {faces[0][8].get_couleur()}
+
+{faces[1][0].get_couleur()} {faces[1][1].get_couleur()} {faces[1][2].get_couleur()}     {faces[2][0].get_couleur()} {faces[2][1].get_couleur()} {faces[2][2].get_couleur()}     {faces[3][0].get_couleur()} {faces[3][1].get_couleur()} {faces[3][2].get_couleur()}     {faces[4][0].get_couleur()} {faces[4][1].get_couleur()} {faces[4][2].get_couleur()}
+{faces[1][3].get_couleur()} {faces[1][4].get_couleur()} {faces[1][5].get_couleur()}     {faces[2][3].get_couleur()} {faces[2][4].get_couleur()} {faces[2][5].get_couleur()}     {faces[3][3].get_couleur()} {faces[3][4].get_couleur()} {faces[3][5].get_couleur()}     {faces[4][3].get_couleur()} {faces[4][4].get_couleur()} {faces[4][5].get_couleur()}
+{faces[1][6].get_couleur()} {faces[1][7].get_couleur()} {faces[1][8].get_couleur()}     {faces[2][6].get_couleur()} {faces[2][7].get_couleur()} {faces[2][8].get_couleur()}     {faces[3][6].get_couleur()} {faces[3][7].get_couleur()} {faces[3][8].get_couleur()}     {faces[4][6].get_couleur()} {faces[4][7].get_couleur()} {faces[4][8].get_couleur()}
+
+          {faces[5][0].get_couleur()} {faces[5][1].get_couleur()} {faces[5][2].get_couleur()}
+          {faces[5][3].get_couleur()} {faces[5][4].get_couleur()} {faces[5][5].get_couleur()}
+          {faces[5][6].get_couleur()} {faces[5][7].get_couleur()} {faces[5][8].get_couleur()}
+
+""")
+             
+def init_cub(couleurs): #sens aiguille d'une montre
+    print(couleurs)
+    cube = []
+    id = 0
+    for numéro_face in range(1, 7):
+        for numéro_carré in range(1, 10):
+            cube.append(Carré(couleurs[id], numéro_face, numéro_carré, id + 1))
+            id +=1
+    return cube 
 
 print("--- INIT ----")
-cube = Cube(init_cub(couleurs))
+cube = Cube(init_cub(new_colors))
+cube.print_cube()
 face1 = cube.get_faces()[0]
 face2 = cube.get_faces()[1]
 face3 = cube.get_faces()[2]
