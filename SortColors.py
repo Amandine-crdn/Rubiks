@@ -30,10 +30,10 @@ import random
     # x x x
     # x milieu x
     # x x x
+
 def define_place(milieu, aretes, coins):
     face1, face2,face3, face4, face5, face6  = {}, {}, {}, {}, {}, {}
     new_colors = []
-
     #coin
     face1[1] = coins[0][0]
     face2[1] = coins[0][1]
@@ -60,80 +60,78 @@ def define_place(milieu, aretes, coins):
     face3[1] = coins[2][1]
     face2[3] = coins[2][2]
     #arete
-    face1[8] = aretes[2][0]
-    face3[2] = aretes[2][1] 
+    face1[8] = aretes[3][0]
+    face3[2] = aretes[3][1] 
     #coin
     face1[9] = coins[3][0]
-    face3[3] = coins[3][1]
-    face4[1] = coins[3][2]
+    face4[1] = coins[3][1] 
+    face3[3] = coins[3][2] 
 
     #arete
-    face2[4] = aretes[3][0]
-    face5[6] = aretes[3][1] 
+    face2[4] = aretes[4][0]
+    face5[6] = aretes[4][1] 
     #milieu
     face2[5] = milieu[1]
     #arete
-    face2[6] = aretes[4][0]
-    face3[4] = aretes[4][1]
+    face2[6] = aretes[5][0]
+    face3[4] = aretes[5][1]
 
     #coin
     face2[7] = coins[4][0]
     face6[7] = coins[4][1]
     face5[9] = coins[4][2]
     #arete
-    face2[8] = aretes[5][0]
-    face6[4] = aretes[5][1] 
+    face2[8] = aretes[6][0]
+    face6[4] = aretes[6][1] 
     #coin
     face2[9] = coins[5][0]
-    face6[1] = coins[5][1]
-    face3[7] = coins[5][2]
+    face3[7] = coins[5][1]
+    face6[1] = coins[5][2]
 
     #milieu
     face3[5] = milieu[2]
     #arete
-    face3[6] = aretes[6][0]
-    face4[4] = aretes[6][1]
+    face3[6] = aretes[7][0]
+    face4[4] = aretes[7][1]
 
     #arete
-    face3[8] = aretes[7][0]
-    face6[2] = aretes[7][1] 
+    face3[8] = aretes[8][0]
+    face6[2] = aretes[8][1] 
     #coin
     face3[9] = coins[6][0]
-    face6[3] = coins[6][1]
-    face4[7] = coins[6][2]
+    face4[7] = coins[6][1]
+    face6[3] = coins[6][2]
 
     #milieu
     face4[5] = milieu[3]
     #arete
-    face4[6] = aretes[8][0]
-    face5[4] = aretes[8][1]
+    face4[6] = aretes[9][0]
+    face5[4] = aretes[9][1]
 
     #arete
-    face4[8] = aretes[9][0]
-    face6[6] = aretes[9][1] 
+    face4[8] = aretes[10][0]
+    face6[6] = aretes[10][1] 
     #coin
     face4[9] = coins[7][0]
-    face6[9] = coins[7][1]
-    face5[7] = coins[7][2]
+    face5[7] = coins[7][1]
+    face6[9] = coins[7][2]
 
     #milieu
     face5[5] = milieu[4]
 
     #arete
-    face5[8] = aretes[9][0]
-    face6[8] = aretes[9][1] 
+    face5[8] = aretes[11][0]
+    face6[8] = aretes[11][1] 
 
     #milieu
     face6[5] = milieu[5]
 
-    new_colors.extend(v for v in sorted(face1.values()))
-    new_colors.extend(v for v in sorted(face2.values()))
-    new_colors.extend(v for v in sorted(face3.values()))
-    new_colors.extend(v for v in sorted(face4.values()))
-    new_colors.extend(v for v in sorted(face5.values()))
-    new_colors.extend(v for v in sorted(face6.values()))
-   
-  
+    #trier selon le numero de case
+    faces = [face1, face2, face3, face4, face5, face6]
+    for f in faces:
+        for i in range(1, 10):
+            new_colors.append(f[i])
+    
     return new_colors
 
 
@@ -141,22 +139,26 @@ def define_place(milieu, aretes, coins):
 
 def get_random_colors():
     colors = []
+    #sous forme de liste pour melanger aleatoirement avec random shuffle
+    aretes = [['O','B'], ['O','W'], ['O','G'], ['O','Y'], ['G','W'], ['G','R'], ['G','Y'], ['R','W'], ['R','B'], ['R','Y'], ['B','W'], ['B','Y']]
+    for a in aretes:
+        random.shuffle(a)
     
-    aretes = {'OB' : ['O','B'],'OW' : ['O','W'],'OG' : ['O','G'],'OY' : ['O','Y'],'GW' : ['G','W'],'GR' : ['G','R'],'GY' : ['G','Y'],'RW' : ['R','W'],'RB' : ['R','B'],'RY' : ['R','Y'],'BW' : ['B','W'],'BY' : ['B','Y'],}
-    for v in aretes.values():
-        random.shuffle(v)
-    colors.extend([v for v in aretes.values()])
-
-    coins = {'WRB' : ['W', 'R', 'B'],'WBO' : ['W', 'B', 'O'],'WGR' : ['W', 'G', 'R'],'WGO' : ['W', 'G', 'O'],'BRY' : ['B', 'R', 'Y'],'BYO' : ['B', 'Y', 'O'],'YGR' : ['Y', 'G', 'R'],'YGO' : ['Y', 'G', 'O'],}
-    for v in coins.values():
-        random.shuffle(v)
-    colors.extend([v for v in coins.values()])
-
+    coins = [['WRG', 'RGW', 'GWR'], ['WBR', 'RWB', 'BRW'], ['WOB', 'BWO', 'OBW'], ['WGO', 'GOW', 'OWG'], ['BYR', 'YRB', 'RBY'], ['BOY', 'OYB', 'YBO'], ['GRY', 'RYG', 'YGR'], ['YOG', 'GYO', 'OGY']]
+    for c in coins:
+        random.shuffle(c)
+    
     milieu = ['W', 'G', 'Y', 'O', 'R', 'B']
-    random.shuffle(milieu)
+  
+    new_coins = []
+    for c in coins:
+        new_coins.append(c[0])
+    colors.extend(aretes)
+    colors.extend(new_coins)
     colors.extend(milieu)
+
     random.shuffle(colors)
-    # print(colors)
+
     return colors
 
 
@@ -168,9 +170,23 @@ def sort_colors(colors):
         milieu.append(c) if len(c) == 1 else aretes.append(c) if len(c) == 2 else coins.append(c)
     return milieu, aretes, coins
 
-print("--- get color ----")
+def check_nb_colors():
+    y, b, r, g, w, o = 0, 0, 0, 0, 0, 0
+    for n in new_colors:
+        if n == 'Y':
+            y+=1
+        elif n == 'B':
+            b+=1
+        elif n == 'R':
+            r+=1
+        elif n == 'G':
+            g+=1
+        elif n == 'W':
+            w+=1
+        elif n == 'O':
+            o+=1
+    print(y, g, r, b, g, w)
+
 colors = get_random_colors()
-print("--- SORT ----")
 milieu, aretes, coins = sort_colors(colors)
 new_colors = define_place(milieu, aretes, coins)
-print(new_colors)

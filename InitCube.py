@@ -3,7 +3,7 @@ from SortColors import new_colors
 ####################### CARRE
 
 class Carré():
-    def __init__(self, couleur: str, numéro_face, numéro_carré, id) -> None: #x: int , y: int, 
+    def __init__(self, couleur: str, numéro_face, numéro_carré, id) -> None:
         self.couleur = couleur
         self.numéro_face = numéro_face
         self.numéro_carré = numéro_carré
@@ -127,22 +127,22 @@ class Cube():
     
     def print_cube(self):
         faces = cube.get_faces()
-        print(f"""
-          {faces[0][0].get_couleur()} {faces[0][1].get_couleur()} {faces[0][2].get_couleur()}
-          {faces[0][3].get_couleur()} {faces[0][4].get_couleur()} {faces[0][5].get_couleur()}
-          {faces[0][6].get_couleur()} {faces[0][7].get_couleur()} {faces[0][8].get_couleur()}
+        print(f"""                                                                                              
+          {faces[4][8].get_couleur()} {faces[4][7].get_couleur()} {faces[4][6].get_couleur()}                   5
+          {faces[4][5].get_couleur()} {faces[4][4].get_couleur()} {faces[4][3].get_couleur()}                2  1  4  6
+          {faces[4][2].get_couleur()} {faces[4][1].get_couleur()} {faces[4][0].get_couleur()}                   3
 
-{faces[1][0].get_couleur()} {faces[1][1].get_couleur()} {faces[1][2].get_couleur()}     {faces[2][0].get_couleur()} {faces[2][1].get_couleur()} {faces[2][2].get_couleur()}     {faces[3][0].get_couleur()} {faces[3][1].get_couleur()} {faces[3][2].get_couleur()}     {faces[4][0].get_couleur()} {faces[4][1].get_couleur()} {faces[4][2].get_couleur()}
-{faces[1][3].get_couleur()} {faces[1][4].get_couleur()} {faces[1][5].get_couleur()}     {faces[2][3].get_couleur()} {faces[2][4].get_couleur()} {faces[2][5].get_couleur()}     {faces[3][3].get_couleur()} {faces[3][4].get_couleur()} {faces[3][5].get_couleur()}     {faces[4][3].get_couleur()} {faces[4][4].get_couleur()} {faces[4][5].get_couleur()}
-{faces[1][6].get_couleur()} {faces[1][7].get_couleur()} {faces[1][8].get_couleur()}     {faces[2][6].get_couleur()} {faces[2][7].get_couleur()} {faces[2][8].get_couleur()}     {faces[3][6].get_couleur()} {faces[3][7].get_couleur()} {faces[3][8].get_couleur()}     {faces[4][6].get_couleur()} {faces[4][7].get_couleur()} {faces[4][8].get_couleur()}
+{faces[1][6].get_couleur()} {faces[1][3].get_couleur()} {faces[1][0].get_couleur()}     {faces[0][0].get_couleur()} {faces[0][1].get_couleur()} {faces[0][2].get_couleur()}     {faces[3][2].get_couleur()} {faces[3][5].get_couleur()} {faces[3][8].get_couleur()}     {faces[5][6].get_couleur()} {faces[5][7].get_couleur()} {faces[5][8].get_couleur()}
+{faces[1][7].get_couleur()} {faces[1][4].get_couleur()} {faces[1][1].get_couleur()}     {faces[0][3].get_couleur()} {faces[0][4].get_couleur()} {faces[0][5].get_couleur()}     {faces[3][1].get_couleur()} {faces[3][4].get_couleur()} {faces[3][7].get_couleur()}     {faces[5][3].get_couleur()} {faces[5][4].get_couleur()} {faces[5][5].get_couleur()}
+{faces[1][8].get_couleur()} {faces[1][5].get_couleur()} {faces[1][2].get_couleur()}     {faces[0][6].get_couleur()} {faces[0][7].get_couleur()} {faces[0][8].get_couleur()}     {faces[3][0].get_couleur()} {faces[3][3].get_couleur()} {faces[3][6].get_couleur()}     {faces[5][0].get_couleur()} {faces[5][1].get_couleur()} {faces[5][2].get_couleur()}
 
-          {faces[5][0].get_couleur()} {faces[5][1].get_couleur()} {faces[5][2].get_couleur()}
-          {faces[5][3].get_couleur()} {faces[5][4].get_couleur()} {faces[5][5].get_couleur()}
-          {faces[5][6].get_couleur()} {faces[5][7].get_couleur()} {faces[5][8].get_couleur()}
+          {faces[2][0].get_couleur()} {faces[2][1].get_couleur()} {faces[2][2].get_couleur()}
+          {faces[2][3].get_couleur()} {faces[2][4].get_couleur()} {faces[2][5].get_couleur()}
+          {faces[2][6].get_couleur()} {faces[2][7].get_couleur()} {faces[2][8].get_couleur()}
 
 """)
              
-def init_cub(couleurs): #sens aiguille d'une montre
+def init_cub(couleurs):
     print(couleurs)
     cube = []
     id = 0
@@ -154,6 +154,7 @@ def init_cub(couleurs): #sens aiguille d'une montre
 
 print("--- INIT ----")
 cube = Cube(init_cub(new_colors))
+print("--- MODELISATION ----")
 cube.print_cube()
 face1 = cube.get_faces()[0]
 face2 = cube.get_faces()[1]
