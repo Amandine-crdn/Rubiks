@@ -136,6 +136,28 @@ def define_place(milieu, aretes, coins):
 
 
 
+def get_random_colors_test():
+    #sous forme de liste pour melanger aleatoirement avec random shuffle
+    aretes = [['O','B'], ['O','W'], ['O','G'], ['O','Y'], ['G','W'], ['G','R'], ['G','Y'], ['R','W'], ['R','B'], ['R','Y'], ['B','W'], ['B','Y']]
+    for a in aretes:
+        random.shuffle(a)
+    new_aretes = []
+    for a in aretes:
+        new_aretes.append(a[0] + a[1])
+    random.shuffle(new_aretes)
+    
+    coins = [['WRG', 'RGW', 'GWR'], ['WBR', 'RWB', 'BRW'], ['WOB', 'BWO', 'OBW'], ['WGO', 'GOW', 'OWG'], ['BYR', 'YRB', 'RBY'], ['BOY', 'OYB', 'YBO'], ['GRY', 'RYG', 'YGR'], ['YOG', 'GYO', 'OGY']]
+    for c in coins:
+        random.shuffle(c)
+    
+    new_coins = []
+    for c in coins:
+        new_coins.append(c[0])
+    random.shuffle(new_coins)
+    #les milieux doivent respecter la coherence du rubikscub
+    milieu = ['W', 'B', 'O', 'G', 'R', 'Y'] #definit la dimension du cube dans l'espace car après ne bougera pas
+
+    return milieu, new_aretes, new_coins
 
 def get_random_colors():
     colors = []
@@ -148,16 +170,15 @@ def get_random_colors():
     for c in coins:
         random.shuffle(c)
     
-    milieu = ['W', 'G', 'Y', 'O', 'R', 'B']
+    milieu = ['W', 'B', 'O', 'G', 'R', 'Y'] #definit la dimension du cube dans l'espace car après ne bougera pas
   
     new_coins = []
     for c in coins:
         new_coins.append(c[0])
     colors.extend(aretes)
     colors.extend(new_coins)
-    colors.extend(milieu)
-
     random.shuffle(colors)
+    colors.extend(milieu) #les milieux doivent respecter la coherence du rubikscub
 
     return colors
 
@@ -170,23 +191,9 @@ def sort_colors(colors):
         milieu.append(c) if len(c) == 1 else aretes.append(c) if len(c) == 2 else coins.append(c)
     return milieu, aretes, coins
 
-def check_nb_colors():
-    y, b, r, g, w, o = 0, 0, 0, 0, 0, 0
-    for n in new_colors:
-        if n == 'Y':
-            y+=1
-        elif n == 'B':
-            b+=1
-        elif n == 'R':
-            r+=1
-        elif n == 'G':
-            g+=1
-        elif n == 'W':
-            w+=1
-        elif n == 'O':
-            o+=1
-    print(y, g, r, b, g, w)
+milieux, aretes, coins = get_random_colors_test()
+# colors = get_random_colors()
+# milieu, aretes, coins = sort_colors(colors)
+# new_colors = define_place(milieu, aretes, coins)
 
-colors = get_random_colors()
-milieu, aretes, coins = sort_colors(colors)
-new_colors = define_place(milieu, aretes, coins)
+
