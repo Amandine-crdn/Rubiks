@@ -1,4 +1,6 @@
-from SortColors import  milieux, aretes, coins
+from SortColors import  milieux#, aretes, coins
+aretes = ["WR", "WB", "WG", "WO", "BR", "BO", "BY", "OG", "OY", "GR", "GY","RY"]
+coins = ["WBR", "WRG", "WOB","WGO" , "BYR", "GRY", "BYO", "GYO"]
 
 class Cube():
     def __init__(self) -> None:        
@@ -26,7 +28,7 @@ class Cube():
         return self.left_aretes
     
     def get_color_coin(self, num_coin):
-        print(self.coins[num_coin])
+        # print(self.coins[num_coin])
         return self.coins[num_coin]
     
     def set_color_coin(self, num_coin, color):
@@ -43,27 +45,19 @@ class Cube():
         self.aretes[num_arete] = color
     
 
-    def print_cube(self): # a verifier
+    def print_cube(self):
         print(f"""
 
-        {self.coins[4][0]} {self.aretes[11][0]} {self.coins[5][0]} 
+        {self.coins[4][2]} {self.aretes[11][0]} {self.coins[5][1]} 
         {self.aretes[4][1]} {self.milieux[4]} {self.aretes[9][1]}  
-        {self.coins[0][2]} {self.aretes[0][1]} {self.coins[1][1]}                                                                                                                                          
-{self.coins[4][1]} {self.aretes[4][0]} {self.coins[0][1]}   {self.coins[0][0]} {self.aretes[0][0]} {self.coins[1][0]}   {self.coins[1][2]} {self.aretes[9][0]} {self.coins[5][2]}   {self.coins[5][1]} {self.aretes[11][1]} {self.coins[4][2]}
+        {self.coins[0][2]} {self.aretes[0][1]} {self.coins[1][1]}
+
+{self.coins[4][0]} {self.aretes[4][0]} {self.coins[0][1]}   {self.coins[0][0]} {self.aretes[0][0]} {self.coins[1][0]}   {self.coins[1][2]} {self.aretes[9][0]} {self.coins[5][0]}   {self.coins[5][2]} {self.aretes[11][1]} {self.coins[4][1]}
 {self.aretes[6][0]} {self.milieux[1]} {self.aretes[1][1]}   {self.aretes[1][0]} {self.milieux[0]} {self.aretes[2][0]}   {self.aretes[2][1]} {self.milieux[3]} {self.aretes[10][0]}   {self.aretes[10][1]} {self.milieux[5]} {self.aretes[6][1]} 
-{self.coins[6][2]} {self.aretes[5][0]} {self.coins[2][2]}   {self.coins[2][0]} {self.aretes[3][0]} {self.coins[3][0]}   {self.coins[3][1]} {self.aretes[7][1]} {self.coins[7][1]}   {self.coins[7][2]} {self.aretes[8][1]} {self.coins[6][1]} 
+{self.coins[6][0]} {self.aretes[5][0]} {self.coins[2][2]}   {self.coins[2][0]} {self.aretes[3][0]} {self.coins[3][0]}   {self.coins[3][1]} {self.aretes[7][1]} {self.coins[7][0]}   {self.coins[7][1]} {self.aretes[8][1]} {self.coins[6][1]} 
 
         {self.coins[2][1]} {self.aretes[3][1]} {self.coins[3][2]}
         {self.aretes[5][1]} {self.milieux[2]} {self.aretes[7][0]} 
-        {self.coins[6][0]} {self.aretes[8][0]} {self.coins[7][0]}
+        {self.coins[6][2]} {self.aretes[8][0]} {self.coins[7][2]}
 
 """)
-        
-
-    # def get_aretes(self):
-    #     return self.aretes
-    # def get_milieux(self):
-    #     return self.milieux
-
-
-    
