@@ -24,3 +24,8 @@ def get_random_colors():
     return milieu, new_aretes, new_coins
 
 milieux, aretes, coins = get_random_colors()
+
+#retirer lignes en dessous
+# aretes = ["WR", "WB", "WG", "WO", "BR", "BO", "BY", "OG", "OY", "GR", "GY","RY"]
+aretes = ["BO", "BY", "WR", "BR", "OG", "OY", "GR", "WB","GY", "WG", "WO", "RY"]
+coins = ["WBR", "WRG", "WOB","WGO" , "BYR", "GRY", "BYO", "GYO"]
