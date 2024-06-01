@@ -1,4 +1,4 @@
-from SortColors import aretes, coins
+from SortColors import aretes, coins, milieux
 
 class Node():
     def __init__(self, value: int, color: str) -> None:
@@ -22,6 +22,7 @@ class Node():
         self.u2 = None
         self.d2 = None
         self.b2 = None
+      
 
     def get_value(self):
         return self.value
@@ -31,6 +32,7 @@ class Node():
 
     def set_color(self, color):
         self.color = color
+
 
     def setter(self, r=None, rprime=None, f=None, fprime=None, l=None, lprime=None, u=None, uprime=None, d=None, dprime=None, b=None, bprime=None, r2=None,f2=None,l2=None,u2=None,d2=None,b2=None):
         # to_init = [
@@ -96,9 +98,9 @@ class Node():
                 print("💮", tmp.get_color())
                 new_list.clear()
                 for k, v in tmp._getter().items():
-                    if v is not None:
+                    if v:
                         new_list.append(v)
-                        if v not in locked_edge: # a supp
+                        if v not in locked_edge: # contourner le noeud ?
                             dico_node[tmp].append((k, v))
                     if v and color in v.get_color() and v not in locked_edge:
                         print("✔️",k, v.get_color())
@@ -135,6 +137,7 @@ C6 = Node(value=6, color=coins[6])
 C7 = Node(value=7, color=coins[7])
 
 
+
 #premonition mouvement
 
 A0.setter(u=A1, uprime=A2, u2=A3, b=A9, bprime=A4, b2=A11)
@@ -149,4 +152,6 @@ A8.setter(d=A6, dprime=A10, d2=A11, f=A7, fprime=A6, f2=A3)
 A9.setter(r=A2, rprime=A10, r2=A7, b=A11, bprime=A0, b2=A4)
 A10.setter(r=A9, rprime=A7, r2=A2, d=A8, dprime=A11, d2=A6)
 A11.setter(b=A4, bprime=A9, b2=A0, d=A10, dprime=A6, d2=A8)
+
+
 

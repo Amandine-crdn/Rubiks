@@ -10,6 +10,35 @@ def action(choice: int):
     ]
     return functions[choice]
 
+def turn_edge_left():
+    L2()
+    UpPrime()
+    FrontPrime()
+    Left()
+    Front()
+
+def turn_edge_right():
+    R2()
+    Up()
+    Front()
+    RightPrime()
+    FrontPrime()
+
+def turn_edge_up():
+    F2()
+    UpPrime()
+    RightPrime()
+    Front()
+    Right()
+
+def turn_edge_back():
+    B2()
+    Up()
+    Right()
+    Back()
+    Left()
+
+
 
 def solver_white_edges(goal):
     cube.print_cube()
@@ -38,7 +67,8 @@ def solver_white_edges(goal):
     for direction in reversed(list_actions):
         print(direction)
         action(direction)()
-    cube.append(goal)
+    cube.append(goal) #only for this function to find an other path
+
 
 
 

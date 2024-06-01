@@ -96,12 +96,12 @@ def LeftPrime():
     #move edges
     a1 = A1.get_color()[1] + A1.get_color()[0]
     a4 = A4.get_color()
-    a6 = A6.get_color()
     a5 = A5.get_color()[1] + A5.get_color()[0]
+    a6 = A6.get_color()
 
-    A5.set_color(a1) 
     A1.set_color(a5)
-    A4.set_color(a6)
+    A4.set_color(a1)
+    A5.set_color(a6) 
     A6.set_color(a4)
 
 
@@ -247,7 +247,7 @@ def FrontPrime():
 
     #move edges
     a3 = A3.get_color()
-    a5 = A5.get_color()[1] + A5.get_color()[3]
+    a5 = A5.get_color()[1] + A5.get_color()[0]
     a7 = A7.get_color()[1] + A7.get_color()[0]
     a8 = A8.get_color()
 
