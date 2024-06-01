@@ -38,6 +38,4 @@ class Cube():
         {self.coins[6][2]} {self.aretes[8].get_color()[0]} {self.coins[7][2]}
 
 """)
-
-
 cube = Cube()

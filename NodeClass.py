@@ -64,37 +64,53 @@ class Node():
     
     def _getter(self):
         dico = {}
+
         keys = [
             'r', 'f', 'l', 'u', 'd', 'b', 'rprime', 'fprime', 'lprime', 'dprime', 'uprime', 'bprime', 'r2', 'f2', 'l2', 'u2', 'd2', 'b2'
         ]
+
         list_attributs = [
             self.r, self.f, self.l, self.u, self.d, self.b, self.rprime, self.fprime, self.lprime, self.dprime, self.uprime, self.bprime, self.r2, self.f2, self.l2, self.u2, self.d2, self.b2
         ]
+
         for i in range(0, len(keys)):
             dico[i] = list_attributs[i]
-        # for k, v in dico.items():
-        #     print(k, v)
         return dico
+
+
 
     #return le chemin le plus rapide
     def find_path(self, color: int, locked_edge): 
-
-        dico = self._getter()
-        temp_node = []
+        print("\n")
         if self.get_color() in color:
             return None
 
-        # while temp_node is not None:
-        for k, v in dico.items():
-            if v and color in v.get_color() and v not in locked_edge:
-                print("✔️",k, v.get_color())
-                temp_node.append(v)
-                return k
-            # print(k, v.get_color())
-        print("none")
-        return None
+        temp_node = [self]
+        new_list = []
+        dico_node = {}
+        while True:
+            print("💮💮💮 TEMP NODE",len(temp_node))
+            
+            for tmp in temp_node:
+                dico_node[(tmp)] = []
+                print("💮", tmp.get_color())
+                new_list.clear()
+                for k, v in tmp._getter().items():
+                    if v is not None:
+                        new_list.append(v)
+                        if v not in locked_edge: # a supp
+                            dico_node[tmp].append((k, v))
+                    if v and color in v.get_color() and v not in locked_edge:
+                        print("✔️",k, v.get_color())
+                        return dico_node
+             
+            if len(new_list) == 0:
+                print("🚩None")
+                break
+            temp_node = new_list
+        return {}
 
-    
+
 
 A0 = Node(value=0, color=aretes[0])
 A1 = Node(value=1, color=aretes[1])
