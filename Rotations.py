@@ -5,7 +5,7 @@ from NodeClass import A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11
 
 
 def Right():
-    print("🥐 fonction Right\n")
+    # print("🥐 fonction Right\n")
     
     #move corners
     C1 = cube.get_color_coin(1)
@@ -30,7 +30,7 @@ def Right():
     A10.set_color(a9)
 
 def RightPrime():
-    print("🥐 fonction RightPrime\n")
+    # print("🥐 fonction RightPrime\n")
 
     #move corners
     C1 = cube.get_color_coin(1)
@@ -55,7 +55,7 @@ def RightPrime():
     A10.set_color(a7) 
 
 def Left():
-    print("🥐 fonction Left\n")
+    # print("🥐 fonction Left\n")
     
     #move corners
     C0 = cube.get_color_coin(0)
@@ -80,7 +80,7 @@ def Left():
     A6.set_color(a5)
 
 def LeftPrime():
-    print("🥐 fonction LeftPrime\n")
+    # print("🥐 fonction LeftPrime\n")
 
     #move corners
     C0 = cube.get_color_coin(0)
@@ -106,7 +106,7 @@ def LeftPrime():
 
 
 def Up():
-    print("🥐 fonction Up\n")
+    # print("🥐 fonction Up\n")
     
     #move corners
     C0 = cube.get_color_coin(0)
@@ -131,7 +131,7 @@ def Up():
     A3.set_color(a2)
 
 def UpPrime():
-    print("🥐 fonction UpPrime\n")
+    # print("🥐 fonction UpPrime\n")
 
     #move corners
     C0 = cube.get_color_coin(0)
@@ -157,7 +157,7 @@ def UpPrime():
 
 
 def Down():
-    print("🥐 fonction Down\n")
+    # print("🥐 fonction Down\n")
     
     #move corners
     C4 = cube.get_color_coin(4)
@@ -182,7 +182,7 @@ def Down():
     A11.set_color(a10)
 
 def DownPrime():
-    print("🥐 fonction DownPrime\n")
+    # print("🥐 fonction DownPrime\n")
 
     #move corners
     C4 = cube.get_color_coin(4)
@@ -207,7 +207,7 @@ def DownPrime():
     A11.set_color(a6)
 
 def Front():
-    print("🥐 fonction Front\n")
+    # print("🥐 fonction Front\n")
     
     #move corners
     C2 = cube.get_color_coin(2)
@@ -232,7 +232,7 @@ def Front():
     A8.set_color(a7)
 
 def FrontPrime():
-    print("🥐 fonction FrontPrime\n")
+    # print("🥐 fonction FrontPrime\n")
 
     #move corners
     C2 = cube.get_color_coin(2)
@@ -258,7 +258,7 @@ def FrontPrime():
 
 
 def Back():
-    print("🥐 fonction Back\n")
+    # print("🥐 fonction Back\n")
     
     #move corners
     C0 = cube.get_color_coin(0)
@@ -283,7 +283,7 @@ def Back():
     A11.set_color(a4)
 
 def BackPrime():
-    print("🥐 fonction BackPrime\n")
+    # print("🥐 fonction BackPrime\n")
 
     #move corners
     C0 = cube.get_color_coin(0)
@@ -298,8 +298,8 @@ def BackPrime():
 
     #move edges
     a0 = A0.get_color()
-    a4 = A4.get_color()[1] + A4.get_color()[0]
-    a9 = A9.get_color()
+    a4 = A4.get_color()
+    a9 = A9.get_color()[1] + A9.get_color()[0]
     a11 = A11.get_color()[1] + A11.get_color()[0]
     
     A0.set_color(a4) 

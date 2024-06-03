@@ -21,6 +21,10 @@ class Cube():
     
     def set_color_coin(self, num_coin, color):
         self.coins[num_coin] = color
+    
+   
+
+
 
     def print_cube(self):
         print(f"""

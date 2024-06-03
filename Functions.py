@@ -1,12 +1,17 @@
 from CubeClass import cube
 from Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Back, BackPrime, Down, DownPrime, Front, FrontPrime, R2, L2, B2, D2, U2, F2
-locked_edge = cube.blocked_edges
 
 def action(choice: int):
     if choice is None:
         return Rien
+
     functions = [
-        Right, Front, Left, Up, Down, Back, RightPrime, FrontPrime, LeftPrime, DownPrime,  UpPrime, BackPrime, R2, F2, L2, U2, D2, B2
+        Right, RightPrime, R2,
+        Left,  LeftPrime, L2,
+        Front, FrontPrime, F2,
+        Back,  BackPrime, B2,
+        Up, UpPrime, U2,
+        Down, DownPrime, D2
     ]
     return functions[choice]
 
@@ -35,16 +40,15 @@ def turn_edge_back():
     B2()
     Up()
     Right()
-    Back()
-    Left()
+    BackPrime()
+    RightPrime()
 
 
 
 def solver_white_edges(goal):
-    cube.print_cube()
     list_actions = []
     #dabord checker si goal contient pas déjà un W
-    dico = goal.find_path('W',locked_edge)
+    dico = goal.find_path('W',cube.blocked_edges)
 
     init_node = list(dico.keys())[-1]
     init_tuple = list(dico.values())[-1]
@@ -65,22 +69,8 @@ def solver_white_edges(goal):
 
     print("actions à réalisé en partant de la fin: ",list_actions)
     for direction in reversed(list_actions):
-        print(direction)
         action(direction)()
-    cube.append(goal) #only for this function to find an other path
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
 
