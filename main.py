@@ -20,6 +20,8 @@ def have_tuple(node):
             dico[k] = v
     return dico
 
+# def ft_simulation(node):
+#     pass
 
 #backtracking
 def tracking_node(node, color):
@@ -32,10 +34,13 @@ def tracking_node(node, color):
 
     choices = have_tuple(node)
     for k, v in choices.items():
+        #si le chemin a déjà été parcouru changer
 
-        if color in v.get_color() and v not in locked_nodes:
-            #❌❌❌  checker si l'arete arrive du bon coté sinon continuer de chercher  ❌❌❌
-            pass
+
+        # if color in v.get_color() and v not in locked_nodes:
+        #     # ft_simulation(v)
+        #     #❌❌❌  checker si l'arete arrive du bon coté sinon continuer de chercher  ❌❌❌
+        #     pass
         if color in v.get_color() and v not in locked_nodes:#ok ne pas aller cherher directement dans les nodes bloqués
             path.append(k)
             dico[i] = path.copy()
@@ -93,29 +98,30 @@ def select(node):
         action(direction)()
 
 switch_edge = [turn_edge_left, turn_edge_up, turn_edge_right, turn_edge_back] 
-
 index = 0 #dans le backtracking faire en sorte qu'il check si l'arete va bien tomber ? sinon regarde autre chose
 while index != 4: # pour compenser: backtracking ne fait pas toutes les possibilités on dirait
-    index_node = 0
     for n in list_whites_nodes:
-
+        i = 0
         dico = {}
-        i, index = 0, 0
-        path, nodes_meet = [], []
-        node_init, node = n, n
+        path = []
+        nodes_meet = []
+        node_init= n
+        node = n
         while node:
             if 'W' in node.get_color():
                 break
             node = tracking_node(node, 'W')
         select(n)
-        #faire le renversement des aretes ici
         locked_nodes.append(n)
-  
+    
+    index = 0
     for n in list_whites_nodes:
         if 'W' in n.get_color():
+            print(index)
             index += 1
 cube.print_cube()
-    
+
+#faire le renversement des aretes à la fin pour l'instant
 for node_index, n in enumerate(list_whites_nodes, start=0): #pour compenser le backtracking
     if n.get_color()[1] != 'W':
         print("switch")
