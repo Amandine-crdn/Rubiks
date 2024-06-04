@@ -6,13 +6,21 @@ def action(choice: int):
         return Rien
 
     functions = [
-        Right, RightPrime, R2,
-        Left,  LeftPrime, L2,
-        Front, FrontPrime, F2,
-        Back,  BackPrime, B2,
-        Up, UpPrime, U2,
-        Down, DownPrime, D2
+        Right, RightPrime,
+        Left,  LeftPrime, 
+        Front, FrontPrime,
+        Back,  BackPrime, 
+        Up, UpPrime, 
+        Down, DownPrime
     ]
+    #   functions = [
+    #     Right, RightPrime, R2,
+    #     Left,  LeftPrime, L2,
+    #     Front, FrontPrime, F2,
+    #     Back,  BackPrime, B2,
+    #     Up, UpPrime, U2,
+    #     Down, DownPrime, D2
+    # ]
     return functions[choice]
 
 def turn_edge_left():

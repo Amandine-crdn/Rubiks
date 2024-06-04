@@ -143,7 +143,7 @@ class Node():
         # ]
 
         for i in range(0, len(keys)):
-            list_tuple.append((keys[i], list_attributs[i]))
+            list_tuple.append((i, list_attributs[i]))
             # dico[i] = list_attributs[i]
     
         # return dico
