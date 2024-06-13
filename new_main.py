@@ -127,10 +127,11 @@ def ft_protection(nodes_blocked, action_temp):
     print("\n-----------FT_PROTECTION-------------\nnb action à executer: ",len(action_temp))
 
     protection = []
+    other_protection = []
     once = True
     for index, direction in enumerate(reversed(action_temp)):
-        if index != 0:
-            if direction != direction_copy and len(protection) != 0: #tant qu'il n'a pas finit un meme mouvement
+        if index > 0:
+            if action_temp[index] != action_temp[index - 1] and len(protection) > 0: #tant qu'il n'a pas finit un meme mouvement
                 print("💚")
                 for p in protection:
                     action(p)()
@@ -139,13 +140,10 @@ def ft_protection(nodes_blocked, action_temp):
                 protection = [] #vider la liste
                 once = True
                
-        direction_copy = direction
-
         if once == True:
             for k, v in nodes_blocked.items():
                 #u, u' u2
                 if v and (direction == 8 or direction == 9): #si none inutile de proteger
-                    cube.print_cube()
                     if k == A0:
                         action(6)() #back
                         protection.append(7) #b'
@@ -158,16 +156,37 @@ def ft_protection(nodes_blocked, action_temp):
                     if k == A3:
                         action(4)() #front
                         protection.append(5) #f'
-                    for p in protection:
-                        print("🐜 protection to do: ",p)
                     once = False
-                elif v :
-                    print("need other protec")
+
+                #r, r', r2
+                # elif v and k == A2 and (direction == 0 or direction == 1): #seulement A2 qui est impliqué
+                #     #ça depend du prochain coup
+                #     if index < len(action_temp) - 1 and direction[index] == direction[index + 1]
+                        
+                #         #si next_direction = r
+                #         if direction == 0:
+                #             action(6)() # back
+                #             other_protection.append(7) #b'
+
+                #         #si next_direction = r'
+                #         if direction == 1:
+                #             action(4)() # front
+                #             other_protection.append(5) #f'
+                    
+                    
+                    
+
+
+
         #on fait l'action apres avoir proteger
         action(direction)()
+        if len(other_protection) > 0:
+            print("💚other protec")
+            for p in other_protection:
+                action(p)()
 
     #si programme se finit, terminer  
-    if len(protection) != 0:      
+    if len(protection) > 0:      
         print("💚")
         for p in protection:
             action(p)()
@@ -237,3 +256,35 @@ cube.print_cube()
 
 #j'éxecute ces actions tant que les 4 aretes n'ont pas de W
 
+
+
+#transformer les 3 l en l'
+#transformer les 2 u en u2
+#annuler les coups opposés
+def shorter_solution():
+    solution = cube.solution.split()
+    new_solution = ""
+    to_pass = -1
+    for index, s in enumerate(solution):
+       
+        if index == to_pass:
+            pass
+        elif index < len(solution) - 1 and solution[index] == solution[index + 1]: # s'ils sont egaux ex: u u mettre u2
+            new_solution += f"{s[0]}2 "
+            to_pass = index + 1
+        elif index < len(solution) - 1 and solution[index][0] == solution[index + 1][0]: # s'ils sont opposé ex: u u' annuler
+            to_pass = index + 1
+        else:
+            new_solution += f"{s} "
+
+    return new_solution
+
+
+new_solution = shorter_solution()
+print(new_solution)
+new_solution = new_solution.split()
+print(new_solution)
+print(len(new_solution))
+
+
+# print(cube.solution)

@@ -28,6 +28,7 @@ def Right():
     A2.set_color(a7)
     A7.set_color(a10)
     A10.set_color(a9)
+    cube.set_solution("R")
 
 
 def RightPrime():
@@ -55,6 +56,8 @@ def RightPrime():
     A9.set_color(a10) 
     A10.set_color(a7) 
 
+    cube.set_solution("R'")
+
 def Left():
     print("🥐 fonction Left\n")
     
@@ -79,6 +82,7 @@ def Left():
     A1.set_color(a4)
     A4.set_color(a6)
     A6.set_color(a5)
+    cube.set_solution("L")
 
 def LeftPrime():
     print("🥐 fonction LeftPrime\n")
@@ -104,6 +108,7 @@ def LeftPrime():
     A4.set_color(a1)
     A5.set_color(a6) 
     A6.set_color(a4)
+    cube.set_solution("L'")
 
 
 def Up():
@@ -130,6 +135,7 @@ def Up():
     A1.set_color(a3)
     A2.set_color(a0)
     A3.set_color(a2)
+    cube.set_solution("U")
 
 def UpPrime():
     print("🥐 fonction UpPrime\n")
@@ -155,6 +161,7 @@ def UpPrime():
     A1.set_color(a0)
     A2.set_color(a3)
     A3.set_color(a1)
+    cube.set_solution("U'")
 
 
 def Down():
@@ -181,6 +188,7 @@ def Down():
     A8.set_color(a6)
     A10.set_color(a8)
     A11.set_color(a10)
+    cube.set_solution("D")
 
 def DownPrime():
     print("🥐 fonction DownPrime\n")
@@ -207,6 +215,8 @@ def DownPrime():
     A10.set_color(a11)
     A11.set_color(a6)
 
+    cube.set_solution("D'")
+
 def Front():
     print("🥐 fonction Front\n")
     
@@ -232,6 +242,8 @@ def Front():
     A7.set_color(a3)
     A8.set_color(a7)
 
+    cube.set_solution("F")
+
 def FrontPrime():
     print("🥐 fonction FrontPrime\n")
 
@@ -256,6 +268,8 @@ def FrontPrime():
     A5.set_color(a3)
     A7.set_color(a8)
     A8.set_color(a5)
+
+    cube.set_solution("F'")
 
 
 def Back():
@@ -283,6 +297,8 @@ def Back():
     A9.set_color(a11)
     A11.set_color(a4)
 
+    cube.set_solution("B")
+
 def BackPrime():
     print("🥐 fonction BackPrime\n")
 
@@ -307,7 +323,7 @@ def BackPrime():
     A4.set_color(a11)
     A9.set_color(a0)
     A11.set_color(a9)
-
+    cube.set_solution("B'")
 
 def R2():
     Right()
