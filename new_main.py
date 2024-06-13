@@ -121,6 +121,67 @@ def is_moved(before, after):
             # return True
     return False
 
+
+
+def ft_protection(nodes_blocked, action_temp):
+    print("\n-----------FT_PROTECTION-------------\nnb action à executer: ",len(action_temp))
+
+    protection = []
+    once = True
+    for index, direction in enumerate(reversed(action_temp)):
+        if index != 0:
+            if direction != direction_copy and len(protection) != 0: #tant qu'il n'a pas finit un meme mouvement
+                print("💚")
+                for p in protection:
+                    action(p)()
+                print("END")
+                cube.print_cube()
+                protection = [] #vider la liste
+                once = True
+               
+        direction_copy = direction
+
+        if once == True:
+            for k, v in nodes_blocked.items():
+                #u, u' u2
+                if v and (direction == 8 or direction == 9): #si none inutile de proteger
+                    cube.print_cube()
+                    if k == A0:
+                        action(6)() #back
+                        protection.append(7) #b'
+                    if k == A1:
+                        action(2)() #left
+                        protection.append(3) #l'
+                    if k == A2:
+                        action(0)() #right
+                        protection.append(1) #r'
+                    if k == A3:
+                        action(4)() #front
+                        protection.append(5) #f'
+                    for p in protection:
+                        print("🐜 protection to do: ",p)
+                    once = False
+                elif v :
+                    print("need other protec")
+        #on fait l'action apres avoir proteger
+        action(direction)()
+
+    #si programme se finit, terminer  
+    if len(protection) != 0:      
+        print("💚")
+        for p in protection:
+            action(p)()
+        print("END")                
+            
+    
+    # elif direction == 6 or direction == 7 #b
+    #si A0 et que action back,  faire action suivant et back'
+    #si A1 et que action left, faire action suivant et left'
+    #si A2 et que action right, faire action suivant et right'
+    #si A3 et que action front, faire action suivant et front'
+
+
+
 nodes_blocked = {
     A0: None,
     A1: None,
@@ -128,26 +189,30 @@ nodes_blocked = {
     A3: None
 }
 count = 0
-while count != 4:
+while count != 4: #mettre 4 pour les 4 aretes
     nodes = [A0, A1, A2, A3]
     nodes_w = ['A0', 'A1', 'A2', 'A3']
 
     list_path_per_edge = resolve_cross()
     action_temp = speeder_path(list_path_per_edge)
 
-    print("\n-----------------------------\nnb action à executer: ",len(action_temp))
     if action_temp : #si l'action existe, l'executer 
-        for direction in reversed(action_temp):
-            state_before = {} #le mettre avant ou pares le for ?
-            for k, v in nodes_blocked.items(): 
-                state_before[k] = copy.deepcopy(v) if v else None
-
-            action(direction)()
+        
+        #proteger les nodes_blocked, executer l'action et remettre les nodes_blocked à leur place
+        ft_protection(nodes_blocked, action_temp)
             
-            moove = is_moved(state_before, nodes_blocked)
-        cube.print_cube()
+            #si autre action refaire la premiere? action à l'envers
+            # moove = is_moved(state_before, nodes_blocked)
+            
+         
+                
+        
 
     count += 1
+cube.print_cube()
+
+
+
 
 
 #je veux regarder quelle arete résoudre en premier
