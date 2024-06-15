@@ -1,6 +1,6 @@
 from CubeClass import cube
 from NodeClass import A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11
-from Functions import action, solver_white_edges,turn_edge_up, turn_edge_back, turn_edge_left, turn_edge_right
+from Functions import action,turn_edge_up, turn_edge_back, turn_edge_left, turn_edge_right
 from Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Back, BackPrime, Down, DownPrime, Front, FrontPrime, R2, L2, B2, D2, U2, F2
 
 import copy
@@ -9,8 +9,8 @@ cube.print_cube()
 
 
 def ft_protection(nodes_blocked, action_temp):
-    print("\n🐜 -----------------------")
-    print(action_temp[1])
+    # print("\n🐜 -----------------------")
+    # print(action_temp[1])
     other_protection = []
     protection = [] #liste car si besoin de protéger les 4 aretes pour un coup
     once = True
@@ -254,7 +254,7 @@ while count != 4: #mettre 4 pour les 4 aretes
     count += 1
             
 
-
+#faire le renversement des aretes à la fin du backtracking
 #orienter les aretes vers leur centre
 list_whites_nodes = [A0, A1, A2, A3]
 switch_edge = [turn_edge_back, turn_edge_left, turn_edge_right, turn_edge_up] 

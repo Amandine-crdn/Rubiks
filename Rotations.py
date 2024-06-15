@@ -5,7 +5,7 @@ from NodeClass import A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11
 
 
 def Right():
-    print("🥐Right")
+    # print("🥐Right")
     
     #move corners
     C1 = cube.get_color_coin(1)
@@ -32,7 +32,7 @@ def Right():
 
 
 def RightPrime():
-    print("🥐RightPrime")
+    # print("🥐RightPrime")
 
     #move corners
     C1 = cube.get_color_coin(1)
@@ -59,7 +59,7 @@ def RightPrime():
     cube.set_solution("R'")
 
 def Left():
-    print("🥐Left")
+    # print("🥐Left")
     
     #move corners
     C0 = cube.get_color_coin(0)
@@ -85,7 +85,7 @@ def Left():
     cube.set_solution("L")
 
 def LeftPrime():
-    print("🥐LeftPrime")
+    # print("🥐LeftPrime")
 
     #move corners
     C0 = cube.get_color_coin(0)
@@ -112,7 +112,7 @@ def LeftPrime():
 
 
 def Up():
-    print("🥐Up")
+    # print("🥐Up")
     
     #move corners
     C0 = cube.get_color_coin(0)
@@ -138,7 +138,7 @@ def Up():
     cube.set_solution("U")
 
 def UpPrime():
-    print("🥐UpPrime")
+    # print("🥐UpPrime")
 
     #move corners
     C0 = cube.get_color_coin(0)
@@ -165,7 +165,7 @@ def UpPrime():
 
 
 def Down():
-    print("🥐Down")
+    # print("🥐Down")
     
     #move corners
     C4 = cube.get_color_coin(4)
@@ -191,7 +191,7 @@ def Down():
     cube.set_solution("D")
 
 def DownPrime():
-    print("🥐DownPrime")
+    # print("🥐DownPrime")
 
     #move corners
     C4 = cube.get_color_coin(4)
@@ -218,7 +218,7 @@ def DownPrime():
     cube.set_solution("D'")
 
 def Front():
-    print("🥐Front")
+    # print("🥐Front")
     
     #move corners
     C2 = cube.get_color_coin(2)
@@ -245,7 +245,7 @@ def Front():
     cube.set_solution("F")
 
 def FrontPrime():
-    print("🥐FrontPrime")
+    # print("🥐FrontPrime")
 
     #move corners
     C2 = cube.get_color_coin(2)
@@ -273,7 +273,7 @@ def FrontPrime():
 
 
 def Back():
-    print("🥐Back")
+    # print("🥐Back")
     
     #move corners
     C0 = cube.get_color_coin(0)
@@ -300,7 +300,7 @@ def Back():
     cube.set_solution("B")
 
 def BackPrime():
-    print("🥐BackPrime")
+    # print("🥐BackPrime")
 
     #move corners
     C0 = cube.get_color_coin(0)
