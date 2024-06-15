@@ -9,8 +9,8 @@ cube.print_cube()
 
 
 def ft_protection(nodes_blocked, action_temp):
-    print("\n-----------FT_PROTECTION-------------\nnb action à executer: ",len(action_temp[1]))
-    print("?? ",action_temp[1])
+    print("\n🐜 -----------------------")
+    print(action_temp[1])
     other_protection = []
     protection = [] #liste car si besoin de protéger les 4 aretes pour un coup
     once = True
@@ -113,9 +113,7 @@ def ft_protection(nodes_blocked, action_temp):
                
   
         #on fait l'action apres avoir proteger
-        print("\n🥐")
         action(direction)()
-        print("🥐\n")
         if len(other_protection) > 0:
             for op in other_protection:
                 action(op)()
@@ -175,7 +173,6 @@ def backtracking(node, old_node, node_init, path, dico_path, i, color, nodes_blo
         if 'W' in next_node.get_color() and color in next_node.get_color() and check_is_locked(next_node, nodes_blocked) == False:
             path.append(direction)
             copy_path = path.copy()
-            print(copy_path)
             dico_path[i] = copy_path
             path.pop()
             i+=1
@@ -214,7 +211,6 @@ def resolve_cross(nodes_blocked):
             node = n
             node_init = node
             old_node = None
-            print("🥊 index", index)
             while node :
                 node, dico_path, path, i = backtracking(node, old_node, node_init, path, dico_path, i, colors[index], nodes_blocked, index)
             action_temp = shorter_path(dico_path, index) #selectionner le chemin le plus court pour le node en cours selon l'ensemble de son dico
@@ -234,16 +230,12 @@ nodes_blocked = {
 }
 
 count = 0
-start = 0
 
 while count != 4: #mettre 4 pour les 4 aretes
 
     list_path_per_edge, nodes_blocked = resolve_cross(nodes_blocked)
-    start += 1
-
 
     action_temp = speeder_path(list_path_per_edge) 
-    
 
     if action_temp : #si l'action existe, l'executer 
         #proteger les nodes_blocked, executer l'action et remettre les nodes_blocked à leur place
@@ -258,14 +250,18 @@ while count != 4: #mettre 4 pour les 4 aretes
             nodes_blocked[2] = A2
         elif action_temp[0] == 3:
             nodes_blocked[3] = A3
-        for i in range(0, 4):
-            if nodes_blocked[i]:
-                print("❌",nodes_blocked[i].get_color())
        
     count += 1
-    cube.print_cube() 
             
 
+
+#orienter les aretes vers leur centre
+list_whites_nodes = [A0, A1, A2, A3]
+switch_edge = [turn_edge_back, turn_edge_left, turn_edge_right, turn_edge_up] 
+for node_index, n in enumerate(list_whites_nodes, start=0):
+    if n.get_color()[0] != 'W':
+        switch_edge[node_index]()
+cube.print_cube()
 
 
 
@@ -293,35 +289,39 @@ while count != 4: #mettre 4 pour les 4 aretes
 
 
 
-#transformer les 3 l en l'
-#transformer les 2 u en u2
-#annuler les coups opposés
-
-# def shorter_solution(solver):
-#     solution = solver.split()
-#     print(len(solution))
-#     new_solution = ""
-#     to_pass = -1
-#     for index, s in enumerate(solution):
+def shorter_solution(solver):
+    solution = solver.split()
+    new_solution = ""
+    to_pass = -1
+    for index, s in enumerate(solution):
        
-#         if index == to_pass:
-#             pass
-#         elif index < len(solution) - 1 and solution[index] == solution[index + 1]: # s'ils sont egaux ex: u u mettre u2
-#             new_solution += f"{s[0]}2 "
-#             to_pass = index + 1
-#         elif index < len(solution) - 1 and solution[index][0] == solution[index + 1][0]: # s'ils sont opposé ex: u u' annuler
-#             to_pass = index + 1
-#         else:
-#             new_solution += f"{s} "
+        if index == to_pass:
+            pass
+        elif index < len(solution) - 1 and solution[index] == solution[index + 1]: # s'ils sont egaux ex: u u mettre u2
+            new_solution += f"{s[0]}2 "
+            to_pass = index + 1
+        elif index < len(solution) - 1 and solution[index][0] == solution[index + 1][0]: # s'ils sont opposé ex: u u' annuler
+            to_pass = index + 1
+        else:
+            new_solution += f"{s} "
 
-#     return new_solution
+    return new_solution
 
-
-# new_solution = shorter_solution(cube.solution)
+# print(cube.solution)
+new_solution = shorter_solution(cube.solution)
 # new_solution = shorter_solution(new_solution)
-# new_solution = new_solution.split()
-# print(len(new_solution))
-# print(new_solution)
+new_solution = new_solution.split()
+print(len(new_solution))
+print(new_solution)
 
 
 # print(cube.solution)
+
+
+
+#opti
+
+#transformer les 3 l en l'
+#transformer les 2 u en u2
+#annuler les coups opposés
+#voir pour reduite d'avance les couprs avec l'affichage duc hemin qui va etre executer, car êut entrainer des surprotection dans ft protect
