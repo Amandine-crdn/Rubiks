@@ -9,7 +9,7 @@ class Cube():
         self.aretes = [A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11] # aretes_list = A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
         self.milieux = milieux # [M1, M2, M3, M4, M5]
         self.blocked_edges = []
-        self.solution = ""
+        self.solution = []
     
     def append(self, node):
         self.blocked_edges.append(node)

@@ -159,6 +159,12 @@ def action(choice: int):
     return functions[choice]
 
 
+
+        
+
+
+
+        
 def turn_edge_left():
     L2()
     Down()
