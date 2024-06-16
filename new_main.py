@@ -8,7 +8,7 @@ import copy
 cube.print_cube()
 
 
-def ft_protection(nodes_blocked: dict[int, Node], action_temp: tuple[int, list[int]):
+def ft_protection(nodes_blocked: dict[int, Node], action_temp: tuple[int, list[int]]):
     # print("\n🐜 -----------------------")
     # print(action_temp[1])
     other_protection = []
