@@ -1,5 +1,5 @@
 from CubeClass import cube
-from NodeClass import A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11
+from NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11
 from Functions import action,turn_edge_up, turn_edge_back, turn_edge_left, turn_edge_right
 from Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Back, BackPrime, Down, DownPrime, Front, FrontPrime, R2, L2, B2, D2, U2, F2
 
@@ -8,7 +8,7 @@ import copy
 cube.print_cube()
 
 
-def ft_protection(nodes_blocked, action_temp):
+def ft_protection(nodes_blocked: dict[int, Node], action_temp: tuple[int, list[int]):
     # print("\n🐜 -----------------------")
     # print(action_temp[1])
     other_protection = []
@@ -146,7 +146,7 @@ def shorter_path(dico: dict, index: int):
     return action_temp #retourne le chemin le plus court
 
 
-def directions(node): #noeud non NULL, renvoie la direction associé au noeud
+def directions(node: Node): #noeud non NULL, renvoie la direction associé au noeud
     if node is None:
         return {}
     dico = {}
@@ -157,14 +157,14 @@ def directions(node): #noeud non NULL, renvoie la direction associé au noeud
     return dico
 
 
-def check_is_locked(next_node, nodes_blocked):
+def check_is_locked(next_node: Node, nodes_blocked: dict[int, Node]):
     for i in range(0, 4):
         if nodes_blocked[i] and nodes_blocked[i] == next_node:
             return True
     return False
 
 
-def backtracking(node, old_node, node_init, path, dico_path, i, color, nodes_blocked, index):
+def backtracking(node: Node, old_node: Node, node_init: Node, path: list[int], dico_path: dict[int, list[int]], i: int, color: int, nodes_blocked: dict[int, Node], index: int):
     all_directions = directions(node)
     
     for direction, next_node in all_directions.items():
@@ -194,7 +194,7 @@ def backtracking(node, old_node, node_init, path, dico_path, i, color, nodes_blo
 
 
 
-def resolve_cross(nodes_blocked):
+def resolve_cross(nodes_blocked: dict[int, Node]):
     nodes = [A0, A1, A2, A3]
     colors = ['R', 'B', 'G', 'O']
     list_path_per_edge = []
