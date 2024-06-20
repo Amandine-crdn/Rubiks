@@ -15,31 +15,3 @@ def action(choice: int):
   
     return functions[choice]
 
-        
-def turn_edge_left():
-    L2()
-    Down()
-    Front()
-    LeftPrime()
-    FrontPrime()
-
-def turn_edge_right():
-    R2()
-    DownPrime()
-    FrontPrime()
-    Right()
-    Front()
-
-def turn_edge_up():
-    F2()
-    Down()
-    Right()
-    FrontPrime()
-    RightPrime()
-
-def turn_edge_back():
-    B2()
-    DownPrime()
-    RightPrime()
-    Back()
-    Right()
