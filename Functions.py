@@ -3,14 +3,14 @@ from Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Bac
 def action(choice: int):
     if choice is None:
         return Rien
-
+    #mapper les indices en fonctions des rotations
     functions = [
-        Right, RightPrime,
-        Left,  LeftPrime, 
-        Front, FrontPrime,
-        Back,  BackPrime, 
-        Up, UpPrime, 
-        Down, DownPrime
+        Right, RightPrime, #0 1
+        Left,  LeftPrime, # 2 3
+        Front, FrontPrime, # 4 5
+        Back,  BackPrime, # 6 7
+        Up, UpPrime, # 8 9
+        Down, DownPrime #10 11
     ]
   
     return functions[choice]

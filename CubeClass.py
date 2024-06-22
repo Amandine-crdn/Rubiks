@@ -33,17 +33,17 @@ class Cube():
     def print_cube(self):
         print(f"""
 
-        {self.coins[4].get_color()[2]} {self.aretes[11].get_color()[0]} {self.coins[5].get_color()[1]} 
+        {self.coins[4].get_color()[1]} {self.aretes[11].get_color()[0]} {self.coins[5].get_color()[2]} 
         {self.aretes[4].get_color()[1]} {self.milieux[4]} {self.aretes[9].get_color()[1]}  
         {self.coins[0].get_color()[2]} {self.aretes[0].get_color()[1]} {self.coins[1].get_color()[1]}
 
-{self.coins[4].get_color()[0]} {self.aretes[4].get_color()[0]} {self.coins[0].get_color()[1]}   {self.coins[0].get_color()[0]} {self.aretes[0].get_color()[0]} {self.coins[1].get_color()[0]}   {self.coins[1].get_color()[2]} {self.aretes[9].get_color()[0]} {self.coins[5].get_color()[0]}   {self.coins[5].get_color()[2]} {self.aretes[11].get_color()[1]} {self.coins[4].get_color()[1]}
+{self.coins[4].get_color()[2]} {self.aretes[4].get_color()[0]} {self.coins[0].get_color()[1]}   {self.coins[0].get_color()[0]} {self.aretes[0].get_color()[0]} {self.coins[1].get_color()[0]}   {self.coins[1].get_color()[2]} {self.aretes[9].get_color()[0]} {self.coins[5].get_color()[1]}   {self.coins[5].get_color()[0]} {self.aretes[11].get_color()[1]} {self.coins[4].get_color()[0]}
 {self.aretes[6].get_color()[0]} {self.milieux[1]} {self.aretes[1].get_color()[1]}   {self.aretes[1].get_color()[0]} {self.milieux[0]} {self.aretes[2].get_color()[0]}   {self.aretes[2].get_color()[1]} {self.milieux[3]} {self.aretes[10].get_color()[0]}   {self.aretes[10].get_color()[1]} {self.milieux[5]} {self.aretes[6].get_color()[1]} 
-{self.coins[6].get_color()[0]} {self.aretes[5].get_color()[0]} {self.coins[2].get_color()[2]}   {self.coins[2].get_color()[0]} {self.aretes[3].get_color()[0]} {self.coins[3].get_color()[0]}   {self.coins[3].get_color()[1]} {self.aretes[7].get_color()[1]} {self.coins[7].get_color()[0]}   {self.coins[7].get_color()[1]} {self.aretes[8].get_color()[1]} {self.coins[6].get_color()[1]} 
+{self.coins[6].get_color()[1]} {self.aretes[5].get_color()[0]} {self.coins[2].get_color()[2]}   {self.coins[2].get_color()[0]} {self.aretes[3].get_color()[0]} {self.coins[3].get_color()[0]}   {self.coins[3].get_color()[1]} {self.aretes[7].get_color()[1]} {self.coins[7].get_color()[2]}   {self.coins[7].get_color()[0]} {self.aretes[8].get_color()[1]} {self.coins[6].get_color()[0]} 
 
         {self.coins[2].get_color()[1]} {self.aretes[3].get_color()[1]} {self.coins[3].get_color()[2]}
         {self.aretes[5].get_color()[1]} {self.milieux[2]} {self.aretes[7].get_color()[0]} 
-        {self.coins[6].get_color()[2]} {self.aretes[8].get_color()[0]} {self.coins[7].get_color()[2]}
+        {self.coins[6].get_color()[2]} {self.aretes[8].get_color()[0]} {self.coins[7].get_color()[1]}
 
 """)
 cube = Cube()
