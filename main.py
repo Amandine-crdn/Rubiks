@@ -60,21 +60,43 @@ def start_resolve():
                 #C3: v
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
-    commandes = input("entrez vos commandes: ") # F R U2 B' L' D' => 60 mouvements etages 1 et 2
+#     commandes = input("entrez vos commandes: ") # F R U2 B' L' D' => 60 mouvements etages 1 et 2
     
-    split_cmd = commandes.split()
-    if split_cmd:
-        for c in split_cmd: #proteger des commandes inexistantes
-            list_actions = cmd_map.get(c, None)
-            if list_actions is None:
-                print("Error de parsing\n")
-            else:
-                for l in list_actions:
-                    action_start(l)()
-                print("modifier:")
-                cube.print_cube()
-                start_resolve()
-    else:
-        print("Veuillez mélanger le cube\n")
+#     split_cmd = commandes.split()
+#     if split_cmd:
+#         for c in split_cmd: #proteger des commandes inexistantes
+#             list_actions = cmd_map.get(c, None)
+#             if list_actions is None:
+#                 print("Error de parsing\n")
+#             else:
+#                 for l in list_actions:
+#                     action_start(l)()
+#                 print("modifier:")
+#                 cube.print_cube()
+#                 start_resolve()
+#     else:
+#         print("Veuillez mélanger le cube\n")
+
+
+commandes = input("entrez vos commandes: ") # F R U2 B' L' D' => 60 mouvements etages 1 et 2
+split_cmd = commandes.split()
+list_actions = []
+if split_cmd:
+    for c in split_cmd: #proteger des commandes inexistantes
+        acts = cmd_map.get(c, None)
+        print(acts)
+        if acts is None:
+            print("Error de parsing\n")
+            list_actions = []
+            break
+        else:
+            list_actions.extend(acts)
+    for l in list_actions:
+        action_start(l)()
+    print("modifier:")
+    cube.print_cube()
+    if len(list_actions) > 0:
+        start_resolve()
+    cube.print_cube()
