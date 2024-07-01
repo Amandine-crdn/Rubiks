@@ -26,37 +26,28 @@ def compass_edges():
 ########################################################################## FIRST LAYER
 def first_layer():
     #-----------------------------------------------------------------------------edges
-    nodes_blocked = {
-        0: None,
-        1: None,
-        2: None,
-        3: None
-    }
-
+    nodes_blocked = { 0: None, 1: None, 2: None, 3: None }
+    map_node = [ A0, A1, A2, A3 ]
     count = 0
     while count != 4: #mettre 4 pour les 4 aretes
-        list_path_per_edge, nodes_blocked = resolve_cross(nodes_blocked)
-        action_temp = speeder_path(list_path_per_edge) 
-        if action_temp : #si l'action existe, l'executer 
+        list_path_to_resolve_node, nodes_blocked = resolve_cross(nodes_blocked)
+        target_path = speeder_path(list_path_to_resolve_node) 
+        if target_path : #si l'action existe, l'executer 
             #proteger les nodes_blocked, executer l'action et remettre les nodes_blocked à leur place
-            ft_protection(nodes_blocked, action_temp)  
+            ft_protection(nodes_blocked, target_path)  
             #bloquer le noeud une fois actionS réalisées
-            if action_temp[0] == 0:
-                nodes_blocked[0] = A0
-            elif action_temp[0] == 1:
-                nodes_blocked[1] = A1
-            elif action_temp[0] == 2:
-                nodes_blocked[2] = A2
-            elif action_temp[0] == 3:
-                nodes_blocked[3] = A3
+            for i in range(0, 4):
+                if target_path[0] == i:
+                    nodes_blocked[i] = map_node[i]
+            
         count += 1
     #faire le renversement des aretes à la fin du backtracking
     #orienter les aretes vers leur centre
-    print("compass_edge")
+    print("\n🐋 Cross done :")
     cube.print_cube()
-    compass_edges()
-    print("compass_edge PARES")
 
+    print("\n🐋 Edges'Cross Compass : ")
+    compass_edges()
     cube.print_cube()
 
     #-----------------------------------------------------------------------------corners
@@ -89,10 +80,14 @@ def first_layer():
                         break
                     action(10)()
                 insert_corner(index_corner)
-    print("compass")
+    print("\n🐋 Corners' Done : ")
     cube.print_cube()
     #orienter les coins
+
     compass_corners()
+    print("\n🐋 Corners' White Face Cube Done : ")
+    cube.print_cube()
+
 
 
 
@@ -103,45 +98,32 @@ def first_layer():
 ########################################################################## SECOND LAYER
 
 def second_layer():
-    print("2eme etage")
-    cube.print_cube()
 
-    nodes_blocked = {
-        0: False,
-        1: False,
-        2: False,
-        3: False
-    }
+    nodes_blocked = { 0: False, 1: False, 2: False, 3: False }
 
     colors = ["BR", "BO", "OG", "GR"]
     down_edges = [A6, A8, A10, A11]
     center_edges = [A4, A5, A7, A9]
+
     #on vient regarder si les aretes sont bien placées
     for index, d in enumerate(center_edges):
         if d.get_color() == colors[index]:
             nodes_blocked[index] = True
 
     functions_out = [out_edge_back, out_edge_left, out_edge_right, out_edge_up]
-
-    # print("🌴 layer 2")
-    # print(nodes_blocked)
+    
     # remplir le 2eme etage par le 3eme, puis checker s'il faut sortir
     all_locked = all(nodes_blocked.values())
-
     while all_locked is False:
         for i in range(0, 4):
             nodes_blocked = edges_from_three_layer(nodes_blocked)
             if nodes_blocked[i] == False:
-                functions_out[i]() #pas tjs tjs vrai !? , boucle infini comme apr haasard number_nodes_locked 2
-                                    # number_nodes_locked 3
-
-                                    #number_nodes_locked 2
-                                    # 2eme etage, 2eme boucle infini
+                functions_out[i]()                       
         all_locked = all(nodes_blocked.values())
-
     
-
-
+    print("\n🐋 Second Layer Done : ")
+    cube.print_cube()
+    
 
 
 

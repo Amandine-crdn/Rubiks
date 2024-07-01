@@ -29,12 +29,11 @@ def out_edge_up():
    
 def edges_from_three_layer(nodes_blocked):
 
-    for i in range(0, 4): #boucle pas mal
+    for i in range(0, 4):
         for d in down_edges:
             color_node = d.get_color()
             protocole_insertion = []
             if 'R' in color_node and 'B' in color_node:
-                print("resolve BR")
                 if color_node[0] == 'R':
                     #le placer sur Vert 
                     while A10.get_color() != "RB" and A10.get_color() != "BR":
@@ -49,7 +48,6 @@ def edges_from_three_layer(nodes_blocked):
                 nodes_blocked[0] = True
 
             elif 'R' in color_node and 'G' in color_node:
-                print("resolve RG")
                 if color_node[0] == 'R':
                     #le placer sur Bleu
                     while A6.get_color() != "RG" and A6.get_color() != "GR":
@@ -64,7 +62,6 @@ def edges_from_three_layer(nodes_blocked):
                 nodes_blocked[3] = True
 
             elif 'O' in color_node and 'B' in color_node:
-                print("resolve OB")
                 if color_node[0] == 'B':
                     #le placer sur Red
                     while A11.get_color() != "BO" and A11.get_color() != "OB":
@@ -79,7 +76,6 @@ def edges_from_three_layer(nodes_blocked):
                 nodes_blocked[1] = True
 
             elif 'O' in color_node and 'G' in color_node:
-                print("resolve OG")
                 if color_node[0] == 'G':
                     #le placer sur Red
                     while A11.get_color() != "GO" and A11.get_color() != "OG":
@@ -95,7 +91,5 @@ def edges_from_three_layer(nodes_blocked):
 
             for pi in protocole_insertion:
                 action(pi)()
-            if len(protocole_insertion) > 0:
-                print(protocole_insertion)
 
     return nodes_blocked
