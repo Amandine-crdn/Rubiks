@@ -1,8 +1,7 @@
 from SortColors import aretes, coins, milieux
 
 class Node():
-    def __init__(self, value: int, color: str) -> None:
-        self.value = value
+    def __init__(self, color: str) -> None:
         self.color = color
         self.r = None
         self.f = None
@@ -16,10 +15,6 @@ class Node():
         self.uprime = None
         self.dprime = None
         self.bprime= None
-        
-
-    def get_value(self):
-        return self.value
 
     def get_color(self):
         return self.color
@@ -71,18 +66,18 @@ class Node():
         return list_tuple
 
 
-A0 = Node(value=0, color=aretes[0])
-A1 = Node(value=1, color=aretes[1])
-A2 = Node(value=2, color=aretes[2])
-A3 = Node(value=3, color=aretes[3])
-A4 = Node(value=4, color=aretes[4])
-A5 = Node(value=5, color=aretes[5])
-A6 = Node(value=6, color=aretes[6])
-A7 = Node(value=7, color=aretes[7])
-A8 = Node(value=8, color=aretes[8])
-A9 = Node(value=9, color=aretes[9])
-A10 = Node(value=10, color=aretes[10])
-A11 = Node(value=11, color=aretes[11])
+A0 = Node(color=aretes[0])
+A1 = Node(color=aretes[1])
+A2 = Node(color=aretes[2])
+A3 = Node(color=aretes[3])
+A4 = Node(color=aretes[4])
+A5 = Node(color=aretes[5])
+A6 = Node(color=aretes[6])
+A7 = Node(color=aretes[7])
+A8 = Node(color=aretes[8])
+A9 = Node(color=aretes[9])
+A10 = Node(color=aretes[10])
+A11 = Node(color=aretes[11])
 
 A0.setter(u=A1, uprime=A2, b=A9, bprime=A4)
 A1.setter(l=A4, lprime=A5, u=A3, uprime=A0)
@@ -97,14 +92,19 @@ A9.setter(r=A2, rprime=A10, b=A11, bprime=A0)
 A10.setter(r=A9, rprime=A7, d=A8, dprime=A11)
 A11.setter(b=A4, bprime=A9, d=A10, dprime=A6)
 
-C0 = Node(value=0, color=coins[0])
-C1 = Node(value=1, color=coins[1])
-C2 = Node(value=2, color=coins[2])
-C3 = Node(value=3, color=coins[3])
-C4 = Node(value=4, color=coins[4])
-C5 = Node(value=5, color=coins[5])
-C6 = Node(value=6, color=coins[6])
-C7 = Node(value=7, color=coins[7])
+
+
+
+
+
+C0 = Node(color=coins[0])
+C1 = Node(color=coins[1])
+C2 = Node(color=coins[2])
+C3 = Node(color=coins[3])
+C4 = Node(color=coins[4])
+C5 = Node(color=coins[5])
+C6 = Node(color=coins[6])
+C7 = Node(color=coins[7])
 
 C0.setter(u=C2, uprime=C1, l=C4, lprime=C2)
 C1.setter(u=C0, uprime=C3, r=C3, rprime=C5)

@@ -14,13 +14,13 @@ def start_resolve():
         
     first_layer()
     second_layer()
-    third_layer()
+    # third_layer()
 
     moved = True
+    print(len(cube.solution))
     opt_mov = cube.solution.split()
     while moved == True:
         opt_mov, moved = optimize_moves(opt_mov)
-    
     print(len(opt_mov))
     print("🏁 Moves:", opt_mov)
 

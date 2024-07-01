@@ -5,7 +5,7 @@ from utils.SolveWhiteCorners import insert_corner, out_corner, swap_corner
 from utils.SolveWhiteCross import resolve_cross, backtracking, speeder_path, ft_protection, turn_edge_up, turn_edge_back, turn_edge_left, turn_edge_right
 from Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Back, BackPrime, Down, DownPrime, Front, FrontPrime, R2, L2, B2, D2, U2, F2
 from SecondLayer import edges_from_three_layer, out_edge_back, out_edge_left, out_edge_right, out_edge_up
-from ThirdLayer import to_have_trait, check_L, check_trait
+from ThirdLayer import check_cross, make_cross, check_L, check_trait
 
 def compass_corners():
     final_color = ["WBR", "WRG", "WOB", "WGO"]
@@ -22,7 +22,7 @@ def compass_edges():
     for node_index, n in enumerate(list_whites_nodes, start=0):
         if n.get_color()[0] != 'W':
             switch_edge[node_index]()
-
+ 
 ########################################################################## FIRST LAYER
 def first_layer():
     #-----------------------------------------------------------------------------edges
@@ -130,48 +130,46 @@ def second_layer():
 
 ########################################################################## THIRD LAYER
 
+
 #etage 3
-def third_layer():
-    #checker si j'ai un trait:
+def third_layer(): # L R B F R' L' 
+    #checker si la cross est deja faite
     print("\n🔻")
+    if check_cross() == False:
+        print("false")
+        check_L()
+
     cube.print_cube()
 
-    #si j'ai un trait, etape suivante
-    if A6.get_color()[1] == 'Y' and A10.get_color()[1] == 'Y' or A8.get_color()[1] == 'Y' and A11.get_color()[1] == 'Y':
-        print("trait deja la")
-        return
-    #si j'ai un L:
-    #le placer grâce à down ou faire 4 algo selon son emplacement pour gagner entre 0 et 3coups
-    print("A8, A10", A8.get_color()[1], A10.get_color()[1])
-    print("A11, A10", A11.get_color()[1], A10.get_color()[1])
-    print("A8, A6", A8.get_color()[1], A6.get_color()[1])
-    print("A11, A6", A11.get_color()[1], A6.get_color()[1])
-
-    if check_L() == False:
-
-        while True: #idem pas tjs vrai, boucle infini dangereuse
-            print("rien")
-            cube.print_cube()
-            to_have_trait()
-            cube.print_cube()
-
-            #check si ce n'est pas un L
-            if check_trait() == False:
-                break
-            action(11)() #sinon boucle inf
-    else:
-        print("else")
-        check_trait()
 
     #si 2 aretes opposé bien placer en fonction des milieux:
         #mettre ce trait là face à nous et faire l'algo pour mettre en 2 à coté
         #finir par encore l'algo 
     #si 2 aretes a cote:
         # faire une seule fois l'algo
-    #bien placer les coins en fonction de la couleur de ces centres
-    #faire le sexy move sur les 4 coins
 
+        # 🍪 r u r' u r u2 r' dans l'aute sens  et replacer avec un down
+        # l d l' d l d2 l'
+        #liste_actions = [2, 10, 3, 10, 2, 10, 10, 3]
+
+
+
+    #bien placer les coins en fonction de la couleur de ces centres
+    # 🍪 l' u r  u' l u r' u' à l'envers
+    # r' d l' d' r d l' d'
+    #liste_actions = [1, 10, 3, 11, 0, 10, 3, 11]
+
+
+    #faire le sexy move sur les 4 coins
+    #🍪 la on est à l'endroit, a faire sur les coins qui faut changer
+    #  r u r' u'    #puis down
     #fin... avec je pense 150 coups à la fin
+
+    #
+
+    
+#si un motif de rubik est deviné faire son mouvement inverse
+
 
     
 

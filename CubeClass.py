@@ -1,13 +1,12 @@
-from SortColors import  milieux, coins #, aretes, coins
+from SortColors import  milieux, coins 
 from NodeClass import A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11,  C0, C1, C2, C3, C4, C5, C6, C7
 
 
 class Cube():
     def __init__(self) -> None:   
-        # self.coins = [C1, C2, C3, C4, C5, C6, C7]   
         self.coins = [C0, C1, C2, C3, C4, C5, C6, C7]
-        self.aretes = [A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11] # aretes_list = A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12
-        self.milieux = milieux # [M1, M2, M3, M4, M5]
+        self.aretes = [A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11]
+        self.milieux = milieux 
         self.blocked_edges = []
         self.solution = ""
     
@@ -29,7 +28,6 @@ class Cube():
    
 
 
-
     def print_cube(self):
         print(f"""
 
@@ -46,4 +44,5 @@ class Cube():
         {self.coins[6].get_color()[2]} {self.aretes[8].get_color()[0]} {self.coins[7].get_color()[1]}
 
 """)
+
 cube = Cube()
