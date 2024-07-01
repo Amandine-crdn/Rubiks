@@ -9,6 +9,8 @@ from SecondLayer import edges_from_three_layer, out_edge_back, out_edge_left, ou
 
 from SolverRubik import first_layer, second_layer, third_layer
 
+import sys
+
 
 def start_resolve():
         
@@ -29,7 +31,7 @@ def start_resolve():
 
 print("\n🐋 Start :")
 cube.print_cube()
-commandes = input("Shake rubik : ")
+commandes = ' '.join(sys.argv[1::]);
 split_cmd = commandes.split()
 list_actions = []
 if split_cmd:
