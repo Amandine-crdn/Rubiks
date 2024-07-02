@@ -36,14 +36,6 @@ def turn_edge_back():
 def backtracking(node: Node, old_node: Node, node_init: Node, path: list[int], dico_path: dict[int, list[int]], i: int, color: int, nodes_blocked: dict[int, Node], index: int, map_node, nodes_index):
     
     all_directions = possibility_directions(node)
-<<<<<<< HEAD
-=======
-#    print("\n----------------")
-#    for k, v in all_directions.items():
-#        if v:
-#            print(k, v.get_color())
->>>>>>> argv
-
     for direction, next_node in all_directions.items():
         
         #unique condition de fermer un chemin
