@@ -1,12 +1,11 @@
 from Start.CubeClass import cube
-from Start.NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
-from Utils.Functions import action
+from Start.NodeClass import A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
+
 from Layers.SolveWhiteCorners import insert_corner, out_corner, swap_corner
-from Layers.SolveWhiteCross import resolve_cross, backtracking, speeder_path, ft_protection, turn_edge_front, turn_edge_back, turn_edge_left, turn_edge_right
-from Utils.Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Back, BackPrime, Down, DownPrime, Front, FrontPrime, R2, L2, B2, D2, U2, F2
+from Layers.SolveWhiteCross import turn_edge_front, turn_edge_back, turn_edge_left, turn_edge_right
+from Layers.FirstLayer import best_cross
 from Layers.SecondLayer import edges_from_three_layer, reverse_edge, out_edge_back, out_edge_left, out_edge_right, out_edge_up
 from Layers.ThirdLayer import check_cross, make_cross, check_L, check_trait
-from Layers.FirstLayer import nodes_blocked, map_node, nodes_index, colors
 from Start.RotationsStart import cmd_map, action_start
 
 def compass_corners():
@@ -33,7 +32,8 @@ def compass_edges():
 
 
 ########################################################################## FIRST LAYER
-def first_layer():
+def first_layer(list_action):
+    best_cross(list_action)
     spliting = cube.solution.split()
     to_play = []
     cube.print_cube()

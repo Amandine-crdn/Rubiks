@@ -1,7 +1,7 @@
 from Start.CubeClass import cube
 from Start.NodeClass import A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
 
-def reset():
+def reset(list_action):
     cube.solution = "" #remettre à null
     aretes = ["WR", "WB", "WG", "WO", "BR", "BO", "BY", "OG", "OY", "GR", "GY","RY"] #remettre le cube initial
     coins = ["WBR", "WRG", "WOB","WGO" , "YRB", "YGR", "YBO", "YOG"]
@@ -25,6 +25,9 @@ def reset():
     A9.set_color(aretes[9])
     A10.set_color(aretes[10])
     A11.set_color(aretes[11])
+
+    for l in list_action:
+        action_start(l)()
     
 cmd_map = {
     "R": [0],

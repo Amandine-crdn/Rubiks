@@ -1,6 +1,8 @@
-from Start.NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
+from Start.NodeClass import A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
 from Start.CubeClass import cube
 from Utils.Functions import return_solution_opti
+from Start.RotationsStart import reset
+
 nodes_blocked = [ #il va tourner 24 fois pour choisir la meilleure option selon l'algo
     {0: None, 1: None, 2: None, 3: None}, {0: None, 1: None, 3: None, 2: None}, {0: None, 2: None, 1: None, 3: None},
     {0: None, 2: None, 3: None, 1: None}, {0: None, 3: None, 1: None, 2: None}, {0: None, 3: None, 2: None, 1: None},
@@ -61,16 +63,13 @@ def simulation(nodes_index, colors, map_node, nodes_blocked):
             #bloquer le noeud une fois actionS réalisées
             for i in range(0, 4):
                 if target_path[0] == i :
-                    # print("i", i)
                     nodes_blocked[nodes_index[i]] = map_node[nodes_index[i]]    
         count += 1
     
 
 
 #R U2 F B' L2 R 
-def first_layer(list_action): #sans checker le sens des aretes
-    from Start.RotationsStart import reset, action_start
-    from Utils.SolverRubik import first_layer
+def best_cross(list_action): #sans checker le sens des aretes
 
     possibility_solutions = [] 
     #inverser l'ordre des noeuds pour le faire commencer par un autre
@@ -78,15 +77,14 @@ def first_layer(list_action): #sans checker le sens des aretes
     for i in range(0, 24):
         simulation(nodes_index[i], colors[i], map_node[i], nodes_blocked[i])
         possibility_solutions.append((i, cube.solution)) #ajouter l'indice de la solution a choisir et la taille de la solution pour permettre de comaprer apres
-        reset()
         #remettre les mouvements choisi par l'utilisateur
-        for l in list_action:
-            action_start(l)()
+        reset(list_action)
+        
         if i == 0:
             best = possibility_solutions[0]
             index_solution = best[0]
             string_solution = best[1]
-            cube.solution = string_solution
+            cube.set_solution(string_solution)
     #une fois finir de faire 'toutes' les possibilités
     #retourner l'odre des noeuds qui permettent la solution la plus courte
         
@@ -102,12 +100,11 @@ def first_layer(list_action): #sans checker le sens des aretes
             best = (index_solution, string)
 
     cube.set_solution(string_solution)
-    first_layer()
 
 
 #R U2 F B' L2 R 
 def find_orientation_edge_white(node_init, path, direction, index, map_node, nodes_index, color):
-    from Start.RotationsStart import reset, action_start
+    from Start.RotationsStart import action_start
     # print("START ", node.get_color())
     # print("START ", map_node[nodes_index[index]].get_color())
     print("color", color)

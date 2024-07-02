@@ -1,14 +1,10 @@
 from Start.CubeClass import cube
-from Start.NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
-from Utils.Functions import action, optimize_moves
-from Layers.SolveWhiteCorners import insert_corner, out_corner, swap_corner
-from Layers.SolveWhiteCross import resolve_cross, backtracking, speeder_path, ft_protection, turn_edge_front, turn_edge_back, turn_edge_left, turn_edge_right
-from Utils.Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Back, BackPrime, Down, DownPrime, Front, FrontPrime, R2, L2, B2, D2, U2, F2
-from Start.RotationsStart import action_start, cmd_map
-from Layers.SecondLayer import edges_from_three_layer, out_edge_back, out_edge_left, out_edge_right, out_edge_up
+from Utils.Functions import return_solution_opti, optimize_moves
 
-from Utils.SolverRubik import second_layer, third_layer
-from Layers.FirstLayer import first_layer
+
+from Start.RotationsStart import action_start, cmd_map
+
+from Utils.SolverRubik import first_layer, second_layer, third_layer
 
 import sys
 
@@ -19,9 +15,7 @@ def start_resolve(list_actions):
     # third_layer()
 
     moved = True
-    
-   
-    print("solution",cube.solution)
+    return_solution_opti(cube.solution)
     opt_mov = cube.solution.split()
     while moved == True:
         opt_mov, moved = optimize_moves(opt_mov)

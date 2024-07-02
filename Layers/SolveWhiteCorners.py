@@ -1,5 +1,4 @@
 from Utils.Functions import action
-from Start.CubeClass import cube
 
 def insert_corner(index):
     list_out = []
