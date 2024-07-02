@@ -1,6 +1,5 @@
-from NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
-from CubeClass import cube
-
+from Start.NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
+from Start.CubeClass import cube
 
 nodes_blocked = [ #il va tourner 24 fois pour choisir la meilleure option selon l'algo
     {0: None, 1: None, 2: None, 3: None}, {0: None, 1: None, 3: None, 2: None}, {0: None, 2: None, 1: None, 3: None},
@@ -48,7 +47,7 @@ colors = [
 
 # envoyer l'ordre des nodes_blocked a first layer qui permet un meilleur choix
 def return_solution_opti(solution):
-    from Functions import optimize_moves
+    from Utils.Functions import optimize_moves
     moved = True
     opt_mov = solution.split()
     while moved == True:
@@ -60,7 +59,7 @@ def return_solution_opti(solution):
 
 
 def simulation(nodes_index, colors, map_node, nodes_blocked):    
-    from utils.SolveWhiteCross import resolve_cross, ft_protection, speeder_path
+    from Layers.SolveWhiteCross import resolve_cross, ft_protection, speeder_path
 
     count = 0
     while count != 4:
@@ -79,8 +78,9 @@ def simulation(nodes_index, colors, map_node, nodes_blocked):
 
 
 #R U2 F B' L2 R 
-def find_best_first_path(list_action): #sans checker le sens des aretes
-    from RotationsStart import reset, action_start
+def first_layer(list_action): #sans checker le sens des aretes
+    from Start.RotationsStart import reset, action_start
+    from Utils.SolverRubik import first_layer
 
     possibility_solutions = [] 
     #inverser l'ordre des noeuds pour le faire commencer par un autre
@@ -109,13 +109,14 @@ def find_best_first_path(list_action): #sans checker le sens des aretes
             index_solution = p[0]
             string_solution = p[1]
             best = (index_solution, string)
-            
+
     cube.set_solution(string_solution)
+    first_layer()
 
 
 #R U2 F B' L2 R 
 def ft_solver_sim(node_init, path, direction, index, map_node, nodes_index, color):
-    from RotationsStart import reset, action_start
+    from Start.RotationsStart import reset, action_start
     # print("START ", node.get_color())
     # print("START ", map_node[nodes_index[index]].get_color())
     print("color", color)

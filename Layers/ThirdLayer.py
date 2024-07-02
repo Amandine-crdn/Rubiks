@@ -1,6 +1,6 @@
-from NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
-from Functions import action
-from CubeClass import cube
+from Start.NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
+from Utils.Functions import action
+from Start.CubeClass import cube
 
 def check_cross():
         #a11

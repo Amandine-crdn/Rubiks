@@ -55,7 +55,7 @@ Je fais correspondre un int à chaque rotation pour les besoins de mon algorithm
 ***CFOP Speedsolving Method: Cross, First 2 Layers, Orientation, Permutation***
 
 ##1ère étape: résoudre la croix blanche
-## Outils
+## OUtils.
 - path: variable de type list qui va ajouter petit à petit les mouvements de rotations à effectuer pour aller jusqu'au noeud souhaité. Ex : path = [1, 2, 8, 5]
 - dico_path: variable de type dictionnaire qui va ajouter les différents path possibles par noeud
 - nodes_blocked: variable de type list et de taille max 4 qui va ajouter les nodes bien placer et les nodes ajoutés par la suite à protéger de autres mouvements de résolutions d'autres nodes 

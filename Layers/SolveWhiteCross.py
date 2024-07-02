@@ -1,8 +1,8 @@
-from Rotations import Right, RightPrime, Left, LeftPrime, Up, UpPrime, Back, BackPrime, Down, DownPrime, Front, FrontPrime, R2, L2, B2, D2, U2, F2
-from NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
-from Functions import action
-from CubeClass import cube
-from Simulation import ft_solver_sim
+from Utils.Rotations import Right, RightPrime, Left, LeftPrime, Up, UpPrime, Back, BackPrime, Down, DownPrime, Front, FrontPrime, R2, L2, B2, D2, U2, F2
+from Utils.Functions import action
+from Start.NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
+from Start.CubeClass import cube
+from Layers.FirstLayer import ft_solver_sim
 
 def turn_edge_left():
     L2()

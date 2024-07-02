@@ -1,5 +1,5 @@
-from CubeClass import cube
-from NodeClass import A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
+from Start.CubeClass import cube
+from Start.NodeClass import A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
 
 def reset():
     cube.solution = "" #remettre à null

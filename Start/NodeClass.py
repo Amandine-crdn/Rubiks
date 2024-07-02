@@ -1,4 +1,4 @@
-from SortColors import aretes, coins, milieux
+from Start.SortColors import aretes, coins, milieux
 
 class Node():
     def __init__(self, color: str) -> None:

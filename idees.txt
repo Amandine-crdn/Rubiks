@@ -1,1 +1,5 @@
 # les aretes du second layer, qui sont a la bonne place mais pas a la bonne orientation, au lieu de les sortir et les inserer, chercher un algo qui va bien orienter larete.
+
+
+ # si fail programme, entrez les input qui font fail le programme 
+# preciser comportement (boucle infini, face banche mal résolu..) 
