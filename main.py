@@ -7,22 +7,26 @@ from Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Bac
 from RotationsStart import action_start, cmd_map
 from SecondLayer import edges_from_three_layer, out_edge_back, out_edge_left, out_edge_right, out_edge_up
 
-from SolverRubik import first_layer, second_layer, third_layer
+from SolverRubik import find_best_first_path, first_layer, second_layer, third_layer
 
 
-def start_resolve():
-        
-    first_layer()
-    second_layer()
+def start_resolve(list_actions):
+
+    index = find_best_first_path(list_actions) #40 et 60 mouvements   
+    # first_layer(index)
+    print("end")
+    # first_layer()
+    # second_layer()
     # third_layer()
 
     moved = True
-    print(len(cube.solution))
-    opt_mov = cube.solution.split()
-    while moved == True:
-        opt_mov, moved = optimize_moves(opt_mov)
-    print(len(opt_mov))
-    print("🏁 Moves:", opt_mov)
+    
+    # print("ici",len(cube.solution))
+    # opt_mov = cube.solution.split()
+    # while moved == True:
+    #     opt_mov, moved = optimize_moves(opt_mov)
+    # print(len(opt_mov))
+    # print("🏁 Moves:", opt_mov)
 
 
 
@@ -46,4 +50,4 @@ if split_cmd:
     print("\n🐋 State of rubik after shake :")
     cube.print_cube()
     if len(list_actions) > 0:
-        start_resolve()
+        start_resolve(list_actions)

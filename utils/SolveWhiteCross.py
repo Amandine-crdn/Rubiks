@@ -35,10 +35,6 @@ def turn_edge_back():
 def backtracking(node: Node, old_node: Node, node_init: Node, path: list[int], dico_path: dict[int, list[int]], i: int, color: int, nodes_blocked: dict[int, Node], index: int):
     
     all_directions = possibility_directions(node)
-    print("\n----------------")
-    for k, v in all_directions.items():
-        if v:
-            print(k, v.get_color())
 
     for direction, next_node in all_directions.items():
         
@@ -65,21 +61,25 @@ def backtracking(node: Node, old_node: Node, node_init: Node, path: list[int], d
 
 
 
-def resolve_cross(nodes_blocked: dict[int, Node]):
-    nodes = [A0, A1, A2, A3]
-    colors = ['R', 'B', 'G', 'O']
+def resolve_cross(nodes_index, colors, map_node, nodes_blocked: dict[int, Node]):
+    
     list_path_to_resolve_node = []
-
-    for index_node, n in enumerate(nodes):
+    
+    for index_node, n in enumerate(map_node):
         if 'W' in n.get_color() and colors[index_node] in n.get_color() and nodes_blocked[index_node] is None:
             nodes_blocked[index_node] = n
-        else:
+            print("---> ❎ automatic", index_node, n.get_color())
+        elif nodes_blocked[index_node] is None:
             path = []
             dico_target_path = {}
             i = 0
             node = n
             node_init = node
             old_node = None
+            
+            print("\nsearch to replace ", index_node, n.get_color())
+
+            print(f" 🔍 backtracking W{colors[index_node]}" )
             while node :
                 node, dico_target_path, path, i = backtracking(node, old_node, node_init, path, dico_target_path, i, colors[index_node], nodes_blocked, index_node)
             target_path = select_shorter_action(dico_target_path, index_node)
