@@ -1,0 +1,7 @@
+# pour ignorer les fichiers de vim
+*.swp
+*.swo
+*.swm
+# pour ignorer les pycache
+
+__pycache__/

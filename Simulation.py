@@ -84,7 +84,7 @@ def find_best_first_path(list_action): #sans checker le sens des aretes
 
     possibility_solutions = [] 
     #inverser l'ordre des noeuds pour le faire commencer par un autre
-
+  
     for i in range(0, 24):
         simulation(nodes_index[i], colors[i], map_node[i], nodes_blocked[i])
         possibility_solutions.append((i, cube.solution)) #ajouter l'indice de la solution a choisir et la taille de la solution pour permettre de comaprer apres
@@ -92,25 +92,27 @@ def find_best_first_path(list_action): #sans checker le sens des aretes
         #remettre les mouvements choisi par l'utilisateur
         for l in list_action:
             action_start(l)()
+        if i == 0:
+            best = possibility_solutions[0]
+            index_solution = best[0]
     #une fois finir de faire 'toutes' les possibilités
     #retourner l'odre des noeuds qui permettent la solution la plus courte
-    best = possibility_solutions[0]
-    index_solution = best[0]
+        
     for p in possibility_solutions:
-        index_solution = p[0]
         string = return_solution_opti(p[1])
         len_solution = len(string)
 
         #s'il trouve solution plus courte
         if len_solution < len(best[1]):
             best = (index_solution, string)
+            index_solution = p[0]
    
     print("solution attendu", best[1])
     #retourner l'index de best pour renvoyer l'ordre
     return index_solution
 
 
-
+#R U2 F B' L2 R 
 def ft_solver_sim(node_init, path, direction, index, map_node, nodes_index):
     from RotationsStart import reset, action_start
     # print("START ", node.get_color())
