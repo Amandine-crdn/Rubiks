@@ -14,8 +14,8 @@ import sys
 
 def start_resolve(list_actions):
 
-    index, string_solution = find_best_first_path(list_actions) #40 et 60 mouvements  
-    first_layer(index, string_solution)
+    find_best_first_path(list_actions) #40 et 60 mouvements  
+    first_layer()
     
     # print("end")
     # # first_layer()

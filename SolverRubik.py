@@ -33,9 +33,8 @@ def compass_edges():
 
 
 ########################################################################## FIRST LAYER
-def first_layer(index, string_solution):
-    print("index ", index)
-    spliting = string_solution.split()
+def first_layer():
+    spliting = cube.solution.split()
     to_play = []
     cube.print_cube()
     for s in spliting:
@@ -44,35 +43,10 @@ def first_layer(index, string_solution):
         to_play.extend(acts)
     
     for play in to_play:
-        print("play", play)
         action_start(play)()
     
-    
 
 
-
-    # from Simulation import nodes_blocked, map_node, nodes_index, colors
-    #-----------------------------------------------------------------------------edges
-    # best_nodes_blocked = nodes_blocked[index]
-    # for i in range(0, 4):
-    #     best_nodes_blocked[i] = None
-    # best_map_node = map_node[index]
-    # best_node_index = nodes_index[index]
-    # best_colors = colors[index]
-
-    # count = 0
-    # while count != 4: #mettre 4 pour les 4 aretes
-    #     list_path_to_resolve_node, best_n = resolve_cross(best_node_index, best_colors, best_map_node, best_nodes_blocked)
-    #     target_path = speeder_path(list_path_to_resolve_node) 
-    #     if target_path : #si l'action existe, l'executer 
-    #         ft_protection(best_n, target_path)  
-    #         for i in range(0, 4):
-    #             if target_path[0] == i:
-    #                 best_n[best_node_index[i]] = best_map_node[best_node_index[i]]
-            
-    #     count += 1
-    #faire le renversement des aretes à la fin du backtracking
-    #orienter les aretes vers leur centre
     print("\n🐋 Cross done :")
     cube.print_cube()
 

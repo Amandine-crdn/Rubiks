@@ -102,20 +102,15 @@ def find_best_first_path(list_action): #sans checker le sens des aretes
         
     for p in possibility_solutions:
         string = return_solution_opti(p[1]).split()
-        # print(string.split())
-        # print("vrai taille",len(string.split()))
         len_solution = len(string)
 
         #s'il trouve solution plus courte
         if len_solution < len(best[1]):
-            best = (index_solution, string)
             index_solution = p[0]
             string_solution = p[1]
-            cube.solution = string_solution
-
-
-    #retourner l'index de best pour renvoyer l'ordre
-    return index_solution, string_solution
+            best = (index_solution, string)
+            
+    cube.set_solution(string_solution)
 
 
 #R U2 F B' L2 R 
