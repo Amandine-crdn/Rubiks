@@ -15,9 +15,14 @@ def action(choice: int):
   
     return functions[choice]
 
+def return_solution_opti(solution):
+    moved = True
+    opt_mov = solution.split()
+    while moved == True:
+        opt_mov, moved = optimize_moves(opt_mov)
+    return opt_mov
 
 
-# 📽️ corriger "R'2" => R2
 
 
 
@@ -38,15 +43,13 @@ def optimize_moves(moves):
             new_str.append(moves[i][0])
             i+=3 # ou  "l' l' l' " => l
             moved = True
-        
-        elif i < len(moves) - 1 and len(moves[i]) > 2 and moves[i] == moves[i + 1]: #pour eviter B'2
-            new_str.append(f"{moves[i][0]}2")
-            print("here")
-            i+=2 # si 2 egaux dire 2
-            moved = True
+       
             
         elif i < len(moves) - 1 and moves[i] == moves[i + 1]:
-            new_str.append(f"{moves[i]}2")
+            if len(moves[i]) == 2:
+                new_str.append(f"{moves[i][0]}2")
+            else:
+                new_str.append(f"{moves[i]}2")
             i+=2 # si 2 egaux dire 2
             moved = True
 

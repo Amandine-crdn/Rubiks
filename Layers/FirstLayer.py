@@ -1,6 +1,6 @@
 from Start.NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
 from Start.CubeClass import cube
-
+from Utils.Functions import return_solution_opti
 nodes_blocked = [ #il va tourner 24 fois pour choisir la meilleure option selon l'algo
     {0: None, 1: None, 2: None, 3: None}, {0: None, 1: None, 3: None, 2: None}, {0: None, 2: None, 1: None, 3: None},
     {0: None, 2: None, 3: None, 1: None}, {0: None, 3: None, 1: None, 2: None}, {0: None, 3: None, 2: None, 1: None},
@@ -46,16 +46,6 @@ colors = [
 ]
 
 # envoyer l'ordre des nodes_blocked a first layer qui permet un meilleur choix
-def return_solution_opti(solution):
-    from Utils.Functions import optimize_moves
-    moved = True
-    opt_mov = solution.split()
-    while moved == True:
-        opt_mov, moved = optimize_moves(opt_mov)
-
-    string = ' '.join(opt_mov)
-    return string
-
 
 
 def simulation(nodes_index, colors, map_node, nodes_blocked):    
@@ -101,7 +91,8 @@ def first_layer(list_action): #sans checker le sens des aretes
     #retourner l'odre des noeuds qui permettent la solution la plus courte
         
     for p in possibility_solutions:
-        string = return_solution_opti(p[1]).split()
+        opt_mov = return_solution_opti(p[1])
+        string = ' '.join(opt_mov)
         len_solution = len(string)
 
         #s'il trouve solution plus courte
@@ -115,7 +106,7 @@ def first_layer(list_action): #sans checker le sens des aretes
 
 
 #R U2 F B' L2 R 
-def ft_solver_sim(node_init, path, direction, index, map_node, nodes_index, color):
+def find_orientation_edge_white(node_init, path, direction, index, map_node, nodes_index, color):
     from Start.RotationsStart import reset, action_start
     # print("START ", node.get_color())
     # print("START ", map_node[nodes_index[index]].get_color())

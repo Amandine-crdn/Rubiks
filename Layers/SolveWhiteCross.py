@@ -2,7 +2,7 @@ from Utils.Rotations import Right, RightPrime, Left, LeftPrime, Up, UpPrime, Bac
 from Utils.Functions import action
 from Start.NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
 from Start.CubeClass import cube
-from Layers.FirstLayer import ft_solver_sim
+from Layers.FirstLayer import find_orientation_edge_white
 
 def turn_edge_left():
     L2()
@@ -41,7 +41,7 @@ def backtracking(node: Node, old_node: Node, node_init: Node, path: list[int], d
         #unique condition de fermer un chemin
         if 'W' in next_node.get_color() and color in next_node.get_color() and\
         check_is_locked(next_node, nodes_blocked) == False:# and\
-        # ft_solver_sim(node_init, path, direction, index, map_node, nodes_index, color) == True:
+        # find_orientation_edge_white(node_init, path, direction, index, map_node, nodes_index, color) == True:
         #si l'arete ne sera pa bien orienter, ne pas l'ajouter
             path.append(direction)
             copy_path = path.copy()
