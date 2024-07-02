@@ -1,6 +1,7 @@
 from Utils.Rotations import Right, RightPrime, Left, LeftPrime, Up, UpPrime, Back, BackPrime, Down, DownPrime, Front, FrontPrime, R2, L2, B2, D2, U2, F2
 from Utils.Functions import action
 from Start.NodeClass import Node
+from Layers.FirstLayer import find_orientation_edge_white
 
 def turn_edge_left():
     L2()
@@ -38,8 +39,8 @@ def backtracking(node: Node, old_node: Node, node_init: Node, path: list[int], d
         
         #unique condition de fermer un chemin
         if 'W' in next_node.get_color() and color in next_node.get_color() and\
-        check_is_locked(next_node, nodes_blocked) == False:# and\
-        # find_orientation_edge_white(node_init, path, direction, index, map_node, nodes_index, color) == True:
+        check_is_locked(next_node, nodes_blocked) == False and\
+        find_orientation_edge_white(node_init, path, direction, index, map_node, nodes_index, color) == True:
         #si l'arete ne sera pa bien orienter, ne pas l'ajouter
             path.append(direction)
             copy_path = path.copy()
@@ -48,7 +49,7 @@ def backtracking(node: Node, old_node: Node, node_init: Node, path: list[int], d
             i+=1
       
         #chercher un autre chemin
-        elif len(path) < 2 and next_node != node_init and check_is_locked(next_node, nodes_blocked) == False :
+        elif len(path) < 4 and next_node != node_init and check_is_locked(next_node, nodes_blocked) == False :
             path.append(direction)
             copy_path = path.copy()
             node, dico_path, path, i = backtracking(next_node, node, node_init, copy_path, dico_path, i, color, nodes_blocked, index, map_node, nodes_index)
@@ -60,7 +61,7 @@ def backtracking(node: Node, old_node: Node, node_init: Node, path: list[int], d
 
 
 def resolve_cross(nodes_index, colors, map_node, nodes_blocked: dict[int, Node]): #R F B R2 U' L F2
-    
+    print("⛑️ resolve cross ⛑️")
     list_path_to_resolve_node = []
     
     for index_node, n in enumerate(map_node):
@@ -78,7 +79,7 @@ def resolve_cross(nodes_index, colors, map_node, nodes_blocked: dict[int, Node])
             
             # print("\nsearch to replace ", index_node, n.get_color())
 
-            # print(f" 🔍 backtracking W{colors[index_node]}" )
+            print(f"\n 🔍 backtracking W{colors[index_node]}" )
             while node :
                 node, dico_target_path, path, i = backtracking(node, old_node, node_init, path, dico_target_path, i, colors[index_node], nodes_blocked, index_node, map_node,nodes_index)
             target_path = select_shorter_action(dico_target_path, index_node)

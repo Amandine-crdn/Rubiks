@@ -63,7 +63,8 @@ def simulation(nodes_index, colors, map_node, nodes_blocked):
             #bloquer le noeud une fois actionS réalisées
             for i in range(0, 4):
                 if target_path[0] == i :
-                    nodes_blocked[nodes_index[i]] = map_node[nodes_index[i]]    
+                    nodes_blocked[nodes_index[i]] = map_node[nodes_index[i]]
+                    print(nodes_blocked[nodes_index[i]].get_color())
         count += 1
     
 
@@ -74,7 +75,8 @@ def best_cross(list_action): #sans checker le sens des aretes
     possibility_solutions = [] 
     #inverser l'ordre des noeuds pour le faire commencer par un autre
   
-    for i in range(0, 24):
+    # for i in range(0, 24):
+    for i in range(0, 1):
         simulation(nodes_index[i], colors[i], map_node[i], nodes_blocked[i])
         possibility_solutions.append((i, cube.solution)) #ajouter l'indice de la solution a choisir et la taille de la solution pour permettre de comaprer apres
         #remettre les mouvements choisi par l'utilisateur
@@ -105,28 +107,22 @@ def best_cross(list_action): #sans checker le sens des aretes
 #R U2 F B' L2 R 
 def find_orientation_edge_white(node_init, path, direction, index, map_node, nodes_index, color):
     from Start.RotationsStart import action_start
-    # print("START ", node.get_color())
-    # print("START ", map_node[nodes_index[index]].get_color())
-    print("color", color)
-    # print(nodes_index)
-    path.append(direction)
+    # print(colors[nodes_index[index]])
     copy_path = path.copy()
+    copy_path.append(direction)
     for p in copy_path:
         action_start(p)()
-    # print("END ", node.get_color())
-    # print("index", index)
-    # print("nodes_index", nodes_index)
-    # print("map_node", map_node)
-    if node_init.get_color()[0] != 'W':
+    
+    if node_init.get_color() != "W" + color:
         for p in reversed(copy_path):
             action_start(p)()
-        path.pop()
+        copy_path.pop()
         
         return False
-    # print("color", color)
-    # print("END ", map_node[index].get_color())
-    # print("END ", nodes_index[index], node_init.get_color())
-    for p in copy_path:
+    print("🎍 find ", node_init.get_color())
+
+    for p in reversed(copy_path):
         action_start(p)()
-    path.pop()
+
+    copy_path.pop()
     return True

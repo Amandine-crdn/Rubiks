@@ -36,10 +36,8 @@ def first_layer(list_action):
     best_cross(list_action)
     spliting = cube.solution.split()
     to_play = []
-    cube.print_cube()
     for s in spliting:
         acts = cmd_map[s]
-        print(acts)
         to_play.extend(acts)
     
     for play in to_play:
