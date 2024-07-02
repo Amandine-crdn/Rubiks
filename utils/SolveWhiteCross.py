@@ -17,7 +17,7 @@ def turn_edge_right():
     Right()
     Front()
 
-def turn_edge_up():
+def turn_edge_front():
     F2()
     Down()
     Right()
@@ -40,13 +40,15 @@ def backtracking(node: Node, old_node: Node, node_init: Node, path: list[int], d
         
         #unique condition de fermer un chemin
         if 'W' in next_node.get_color() and color in next_node.get_color() and check_is_locked(next_node, nodes_blocked) == False:
+            
+
             path.append(direction)
             copy_path = path.copy()
             dico_path[i] = copy_path
             path.pop()
             i+=1
         
-        elif len(path) > 2:
+        elif len(path) > 1:
             pass
         
         #chercher un autre chemin
@@ -67,9 +69,9 @@ def resolve_cross(nodes_index, colors, map_node, nodes_blocked: dict[int, Node])
     
     for index_node, n in enumerate(map_node):
         if 'W' in n.get_color() and colors[index_node] in n.get_color() and nodes_blocked[index_node] is None:
-            nodes_blocked[index_node] = n
-            print("---> ❎ automatic", index_node, n.get_color())
-        elif nodes_blocked[index_node] is None:
+            nodes_blocked[nodes_index[index_node]] = n
+            # print("---> ❎ automatic", nodes_index[index_node], n.get_color())
+        elif nodes_blocked[nodes_index[index_node]] is None:
             path = []
             dico_target_path = {}
             i = 0
@@ -77,9 +79,9 @@ def resolve_cross(nodes_index, colors, map_node, nodes_blocked: dict[int, Node])
             node_init = node
             old_node = None
             
-            print("\nsearch to replace ", index_node, n.get_color())
+            # print("\nsearch to replace ", index_node, n.get_color())
 
-            print(f" 🔍 backtracking W{colors[index_node]}" )
+            # print(f" 🔍 backtracking W{colors[index_node]}" )
             while node :
                 node, dico_target_path, path, i = backtracking(node, old_node, node_init, path, dico_target_path, i, colors[index_node], nodes_blocked, index_node)
             target_path = select_shorter_action(dico_target_path, index_node)

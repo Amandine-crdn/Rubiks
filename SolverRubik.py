@@ -2,7 +2,7 @@ from CubeClass import cube
 from NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
 from Functions import action, optimize_moves
 from utils.SolveWhiteCorners import insert_corner, out_corner, swap_corner
-from utils.SolveWhiteCross import resolve_cross, backtracking, speeder_path, ft_protection, turn_edge_up, turn_edge_back, turn_edge_left, turn_edge_right
+from utils.SolveWhiteCross import resolve_cross, backtracking, speeder_path, ft_protection, turn_edge_front, turn_edge_back, turn_edge_left, turn_edge_right
 from Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Back, BackPrime, Down, DownPrime, Front, FrontPrime, R2, L2, B2, D2, U2, F2
 from SecondLayer import edges_from_three_layer, out_edge_back, out_edge_left, out_edge_right, out_edge_up
 from ThirdLayer import check_cross, make_cross, check_L, check_trait
@@ -19,7 +19,7 @@ def compass_corners():
 
 def compass_edges():
     list_whites_nodes = [A0, A1, A2, A3]
-    switch_edge = [turn_edge_back, turn_edge_left, turn_edge_right, turn_edge_up] 
+    switch_edge = [turn_edge_back, turn_edge_left, turn_edge_right, turn_edge_front] 
     for node_index, n in enumerate(list_whites_nodes, start=0):
         if n.get_color()[0] != 'W':
             switch_edge[node_index]()
@@ -83,7 +83,6 @@ def simulation(nodes_index, colors, map_node, nodes_blocked):
     count = 0
     while count != 4:
         list_path_to_resolve_node, nodes_blocked = resolve_cross(nodes_index, colors, map_node, nodes_blocked)
-    
         target_path = speeder_path(list_path_to_resolve_node) 
         if target_path : #si l'action existe, l'executer 
             #proteger les nodes_blocked, executer l'action et remettre les nodes_blocked à leur place
@@ -91,45 +90,19 @@ def simulation(nodes_index, colors, map_node, nodes_blocked):
             #bloquer le noeud une fois actionS réalisées
             for i in range(0, 4):
                 if target_path[0] == i :
-                    print("i", i)
-                    nodes_blocked[nodes_index[i]] = map_node[nodes_index[i]]
-                    print("nodes_blocked[nodes_index[i]] ",nodes_blocked[nodes_index[i]].get_color())
-                    print("---> ❎ with action", nodes_blocked[nodes_index[i]].get_color())
-                    if nodes_blocked[0]:
-                        print("---> 0", nodes_blocked[0].get_color())
-                    if nodes_blocked[1]:
-                        print("---> 1", nodes_blocked[1].get_color())
-                    if nodes_blocked[2]:
-                        print("---> 2", nodes_blocked[2].get_color())
-                    if nodes_blocked[3]:
-                        print("---> 3", nodes_blocked[3].get_color())
-            
+                    # print("i", i)
+                    nodes_blocked[nodes_index[i]] = map_node[nodes_index[i]]    
         count += 1
-    #faire le renversement des aretes à la fin du backtracking
-    #orienter les aretes vers leur centre
-    # print("\n🐋 Cross done :")
-    # cube.print_cube()
-
-    # print("\n🐋 Edges'Cross Compass : ")
-    # compass_edges()
-    # cube.print_cube()
+    
 
 
 #R U2 F B' L2 R 
 def find_best_first_path(list_action): #sans checker le sens des aretes
     #inverser l'ordre des noeuds pour le faire commencer par un autre
 
-    for i in range(0, 2):
-        print(f"\n----------------\n🌻 {i}")
-        cube.print_cube()
-        print(A0.get_color(), A1.get_color(), A2.get_color(), A3.get_color())
-        print(nodes_blocked[i])
-        print(nodes_index[i])
-        # cube.print_cube()
+    for i in range(0, 24):
         simulation(nodes_index[i], colors[i], map_node[i], nodes_blocked[i])
-        print("solution: ",return_solution_opti(cube.solution))
         possibility_solutions.append((i, cube.solution)) #ajouter l'indice de la solution a choisir et la taille de la solution pour permettre de comaprer apres
-        # print(possibility_solutions)
         reset()
         #remettre les mouvements choisi par l'utilisateur
         for l in list_action:
@@ -155,21 +128,69 @@ def find_best_first_path(list_action): #sans checker le sens des aretes
 
 
 ########################################################################## FIRST LAYER
-def first_layer():
+def first_layer(index):
+    nodes_blocked = [ #il va tourner 24 fois pour choisir la meilleure option selon l'algo
+    {0: None, 1: None, 2: None, 3: None}, {0: None, 1: None, 3: None, 2: None}, {0: None, 2: None, 1: None, 3: None},
+    {0: None, 2: None, 3: None, 1: None}, {0: None, 3: None, 1: None, 2: None}, {0: None, 3: None, 2: None, 1: None},
+    {1: None, 0: None, 2: None, 3: None}, {1: None, 0: None, 3: None, 2: None}, {1: None, 2: None, 0: None, 3: None},
+    {1: None, 2: None, 3: None, 0: None}, {1: None, 3: None, 0: None, 2: None}, {1: None, 3: None, 2: None, 0: None},
+    {2: None, 0: None, 1: None, 3: None}, {2: None, 0: None, 3: None, 1: None}, {2: None, 1: None, 0: None, 3: None},
+    {2: None, 1: None, 3: None, 0: None}, {2: None, 3: None, 0: None, 1: None}, {2: None, 3: None, 1: None, 0: None},
+    {3: None, 0: None, 1: None, 2: None}, {3: None, 0: None, 2: None, 1: None}, {3: None, 1: None, 0: None, 2: None},
+    {3: None, 1: None, 2: None, 0: None}, {3: None, 2: None, 0: None, 1: None}, {3: None, 2: None, 1: None, 0: None}
+    ]
+    map_node = [ #organisé en fonction des nodes_blocked et par rapport à l'algo de resolve cross
+        [A0, A1, A2, A3], [A0, A1, A3, A2], [A0, A2, A1, A3],
+        [A0, A2, A3, A1], [A0, A3, A1, A2], [A0, A3, A2, A1],
+        [A1, A0, A2, A3], [A1, A0, A3, A2], [A1, A2, A0, A3],
+        [A1, A2, A3, A0], [A1, A3, A0, A2], [A1, A3, A2, A0],
+        [A2, A0, A1, A3], [A2, A0, A3, A1], [A2, A1, A0, A3],
+        [A2, A1, A3, A0], [A2, A3, A0, A1], [A2, A3, A1, A0],
+        [A3, A0, A1, A2], [A3, A0, A2, A1], [A3, A1, A0, A2],
+        [A3, A1, A2, A0], [A3, A2, A0, A1], [A3, A2, A1, A0]
+    ]
+    nodes_index = [ #organisé en fonction des nodes_blocked et par rapport à l'algo de resolve cross
+        [0, 1, 2, 3], [0, 1, 3, 2], [0, 2, 1, 3],
+        [0, 2, 3, 1], [0, 3, 1, 2], [0, 3, 2, 1],
+        [1, 0, 2, 3], [1, 0, 3, 2], [1, 2, 0, 3],
+        [1, 2, 3, 0], [1, 3, 0, 2], [1, 3, 2, 0],
+        [2, 0, 1, 3], [2, 0, 3, 1], [2, 1, 0, 3],
+        [2, 1, 3, 0], [2, 3, 0, 1], [2, 3, 1, 0],
+        [3, 0, 1, 2], [3, 0, 2, 1], [3, 1, 0, 2],
+        [3, 1, 2, 0], [3, 2, 0, 1], [3, 2, 1, 0]
+    ]
+
+    colors = [
+        ['R', 'B', 'G', 'O'], ['R', 'B', 'O', 'G'], ['R', 'G', 'B', 'O'],
+        ['R', 'G', 'O', 'B'], ['R', 'O', 'B', 'G'], ['R', 'O', 'G', 'B'],
+        ['B', 'R', 'G', 'O'], ['B', 'R', 'O', 'G'], ['B', 'G', 'R', 'O'],
+        ['B', 'G', 'O', 'R'], ['B', 'O', 'R', 'G'], ['B', 'O', 'G', 'R'], 
+        ['G', 'R', 'B', 'O'], ['G', 'R', 'O', 'B'], ['G', 'B', 'R', 'O'],
+        ['G', 'B', 'O', 'R'], ['G', 'O', 'R', 'B'], ['G', 'O', 'B', 'R'],
+        ['O', 'R', 'B', 'G'], ['O', 'R', 'G', 'B'], ['O', 'B', 'R', 'G'],
+        ['O', 'B', 'G', 'R'], ['O', 'G', 'R', 'B'], ['O', 'G', 'B', 'R']
+    ]
+
+
     #-----------------------------------------------------------------------------edges
-    nodes_blocked = { 0: None, 1: None, 2: None, 3: None }
-    # map_node = [ A0, A1, A2, A3 ]
+    best_nodes_blocked = nodes_blocked[index]
+    for i in range(0, 4):
+        best_nodes_blocked[i] = None
+    best_map_node = map_node[index]
+    best_node_index = nodes_index[index]
+    best_colors = colors[index]
+
     count = 0
     while count != 4: #mettre 4 pour les 4 aretes
-        list_path_to_resolve_node, nodes_blocked = resolve_cross(nodes_blocked)
+        list_path_to_resolve_node, best_n = resolve_cross(best_node_index, best_colors, best_map_node, best_nodes_blocked)
         target_path = speeder_path(list_path_to_resolve_node) 
         if target_path : #si l'action existe, l'executer 
-            #proteger les nodes_blocked, executer l'action et remettre les nodes_blocked à leur place
-            ft_protection(nodes_blocked, target_path)  
+            #proteger les best_n, executer l'action et remettre les best_n à leur place
+            ft_protection(best_n, target_path)  
             #bloquer le noeud une fois actionS réalisées
             for i in range(0, 4):
                 if target_path[0] == i:
-                    nodes_blocked[i] = map_node[i]
+                    best_n[best_node_index[i]] = best_map_node[best_node_index[i]]
             
         count += 1
     #faire le renversement des aretes à la fin du backtracking
@@ -237,21 +258,20 @@ def second_layer():
     nodes_blocked = { 0: False, 1: False, 2: False, 3: False }
 
     colors = ["BR", "BO", "OG", "GR"]
-    down_edges = [A6, A8, A10, A11]
+    # down_edges = [A6, A8, A10, A11]
     center_edges = [A4, A5, A7, A9]
+    functions_out = [out_edge_back, out_edge_left, out_edge_right, out_edge_up]
 
     #on vient regarder si les aretes sont bien placées
     for index, d in enumerate(center_edges):
         if d.get_color() == colors[index]:
             nodes_blocked[index] = True
-
-    functions_out = [out_edge_back, out_edge_left, out_edge_right, out_edge_up]
     
     # remplir le 2eme etage par le 3eme, puis checker s'il faut sortir
     all_locked = all(nodes_blocked.values())
     while all_locked is False:
         for i in range(0, 4):
-            nodes_blocked = edges_from_three_layer(nodes_blocked)
+            nodes_blocked = edges_from_there_layer(nodes_blocked)
             if nodes_blocked[i] == False:
                 functions_out[i]()                       
         all_locked = all(nodes_blocked.values())

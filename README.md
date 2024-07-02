@@ -17,17 +17,17 @@ Up -> U, upPrime -> U', Up x 2 -> U2,
          O
 
 
-                                                      coins[4][2] aretes[11][0] coins[5][1]
+                                                      coins[4][1] aretes[11][0] coins[5][2]
                                                       aretes[4][1] milieux[4] aretes[9][1]
                                                       coins[0][2] aretes[0][1] coins[1][1]
 
-         coins[4][0] aretes[4][0] coins[0][1]         coins[0][0] aretes[0][0] coins[1][0]        coins[1][2] aretes[9][0] coins[5][0]       coins[5][2] aretes[11][1] coins[4][1]
+         coins[4][2] aretes[4][0] coins[0][1]         coins[0][0] aretes[0][0] coins[1][0]        coins[1][2] aretes[9][0] coins[5][1]       coins[5][0] aretes[11][1] coins[4][0]
          aretes[6][0] milieux[1] aretes[1][1]         aretes[1][0] milieux[0] aretes[2][0]        aretes[2][1] milieux[3] aretes[10][0]      aretes[10][1] milieux[5] aretes[6][1] 
-         coins[6][0] aretes[5][0] coins[2][2]         coins[2][0] aretes[3][0] coins[3][0]        coins[3][1] aretes[7][1] coins[7][0]       coins[7][1] aretes[8][1] coins[6][1] 
+         coins[6][1] aretes[5][0] coins[2][2]         coins[2][0] aretes[3][0] coins[3][0]        coins[3][1] aretes[7][1] coins[7][2]       coins[7][0] aretes[8][1] coins[6][0] 
 
                                                       coins[2][1] aretes[3][1] coins[3][2]
                                                       aretes[5][1] milieux[2] aretes[7][0] 
-                                                      coins[6][2] aretes[8][0] coins[7][2]
+                                                      coins[6][2] aretes[8][0] coins[7][1]
 
 
 Je fais correspondre un int à chaque rotation pour les besoins de mon algorithme:
