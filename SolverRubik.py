@@ -4,7 +4,7 @@ from Functions import action
 from utils.SolveWhiteCorners import insert_corner, out_corner, swap_corner
 from utils.SolveWhiteCross import resolve_cross, backtracking, speeder_path, ft_protection, turn_edge_front, turn_edge_back, turn_edge_left, turn_edge_right
 from Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Back, BackPrime, Down, DownPrime, Front, FrontPrime, R2, L2, B2, D2, U2, F2
-from SecondLayer import edges_from_three_layer, out_edge_back, out_edge_left, out_edge_right, out_edge_up
+from SecondLayer import edges_from_three_layer, reverse_edge, out_edge_back, out_edge_left, out_edge_right, out_edge_up
 from ThirdLayer import check_cross, make_cross, check_L, check_trait
 from Simulation import nodes_blocked, map_node, nodes_index, colors
 
@@ -136,7 +136,13 @@ def second_layer():
     all_locked = all(nodes_blocked.values())
     while all_locked is False:
         for i in range(0, 4):
-            nodes_blocked = edges_from_three_layer(nodes_blocked)
+            if nodes_blocked[i]:
+               continue 
+            if center_edges[i].get_color()[0] == colors[i][1] and center_edges[i].get_color()[1] == colors[i][0]:
+                reverse_edge(colors[i])
+                node_blocked = True
+            else:
+                nodes_blocked = edges_from_three_layer(nodes_blocked)
             if nodes_blocked[i] == False:
                 functions_out[i]()                       
         all_locked = all(nodes_blocked.values())

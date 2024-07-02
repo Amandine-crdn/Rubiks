@@ -25,6 +25,17 @@ def out_edge_up():
     for pi in protocole_sortie:
         action(pi)()
     
+def reverse_edge(current_edge):
+    if current_edge == "OG":
+        protocole_insertion = [0, 0, 10, 10, 5, 0, 0, 4, 10, 10, 0, 11, 0] # R2 D2 F' R2 F D2 R D' R"
+    elif current_edge == "BO":
+        protocole_insertion = [4, 4, 10, 10, 3, 4, 4, 2, 10, 10, 4, 11, 4] # F2 D2 L' F2 L D2 F D' F"
+    elif current_edge == "GR":
+        protocole_insertion = [6, 6, 10, 10, 1, 6, 6, 0, 10, 10, 6, 11, 6] # B2 D2 R' B2 R D2 B D' B"
+    elif current_edge == "BR":
+        protocole_insertion = [2, 2, 10, 10, 7, 2, 2, 6, 10, 10, 2, 11, 2] # L2 D2 B' L2 B D2 L D' L"
+    for pi in protocole_insertion:
+        action(pi)()
 
    
 def edges_from_three_layer(nodes_blocked):

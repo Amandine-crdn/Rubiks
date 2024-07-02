@@ -10,6 +10,8 @@ from SecondLayer import edges_from_three_layer, out_edge_back, out_edge_left, ou
 from SolverRubik import first_layer, second_layer, third_layer
 from Simulation import find_best_first_path
 
+import sys
+
 def start_resolve(list_actions):
 
     index = find_best_first_path(list_actions) #40 et 60 mouvements   
@@ -33,7 +35,7 @@ def start_resolve(list_actions):
 
 print("\n🐋 Start :")
 cube.print_cube()
-commandes = input("Shake rubik : ")
+commandes = ' '.join(sys.argv[1::]);
 split_cmd = commandes.split()
 list_actions = []
 if split_cmd:
