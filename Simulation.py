@@ -95,28 +95,35 @@ def find_best_first_path(list_action): #sans checker le sens des aretes
         if i == 0:
             best = possibility_solutions[0]
             index_solution = best[0]
+            string_solution = best[1]
+            cube.solution = string_solution
     #une fois finir de faire 'toutes' les possibilités
     #retourner l'odre des noeuds qui permettent la solution la plus courte
         
     for p in possibility_solutions:
-        string = return_solution_opti(p[1])
+        string = return_solution_opti(p[1]).split()
+        # print(string.split())
+        # print("vrai taille",len(string.split()))
         len_solution = len(string)
 
         #s'il trouve solution plus courte
         if len_solution < len(best[1]):
             best = (index_solution, string)
             index_solution = p[0]
-   
-    print("solution attendu", best[1])
+            string_solution = p[1]
+            cube.solution = string_solution
+
+
     #retourner l'index de best pour renvoyer l'ordre
-    return index_solution
+    return index_solution, string_solution
 
 
 #R U2 F B' L2 R 
-def ft_solver_sim(node_init, path, direction, index, map_node, nodes_index):
+def ft_solver_sim(node_init, path, direction, index, map_node, nodes_index, color):
     from RotationsStart import reset, action_start
     # print("START ", node.get_color())
     # print("START ", map_node[nodes_index[index]].get_color())
+    print("color", color)
     # print(nodes_index)
     path.append(direction)
     copy_path = path.copy()
@@ -132,7 +139,9 @@ def ft_solver_sim(node_init, path, direction, index, map_node, nodes_index):
         path.pop()
         
         return False
-    print("END ", nodes_index[index], node_init.get_color())
+    # print("color", color)
+    # print("END ", map_node[index].get_color())
+    # print("END ", nodes_index[index], node_init.get_color())
     for p in copy_path:
         action_start(p)()
     path.pop()

@@ -7,6 +7,7 @@ from Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Bac
 from SecondLayer import edges_from_three_layer, reverse_edge, out_edge_back, out_edge_left, out_edge_right, out_edge_up
 from ThirdLayer import check_cross, make_cross, check_L, check_trait
 from Simulation import nodes_blocked, map_node, nodes_index, colors
+from RotationsStart import cmd_map, action_start
 
 def compass_corners():
     final_color = ["WBR", "WRG", "WOB", "WGO"]
@@ -32,82 +33,94 @@ def compass_edges():
 
 
 ########################################################################## FIRST LAYER
-def first_layer(index):
+def first_layer(index, string_solution):
     print("index ", index)
-    from Simulation import nodes_blocked, map_node, nodes_index, colors
+    spliting = string_solution.split()
+    to_play = []
+    cube.print_cube()
+    for s in spliting:
+        acts = cmd_map[s]
+        print(acts)
+        to_play.extend(acts)
+    
+    for play in to_play:
+        print("play", play)
+        action_start(play)()
+    
+    
 
 
+
+    # from Simulation import nodes_blocked, map_node, nodes_index, colors
     #-----------------------------------------------------------------------------edges
-    best_nodes_blocked = nodes_blocked[index]
-    for i in range(0, 4):
-        best_nodes_blocked[i] = None
-    best_map_node = map_node[index]
-    best_node_index = nodes_index[index]
-    best_colors = colors[index]
+    # best_nodes_blocked = nodes_blocked[index]
+    # for i in range(0, 4):
+    #     best_nodes_blocked[i] = None
+    # best_map_node = map_node[index]
+    # best_node_index = nodes_index[index]
+    # best_colors = colors[index]
 
-    count = 0
-    while count != 4: #mettre 4 pour les 4 aretes
-        list_path_to_resolve_node, best_n = resolve_cross(best_node_index, best_colors, best_map_node, best_nodes_blocked)
-        target_path = speeder_path(list_path_to_resolve_node) 
-        if target_path : #si l'action existe, l'executer 
-            #proteger les best_n, executer l'action et remettre les best_n à leur place
-            ft_protection(best_n, target_path)  
-            #bloquer le noeud une fois actionS réalisées
-            for i in range(0, 4):
-                if target_path[0] == i:
-                    best_n[best_node_index[i]] = best_map_node[best_node_index[i]]
+    # count = 0
+    # while count != 4: #mettre 4 pour les 4 aretes
+    #     list_path_to_resolve_node, best_n = resolve_cross(best_node_index, best_colors, best_map_node, best_nodes_blocked)
+    #     target_path = speeder_path(list_path_to_resolve_node) 
+    #     if target_path : #si l'action existe, l'executer 
+    #         ft_protection(best_n, target_path)  
+    #         for i in range(0, 4):
+    #             if target_path[0] == i:
+    #                 best_n[best_node_index[i]] = best_map_node[best_node_index[i]]
             
-        count += 1
+    #     count += 1
     #faire le renversement des aretes à la fin du backtracking
     #orienter les aretes vers leur centre
     print("\n🐋 Cross done :")
     cube.print_cube()
 
-    print("\n🐋 Edges'Cross Compass : ")
-    compass_edges()
-    cube.print_cube()
+    # print("\n🐋 Edges'Cross Compass : ")
+    # compass_edges()
+    # cube.print_cube()
 
 
 
 
 
-    #-----------------------------------------------------------------------------corners
-    nodes_blocked = {
-        0: None,
-        1: None,
-        2: None,
-        3: None
-    }
+    # #-----------------------------------------------------------------------------corners
+    # nodes_blocked = {
+    #     0: None,
+    #     1: None,
+    #     2: None,
+    #     3: None
+    # }
 
-    whites_corners = [C0, C1, C2, C3]
-    colors = ['RB', 'RG', 'BO', 'OG']
-    nodes = [C0, C1, C2, C3, C4, C5, C6, C7]
-    down_corners = [C4, C5, C6, C7]
+    # whites_corners = [C0, C1, C2, C3]
+    # colors = ['RB', 'RG', 'BO', 'OG']
+    # nodes = [C0, C1, C2, C3, C4, C5, C6, C7]
+    # down_corners = [C4, C5, C6, C7]
         
-    for index_corner, c in enumerate(whites_corners):
-        #pour chaque coin on va chercher sa couleur
-        for index_node, n in enumerate(nodes):
-            if nodes_blocked[index_corner] is None and {'W', colors[index_corner][0], colors[index_corner][1]}.issubset(n.get_color()) :
-            # if 'W' in n.get_color() and colors[index_corner][0] in n.get_color() and colors[index_corner][1] in n.get_color() and nodes_blocked[index_corner] is None : #on choppe le node qu'on veut ramener à c
-                #on chercher à savoir c'est quel node:
-                if index_node == index_corner: #si le noeud est au bon endroit
-                    nodes_blocked[index_corner] = n
-                    continue
-                elif index_node >= 0 and index_node <= 3: #faire sortir le node recherché pour le placer apres
-                    out_corner(index_node)
+    # for index_corner, c in enumerate(whites_corners):
+    #     #pour chaque coin on va chercher sa couleur
+    #     for index_node, n in enumerate(nodes):
+    #         if nodes_blocked[index_corner] is None and {'W', colors[index_corner][0], colors[index_corner][1]}.issubset(n.get_color()) :
+    #         # if 'W' in n.get_color() and colors[index_corner][0] in n.get_color() and colors[index_corner][1] in n.get_color() and nodes_blocked[index_corner] is None : #on choppe le node qu'on veut ramener à c
+    #             #on chercher à savoir c'est quel node:
+    #             if index_node == index_corner: #si le noeud est au bon endroit
+    #                 nodes_blocked[index_corner] = n
+    #                 continue
+    #             elif index_node >= 0 and index_node <= 3: #faire sortir le node recherché pour le placer apres
+    #                 out_corner(index_node)
     
-                while True:
-                    if 'W' in down_corners[index_corner].get_color() and colors[index_corner][0] in down_corners[index_corner].get_color() and colors[index_corner][1] in down_corners[index_corner].get_color() : #on choppe le node qu'on veut ramener à c
-                        break
-                    action(10)()
-                insert_corner(index_corner)
-    print("\n🐋 Corners' Done : ")
-    cube.print_cube()
-    # orienter les coins
+    #             while True:
+    #                 if 'W' in down_corners[index_corner].get_color() and colors[index_corner][0] in down_corners[index_corner].get_color() and colors[index_corner][1] in down_corners[index_corner].get_color() : #on choppe le node qu'on veut ramener à c
+    #                     break
+    #                 action(10)()
+    #             insert_corner(index_corner)
+    # print("\n🐋 Corners' Done : ")
+    # cube.print_cube()
+    # # orienter les coins
 
-    compass_corners()
-    print("\n🐋 Corners' White Face Cube Done : ")
-    cube.print_cube()
+    # compass_corners()
+    # print("\n🐋 Corners' White Face Cube Done : ")
+    # cube.print_cube()
 
 
 

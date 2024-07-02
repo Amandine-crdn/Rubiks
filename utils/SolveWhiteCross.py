@@ -40,24 +40,17 @@ def backtracking(node: Node, old_node: Node, node_init: Node, path: list[int], d
         
         #unique condition de fermer un chemin
         if 'W' in next_node.get_color() and color in next_node.get_color() and\
-        check_is_locked(next_node, nodes_blocked) == False:
+        check_is_locked(next_node, nodes_blocked) == False:# and\
+        # ft_solver_sim(node_init, path, direction, index, map_node, nodes_index, color) == True:
         #si l'arete ne sera pa bien orienter, ne pas l'ajouter
-            # if ft_solver_sim(node_init, path, direction, index, map_node, nodes_index) == True:
             path.append(direction)
             copy_path = path.copy()
             dico_path[i] = copy_path
             path.pop()
             i+=1
-            # elif len(path) <= 2 and next_node != node_init and check_is_locked(next_node, nodes_blocked) == False :
-            #     path.append(direction)
-            #     copy_path = path.copy()
-            #     node, dico_path, path, i = backtracking(next_node, node, node_init, copy_path, dico_path, i, color, nodes_blocked, index, map_node, nodes_index)
-            #     if len(path) != 0:
-            #         path.pop() #pour abandonner chemin
-        
       
         #chercher un autre chemin
-        elif len(path) <= 3 and next_node != node_init and check_is_locked(next_node, nodes_blocked) == False :
+        elif len(path) < 2 and next_node != node_init and check_is_locked(next_node, nodes_blocked) == False :
             path.append(direction)
             copy_path = path.copy()
             node, dico_path, path, i = backtracking(next_node, node, node_init, copy_path, dico_path, i, color, nodes_blocked, index, map_node, nodes_index)
@@ -76,7 +69,8 @@ def resolve_cross(nodes_index, colors, map_node, nodes_blocked: dict[int, Node])
         if 'W' in n.get_color() and colors[index_node] in n.get_color():# and nodes_blocked[index_node] is None:
             nodes_blocked[nodes_index[index_node]] = n
             # print("---> ❎ automatic", nodes_index[index_node], n.get_color())
-        elif nodes_blocked[nodes_index[index_node]] is None:
+        # elif nodes_blocked[nodes_index[index_node]] is None:
+        else:
             path = []
             dico_target_path = {}
             i = 0

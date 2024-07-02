@@ -38,11 +38,18 @@ def optimize_moves(moves):
             new_str.append(moves[i][0])
             i+=3 # ou  "l' l' l' " => l
             moved = True
+        
+        elif i < len(moves) - 1 and len(moves[i]) > 2 and moves[i] == moves[i + 1]: #pour eviter B'2
+            new_str.append(f"{moves[i][0]}2")
+            print("here")
+            i+=2 # si 2 egaux dire 2
+            moved = True
             
         elif i < len(moves) - 1 and moves[i] == moves[i + 1]:
             new_str.append(f"{moves[i]}2")
             i+=2 # si 2 egaux dire 2
             moved = True
+
 
         elif i < len(moves) - 1 and (moves[i] == f"{moves[i + 1]}'" or f"{moves[i]}'" == moves[i+1]): 
             i+=2 #pour les l' l et l l' annule 2 opposé
@@ -65,6 +72,7 @@ def optimize_moves(moves):
             new_str.append(f"{moves[i][0]}")
             i+=2  #si D2 et d' => d ou d'D2 => d
             moved = True
+        
 
         else:
             new_str.append(moves[i])

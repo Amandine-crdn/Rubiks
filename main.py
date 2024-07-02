@@ -14,8 +14,9 @@ import sys
 
 def start_resolve(list_actions):
 
-    index = find_best_first_path(list_actions) #40 et 60 mouvements  
-    first_layer(index)
+    index, string_solution = find_best_first_path(list_actions) #40 et 60 mouvements  
+    first_layer(index, string_solution)
+    
     # print("end")
     # # first_layer()
     # second_layer()
@@ -23,7 +24,8 @@ def start_resolve(list_actions):
 
     moved = True
     
-    print(index) 
+   
+    print("solution",cube.solution)
     opt_mov = cube.solution.split()
     while moved == True:
         opt_mov, moved = optimize_moves(opt_mov)
