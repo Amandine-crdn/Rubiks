@@ -1,11 +1,12 @@
 from CubeClass import cube
 from NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
-from Functions import action, optimize_moves
+from Functions import action
 from utils.SolveWhiteCorners import insert_corner, out_corner, swap_corner
-from utils.SolveWhiteCross import resolve_cross, backtracking, speeder_path, ft_protection, turn_edge_up, turn_edge_back, turn_edge_left, turn_edge_right
+from utils.SolveWhiteCross import resolve_cross, backtracking, speeder_path, ft_protection, turn_edge_front, turn_edge_back, turn_edge_left, turn_edge_right
 from Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Back, BackPrime, Down, DownPrime, Front, FrontPrime, R2, L2, B2, D2, U2, F2
 from SecondLayer import edges_from_three_layer, out_edge_back, out_edge_left, out_edge_right, out_edge_up
 from ThirdLayer import check_cross, make_cross, check_L, check_trait
+from Simulation import nodes_blocked, map_node, nodes_index, colors
 
 def compass_corners():
     final_color = ["WBR", "WRG", "WOB", "WGO"]
@@ -18,27 +19,43 @@ def compass_corners():
 
 def compass_edges():
     list_whites_nodes = [A0, A1, A2, A3]
-    switch_edge = [turn_edge_back, turn_edge_left, turn_edge_right, turn_edge_up] 
+    switch_edge = [turn_edge_back, turn_edge_left, turn_edge_right, turn_edge_front] 
     for node_index, n in enumerate(list_whites_nodes, start=0):
         if n.get_color()[0] != 'W':
             switch_edge[node_index]()
- 
+
+
+
+
+
+
+
+
 ########################################################################## FIRST LAYER
-def first_layer():
+def first_layer(index):
+    print("index ", index)
+    from Simulation import nodes_blocked, map_node, nodes_index, colors
+
+
     #-----------------------------------------------------------------------------edges
-    nodes_blocked = { 0: None, 1: None, 2: None, 3: None }
-    map_node = [ A0, A1, A2, A3 ]
+    best_nodes_blocked = nodes_blocked[index]
+    for i in range(0, 4):
+        best_nodes_blocked[i] = None
+    best_map_node = map_node[index]
+    best_node_index = nodes_index[index]
+    best_colors = colors[index]
+
     count = 0
     while count != 4: #mettre 4 pour les 4 aretes
-        list_path_to_resolve_node, nodes_blocked = resolve_cross(nodes_blocked)
+        list_path_to_resolve_node, best_n = resolve_cross(best_node_index, best_colors, best_map_node, best_nodes_blocked)
         target_path = speeder_path(list_path_to_resolve_node) 
         if target_path : #si l'action existe, l'executer 
-            #proteger les nodes_blocked, executer l'action et remettre les nodes_blocked à leur place
-            ft_protection(nodes_blocked, target_path)  
+            #proteger les best_n, executer l'action et remettre les best_n à leur place
+            ft_protection(best_n, target_path)  
             #bloquer le noeud une fois actionS réalisées
             for i in range(0, 4):
                 if target_path[0] == i:
-                    nodes_blocked[i] = map_node[i]
+                    best_n[best_node_index[i]] = best_map_node[best_node_index[i]]
             
         count += 1
     #faire le renversement des aretes à la fin du backtracking
@@ -49,6 +66,10 @@ def first_layer():
     print("\n🐋 Edges'Cross Compass : ")
     compass_edges()
     cube.print_cube()
+
+
+
+
 
     #-----------------------------------------------------------------------------corners
     nodes_blocked = {
@@ -82,7 +103,7 @@ def first_layer():
                 insert_corner(index_corner)
     print("\n🐋 Corners' Done : ")
     cube.print_cube()
-    #orienter les coins
+    # orienter les coins
 
     compass_corners()
     print("\n🐋 Corners' White Face Cube Done : ")
@@ -98,19 +119,18 @@ def first_layer():
 ########################################################################## SECOND LAYER
 
 def second_layer():
-
+    
     nodes_blocked = { 0: False, 1: False, 2: False, 3: False }
 
     colors = ["BR", "BO", "OG", "GR"]
-    down_edges = [A6, A8, A10, A11]
+    # down_edges = [A6, A8, A10, A11]
     center_edges = [A4, A5, A7, A9]
+    functions_out = [out_edge_back, out_edge_left, out_edge_right, out_edge_up]
 
     #on vient regarder si les aretes sont bien placées
     for index, d in enumerate(center_edges):
         if d.get_color() == colors[index]:
             nodes_blocked[index] = True
-
-    functions_out = [out_edge_back, out_edge_left, out_edge_right, out_edge_up]
     
     # remplir le 2eme etage par le 3eme, puis checker s'il faut sortir
     all_locked = all(nodes_blocked.values())

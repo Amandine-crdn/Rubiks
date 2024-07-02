@@ -1,6 +1,31 @@
 from CubeClass import cube
 from NodeClass import A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
 
+def reset():
+    cube.solution = "" #remettre à null
+    aretes = ["WR", "WB", "WG", "WO", "BR", "BO", "BY", "OG", "OY", "GR", "GY","RY"] #remettre le cube initial
+    coins = ["WBR", "WRG", "WOB","WGO" , "YRB", "YGR", "YBO", "YOG"]
+    C0.set_color(coins[0])
+    C1.set_color(coins[1])
+    C2.set_color(coins[2])
+    C3.set_color(coins[3])
+    C4.set_color(coins[4])
+    C5.set_color(coins[5])
+    C6.set_color(coins[6])
+    C7.set_color(coins[7])
+    A0.set_color(aretes[0])
+    A1.set_color(aretes[1])
+    A2.set_color(aretes[2])
+    A3.set_color(aretes[3])
+    A4.set_color(aretes[4])
+    A5.set_color(aretes[5])
+    A6.set_color(aretes[6])
+    A7.set_color(aretes[7])
+    A8.set_color(aretes[8])
+    A9.set_color(aretes[9])
+    A10.set_color(aretes[10])
+    A11.set_color(aretes[11])
+    
 cmd_map = {
     "R": [0],
     "R'": [1],

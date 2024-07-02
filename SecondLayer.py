@@ -6,23 +6,23 @@ colors = ["BR", "BO", "OG", "GR"]
 down_edges = [A6, A8, A10, A11]
 
 def out_edge_back():
-    protocole_insertion = [3, 11, 2, 10, 6, 10, 7] # l' d' l d b d b'
-    for pi in protocole_insertion:
+    protocole_sortie = [3, 11, 2, 10, 6, 10, 7] # l' d' l d b d b'
+    for pi in protocole_sortie:
         action(pi)()
     
 def out_edge_left():
-    protocole_insertion = [5, 11, 4, 10, 2, 10, 3] # f' d' f d l d l'
-    for pi in protocole_insertion:
+    protocole_sortie = [5, 11, 4, 10, 2, 10, 3] # f' d' f d l d l'
+    for pi in protocole_sortie:
         action(pi)()
     
 def out_edge_right():
-    protocole_insertion = [1, 11, 0, 10, 4, 10, 5] # r' d' r d f d f'
-    for pi in protocole_insertion:
+    protocole_sortie = [1, 11, 0, 10, 4, 10, 5] # r' d' r d f d f'
+    for pi in protocole_sortie:
         action(pi)()
 
 def out_edge_up():
-    protocole_insertion = [7, 11, 6, 10, 0, 10, 1] # b' d' b d  r d r'
-    for pi in protocole_insertion:
+    protocole_sortie = [7, 11, 6, 10, 0, 10, 1] # b' d' b d  r d r'
+    for pi in protocole_sortie:
         action(pi)()
     
 
