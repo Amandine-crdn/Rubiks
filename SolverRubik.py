@@ -1,12 +1,12 @@
 from CubeClass import cube
 from NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
-from Functions import action, optimize_moves
+from Functions import action
 from utils.SolveWhiteCorners import insert_corner, out_corner, swap_corner
 from utils.SolveWhiteCross import resolve_cross, backtracking, speeder_path, ft_protection, turn_edge_front, turn_edge_back, turn_edge_left, turn_edge_right
 from Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Back, BackPrime, Down, DownPrime, Front, FrontPrime, R2, L2, B2, D2, U2, F2
 from SecondLayer import edges_from_three_layer, out_edge_back, out_edge_left, out_edge_right, out_edge_up
 from ThirdLayer import check_cross, make_cross, check_L, check_trait
-from RotationsStart import reset, action_start
+from Simulation import nodes_blocked, map_node, nodes_index, colors
 
 def compass_corners():
     final_color = ["WBR", "WRG", "WOB", "WGO"]
@@ -25,151 +25,16 @@ def compass_edges():
             switch_edge[node_index]()
 
 
-possibility_solutions = [] 
-# envoyer l'ordre des nodes_blocked a first layer qui permet un meilleur choix
-def return_solution_opti(solution):
-    moved = True
-    opt_mov = solution.split()
-    while moved == True:
-        opt_mov, moved = optimize_moves(opt_mov)
-
-    string = ' '.join(opt_mov)
-    return string
 
 
-nodes_blocked = [ #il va tourner 24 fois pour choisir la meilleure option selon l'algo
-    {0: None, 1: None, 2: None, 3: None}, {0: None, 1: None, 3: None, 2: None}, {0: None, 2: None, 1: None, 3: None},
-    {0: None, 2: None, 3: None, 1: None}, {0: None, 3: None, 1: None, 2: None}, {0: None, 3: None, 2: None, 1: None},
-    {1: None, 0: None, 2: None, 3: None}, {1: None, 0: None, 3: None, 2: None}, {1: None, 2: None, 0: None, 3: None},
-    {1: None, 2: None, 3: None, 0: None}, {1: None, 3: None, 0: None, 2: None}, {1: None, 3: None, 2: None, 0: None},
-    {2: None, 0: None, 1: None, 3: None}, {2: None, 0: None, 3: None, 1: None}, {2: None, 1: None, 0: None, 3: None},
-    {2: None, 1: None, 3: None, 0: None}, {2: None, 3: None, 0: None, 1: None}, {2: None, 3: None, 1: None, 0: None},
-    {3: None, 0: None, 1: None, 2: None}, {3: None, 0: None, 2: None, 1: None}, {3: None, 1: None, 0: None, 2: None},
-    {3: None, 1: None, 2: None, 0: None}, {3: None, 2: None, 0: None, 1: None}, {3: None, 2: None, 1: None, 0: None}
-]
-map_node = [ #organisé en fonction des nodes_blocked et par rapport à l'algo de resolve cross
-    [A0, A1, A2, A3], [A0, A1, A3, A2], [A0, A2, A1, A3],
-    [A0, A2, A3, A1], [A0, A3, A1, A2], [A0, A3, A2, A1],
-    [A1, A0, A2, A3], [A1, A0, A3, A2], [A1, A2, A0, A3],
-    [A1, A2, A3, A0], [A1, A3, A0, A2], [A1, A3, A2, A0],
-    [A2, A0, A1, A3], [A2, A0, A3, A1], [A2, A1, A0, A3],
-    [A2, A1, A3, A0], [A2, A3, A0, A1], [A2, A3, A1, A0],
-    [A3, A0, A1, A2], [A3, A0, A2, A1], [A3, A1, A0, A2],
-    [A3, A1, A2, A0], [A3, A2, A0, A1], [A3, A2, A1, A0]
-]
-nodes_index = [ #organisé en fonction des nodes_blocked et par rapport à l'algo de resolve cross
-    [0, 1, 2, 3], [0, 1, 3, 2], [0, 2, 1, 3],
-    [0, 2, 3, 1], [0, 3, 1, 2], [0, 3, 2, 1],
-    [1, 0, 2, 3], [1, 0, 3, 2], [1, 2, 0, 3],
-    [1, 2, 3, 0], [1, 3, 0, 2], [1, 3, 2, 0],
-    [2, 0, 1, 3], [2, 0, 3, 1], [2, 1, 0, 3],
-    [2, 1, 3, 0], [2, 3, 0, 1], [2, 3, 1, 0],
-    [3, 0, 1, 2], [3, 0, 2, 1], [3, 1, 0, 2],
-    [3, 1, 2, 0], [3, 2, 0, 1], [3, 2, 1, 0]
-]
-
-colors = [
-    ['R', 'B', 'G', 'O'], ['R', 'B', 'O', 'G'], ['R', 'G', 'B', 'O'],
-    ['R', 'G', 'O', 'B'], ['R', 'O', 'B', 'G'], ['R', 'O', 'G', 'B'],
-    ['B', 'R', 'G', 'O'], ['B', 'R', 'O', 'G'], ['B', 'G', 'R', 'O'],
-    ['B', 'G', 'O', 'R'], ['B', 'O', 'R', 'G'], ['B', 'O', 'G', 'R'], 
-    ['G', 'R', 'B', 'O'], ['G', 'R', 'O', 'B'], ['G', 'B', 'R', 'O'],
-    ['G', 'B', 'O', 'R'], ['G', 'O', 'R', 'B'], ['G', 'O', 'B', 'R'],
-    ['O', 'R', 'B', 'G'], ['O', 'R', 'G', 'B'], ['O', 'B', 'R', 'G'],
-    ['O', 'B', 'G', 'R'], ['O', 'G', 'R', 'B'], ['O', 'G', 'B', 'R']
-]
-
-def simulation(nodes_index, colors, map_node, nodes_blocked):    
-    count = 0
-    while count != 4:
-        list_path_to_resolve_node, nodes_blocked = resolve_cross(nodes_index, colors, map_node, nodes_blocked)
-        target_path = speeder_path(list_path_to_resolve_node) 
-        if target_path : #si l'action existe, l'executer 
-            #proteger les nodes_blocked, executer l'action et remettre les nodes_blocked à leur place
-            ft_protection(nodes_blocked, target_path)  
-            #bloquer le noeud une fois actionS réalisées
-            for i in range(0, 4):
-                if target_path[0] == i :
-                    # print("i", i)
-                    nodes_blocked[nodes_index[i]] = map_node[nodes_index[i]]    
-        count += 1
-    
-
-
-#R U2 F B' L2 R 
-def find_best_first_path(list_action): #sans checker le sens des aretes
-    #inverser l'ordre des noeuds pour le faire commencer par un autre
-
-    for i in range(0, 24):
-        simulation(nodes_index[i], colors[i], map_node[i], nodes_blocked[i])
-        possibility_solutions.append((i, cube.solution)) #ajouter l'indice de la solution a choisir et la taille de la solution pour permettre de comaprer apres
-        reset()
-        #remettre les mouvements choisi par l'utilisateur
-        for l in list_action:
-            action_start(l)()
-    #une fois finir de faire 'toutes' les possibilités
-    #retourner l'odre des noeuds qui permettent la solution la plus courte
-    best = possibility_solutions[0]
-    index_solution = best[0]
-    for p in possibility_solutions:
-        index_solution = p[0]
-        string = return_solution_opti(p[1])
-        len_solution = len(string)
-
-        #s'il trouve solution plus courte
-        if len_solution < len(best[1]):
-            best = (index_solution, string)
-   
-    print("solution attendu", best[1])
-    #retourner l'index de best pour renvoyer l'ordre
-    return index_solution
 
 
 
 
 ########################################################################## FIRST LAYER
 def first_layer(index):
-    nodes_blocked = [ #il va tourner 24 fois pour choisir la meilleure option selon l'algo
-    {0: None, 1: None, 2: None, 3: None}, {0: None, 1: None, 3: None, 2: None}, {0: None, 2: None, 1: None, 3: None},
-    {0: None, 2: None, 3: None, 1: None}, {0: None, 3: None, 1: None, 2: None}, {0: None, 3: None, 2: None, 1: None},
-    {1: None, 0: None, 2: None, 3: None}, {1: None, 0: None, 3: None, 2: None}, {1: None, 2: None, 0: None, 3: None},
-    {1: None, 2: None, 3: None, 0: None}, {1: None, 3: None, 0: None, 2: None}, {1: None, 3: None, 2: None, 0: None},
-    {2: None, 0: None, 1: None, 3: None}, {2: None, 0: None, 3: None, 1: None}, {2: None, 1: None, 0: None, 3: None},
-    {2: None, 1: None, 3: None, 0: None}, {2: None, 3: None, 0: None, 1: None}, {2: None, 3: None, 1: None, 0: None},
-    {3: None, 0: None, 1: None, 2: None}, {3: None, 0: None, 2: None, 1: None}, {3: None, 1: None, 0: None, 2: None},
-    {3: None, 1: None, 2: None, 0: None}, {3: None, 2: None, 0: None, 1: None}, {3: None, 2: None, 1: None, 0: None}
-    ]
-    map_node = [ #organisé en fonction des nodes_blocked et par rapport à l'algo de resolve cross
-        [A0, A1, A2, A3], [A0, A1, A3, A2], [A0, A2, A1, A3],
-        [A0, A2, A3, A1], [A0, A3, A1, A2], [A0, A3, A2, A1],
-        [A1, A0, A2, A3], [A1, A0, A3, A2], [A1, A2, A0, A3],
-        [A1, A2, A3, A0], [A1, A3, A0, A2], [A1, A3, A2, A0],
-        [A2, A0, A1, A3], [A2, A0, A3, A1], [A2, A1, A0, A3],
-        [A2, A1, A3, A0], [A2, A3, A0, A1], [A2, A3, A1, A0],
-        [A3, A0, A1, A2], [A3, A0, A2, A1], [A3, A1, A0, A2],
-        [A3, A1, A2, A0], [A3, A2, A0, A1], [A3, A2, A1, A0]
-    ]
-    nodes_index = [ #organisé en fonction des nodes_blocked et par rapport à l'algo de resolve cross
-        [0, 1, 2, 3], [0, 1, 3, 2], [0, 2, 1, 3],
-        [0, 2, 3, 1], [0, 3, 1, 2], [0, 3, 2, 1],
-        [1, 0, 2, 3], [1, 0, 3, 2], [1, 2, 0, 3],
-        [1, 2, 3, 0], [1, 3, 0, 2], [1, 3, 2, 0],
-        [2, 0, 1, 3], [2, 0, 3, 1], [2, 1, 0, 3],
-        [2, 1, 3, 0], [2, 3, 0, 1], [2, 3, 1, 0],
-        [3, 0, 1, 2], [3, 0, 2, 1], [3, 1, 0, 2],
-        [3, 1, 2, 0], [3, 2, 0, 1], [3, 2, 1, 0]
-    ]
-
-    colors = [
-        ['R', 'B', 'G', 'O'], ['R', 'B', 'O', 'G'], ['R', 'G', 'B', 'O'],
-        ['R', 'G', 'O', 'B'], ['R', 'O', 'B', 'G'], ['R', 'O', 'G', 'B'],
-        ['B', 'R', 'G', 'O'], ['B', 'R', 'O', 'G'], ['B', 'G', 'R', 'O'],
-        ['B', 'G', 'O', 'R'], ['B', 'O', 'R', 'G'], ['B', 'O', 'G', 'R'], 
-        ['G', 'R', 'B', 'O'], ['G', 'R', 'O', 'B'], ['G', 'B', 'R', 'O'],
-        ['G', 'B', 'O', 'R'], ['G', 'O', 'R', 'B'], ['G', 'O', 'B', 'R'],
-        ['O', 'R', 'B', 'G'], ['O', 'R', 'G', 'B'], ['O', 'B', 'R', 'G'],
-        ['O', 'B', 'G', 'R'], ['O', 'G', 'R', 'B'], ['O', 'G', 'B', 'R']
-    ]
+    print("index ", index)
+    from Simulation import nodes_blocked, map_node, nodes_index, colors
 
 
     #-----------------------------------------------------------------------------edges
@@ -238,7 +103,7 @@ def first_layer(index):
                 insert_corner(index_corner)
     print("\n🐋 Corners' Done : ")
     cube.print_cube()
-    #orienter les coins
+    # orienter les coins
 
     compass_corners()
     print("\n🐋 Corners' White Face Cube Done : ")
@@ -254,7 +119,7 @@ def first_layer(index):
 ########################################################################## SECOND LAYER
 
 def second_layer():
-
+    
     nodes_blocked = { 0: False, 1: False, 2: False, 3: False }
 
     colors = ["BR", "BO", "OG", "GR"]
@@ -271,7 +136,7 @@ def second_layer():
     all_locked = all(nodes_blocked.values())
     while all_locked is False:
         for i in range(0, 4):
-            nodes_blocked = edges_from_there_layer(nodes_blocked)
+            nodes_blocked = edges_from_three_layer(nodes_blocked)
             if nodes_blocked[i] == False:
                 functions_out[i]()                       
         all_locked = all(nodes_blocked.values())

@@ -7,8 +7,8 @@ from Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Bac
 from RotationsStart import action_start, cmd_map
 from SecondLayer import edges_from_three_layer, out_edge_back, out_edge_left, out_edge_right, out_edge_up
 
-from SolverRubik import find_best_first_path, first_layer, second_layer, third_layer
-
+from SolverRubik import first_layer, second_layer, third_layer
+from Simulation import find_best_first_path
 
 def start_resolve(list_actions):
 
@@ -16,7 +16,7 @@ def start_resolve(list_actions):
     first_layer(index)
     print("end")
     # first_layer()
-    # second_layer()
+    second_layer()
     # third_layer()
 
     moved = True
