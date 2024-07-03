@@ -75,8 +75,9 @@ def best_cross(list_action): #sans checker le sens des aretes
     possibility_solutions = [] 
     #inverser l'ordre des noeuds pour le faire commencer par un autre
   
-    # for i in range(0, 24):
-    for i in range(0, 1):
+  
+    for i in range(0, 24):
+    # for i in range(0, 1):
         simulation(nodes_index[i], colors[i], map_node[i], nodes_blocked[i])
         possibility_solutions.append((i, cube.solution)) #ajouter l'indice de la solution a choisir et la taille de la solution pour permettre de comaprer apres
         #remettre les mouvements choisi par l'utilisateur
@@ -100,26 +101,38 @@ def best_cross(list_action): #sans checker le sens des aretes
             index_solution = p[0]
             string_solution = p[1]
             best = (index_solution, string)
-
-    cube.set_solution(string_solution)
+    return index_solution
+    # cube.set_solution(string_solution)
 
 
 #R U2 F B' L2 R 
 def find_orientation_edge_white(node_init, path, direction, index, map_node, nodes_index, color):
     from Start.RotationsStart import action_start
     # print(colors[nodes_index[index]])
+    # print("\n----------start")
+    # print(node_init.get_color())
+    # print(map_node[nodes_index[index]].get_color())
+    # print(map_node[index].get_color())
+    # cube.print_cube()
     copy_path = path.copy()
     copy_path.append(direction)
-    for p in copy_path:
+
+    for p in (copy_path):
         action_start(p)()
-    
+    # print("--------\napres")
+    # print(node_init.get_color())
+    # print(map_node[nodes_index[index]].get_color())
+    # print(map_node[index].get_color())
+    # cube.print_cube()
+
     if node_init.get_color() != "W" + color:
         for p in reversed(copy_path):
             action_start(p)()
         copy_path.pop()
-        
         return False
-    print("🎍 find ", node_init.get_color())
+    
+    # print("🎍 find ", node_init.get_color())
+    # print("color start in end", start)
 
     for p in reversed(copy_path):
         action_start(p)()

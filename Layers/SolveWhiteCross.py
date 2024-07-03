@@ -39,9 +39,12 @@ def backtracking(node: Node, old_node: Node, node_init: Node, path: list[int], d
         
         #unique condition de fermer un chemin
         if 'W' in next_node.get_color() and color in next_node.get_color() and\
-        check_is_locked(next_node, nodes_blocked) == False and\
-        find_orientation_edge_white(node_init, path, direction, index, map_node, nodes_index, color) == True:
+        check_is_locked(next_node, nodes_blocked) == False:# and\
+        # find_orientation_edge_white(node_init, path, direction, index, map_node, nodes_index, color) == True:
         #si l'arete ne sera pa bien orienter, ne pas l'ajouter
+            # print("?? ",next_node.get_color())
+            # find_orientation_edge_white(node_init, path, direction, index, map_node, nodes_index, color)
+
             path.append(direction)
             copy_path = path.copy()
             dico_path[i] = copy_path
@@ -49,7 +52,7 @@ def backtracking(node: Node, old_node: Node, node_init: Node, path: list[int], d
             i+=1
       
         #chercher un autre chemin
-        elif len(path) < 4 and next_node != node_init and check_is_locked(next_node, nodes_blocked) == False :
+        elif len(path) < 2 and next_node != node_init and check_is_locked(next_node, nodes_blocked) == False :
             path.append(direction)
             copy_path = path.copy()
             node, dico_path, path, i = backtracking(next_node, node, node_init, copy_path, dico_path, i, color, nodes_blocked, index, map_node, nodes_index)

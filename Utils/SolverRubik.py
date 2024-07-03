@@ -33,21 +33,45 @@ def compass_edges():
 
 ########################################################################## FIRST LAYER
 def first_layer(list_action):
-    best_cross(list_action)
-    spliting = cube.solution.split()
-    to_play = []
-    for s in spliting:
-        acts = cmd_map[s]
-        to_play.extend(acts)
+    index = best_cross(list_action)
+    # spliting = cube.solution.split()
+    # to_play = []
+    # for s in spliting:
+    #     acts = cmd_map[s]
+    #     to_play.extend(acts)
     
-    for play in to_play:
-        action_start(play)()
+    # for play in to_play:
+    #     action_start(play)()
     
+    print("index ", index)
+    from Layers.FirstLayer import nodes_blocked, map_node, nodes_index, colors
+    from Layers.SolveWhiteCross import speeder_path, resolve_cross, ft_protection
 
+    #-----------------------------------------------------------------------------edges
+    best_nodes_blocked = nodes_blocked[index]
+    for i in range(0, 4):
+        best_nodes_blocked[i] = None
+    best_map_node = map_node[index]
+    best_node_index = nodes_index[index]
+    best_colors = colors[index]
 
+    count = 0
+    while count != 4: #mettre 4 pour les 4 aretes
+        list_path_to_resolve_node, best_n = resolve_cross(best_node_index, best_colors, best_map_node, best_nodes_blocked)
+        target_path = speeder_path(list_path_to_resolve_node) 
+        if target_path : #si l'action existe, l'executer 
+            #proteger les best_n, executer l'action et remettre les best_n à leur place
+            ft_protection(best_n, target_path)  
+            #bloquer le noeud une fois actionS réalisées
+            for i in range(0, 4):
+                if target_path[0] == i:
+                    best_n[best_node_index[i]] = best_map_node[best_node_index[i]]
+            
+        count += 1
+    #faire le renversement des aretes à la fin du backtracking
+    #orienter les aretes vers leur centre
     print("\n🐋 Cross done :")
     cube.print_cube()
-
     # print("\n🐋 Edges'Cross Compass : ")
     # compass_edges()
     # cube.print_cube()
