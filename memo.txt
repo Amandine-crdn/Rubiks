@@ -1,0 +1,18 @@
+FIRST LAYER :
+
+former croix
+mettre arete blanche/bleu en face de blanche/verte et blanche/orange en face de blanche/rouge
+mettre arete blanche/bleu a droite de blanche/rouge elle meme a doite de blanche/verte, elle meme a droite de blanche/orange, elle meme a droite de blanche/bleu 
+	R
+       B V
+	O
+pour changer sens d'une arete sur le premier layer:
+	R U' B
+echanger deux coleurs l'une en face de l'autre:
+	L' R B2 L R'B2
+aligner les couleurs sur les cotes avec leurs centres
+	R
+	R
+      BB VV
+	O
+	O
