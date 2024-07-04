@@ -16,3 +16,93 @@ aligner les couleurs sur les cotes avec leurs centres
       BB VV
 	O
 	O
+
+
+
+Troisieme layer:
+
+faire la croix jaune:
+- Si juste point au centre => F R U R' U' F'
+ .Y.
+.....
+Y.Y.Y
+.....
+ .Y.
+
+- Si un petit L est present, le mettre em haut a gauche => F R U R' U' F'
+ ...
+..Y..
+.YY.Y
+.....
+ .Y.
+
+- Si les Y forment une ligne, la mettre dans le sens gauche droite et => F R U R' U' F'
+ .Y.
+.....
+.YYY.
+.....
+ .Y.
+
+cela devrait former une croix (les autres cases peuvent etre colores aussi)
+ ...
+..Y..
+.YYY.
+..Y..
+ ...
+
+- Si la croix a une case en plus, incliner la face et mettre la case en bas a gauche
+ Y..
+..Y.Y
+.YYY.
+.YY..
+ ..Y
+binaire: 100001100111010100001
+
+ ...
+Y.YY.
+.YYY.
+..Y.Y
+ Y..
+binaire: 001101000111001101000
+
+- Si 
+
+
+
+peut etre parcourir toutes les cases de la face du dessous (down), et stocker les cases en jaune dans un int a l'aide de bitwise
+ex: 	colors = 0
+	for index, box in enumerate(down) 
+		colors |= (box<<i)
+
+ .Y.
+.....
+Y.YY.
+..Y..
+ ...
+binaire: 000001000110100000010
+mouvements:	Fw R U R' U' Fw'
+trad:		B U L U' L' B'
+
+ .Y.
+	.....
+.YYY.
+.....
+ .Y.
+binaire: 010000000111000000010
+mouvements:	F R U R' U' F'
+
+ .Y.
+.....
+Y.Y.Y
+.....
+ .Y.
+binaire: 010000001010100000010
+mouvements:	F R U R' U'F'
+
+ ...
+..Y..
+.YYY.
+..Y..
+ ...
+binaire: 000001000111000100000
+
