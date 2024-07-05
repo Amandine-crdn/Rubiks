@@ -1,0 +1,21 @@
+CROSS:
+
+Faire une croix blanche avec les bonnes couleurs sur les faces adjacentes.
+   ...
+   .R.
+   .R.
+....W....
+.BBWWWVV.
+....W....
+   .O.
+   .O.
+   ...
+
+
+FIRST 2 LAYERS:
+
+mettre le coin et son arete correspondante (les memes couleurs) sur le troisieme layer,
+mettre le coin au dessus de son emplacement, et faire appel a un des 41 algo.
+
+OLL
+

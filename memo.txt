@@ -19,9 +19,9 @@ aligner les couleurs sur les cotes avec leurs centres
 
 
 
-Troisieme layer:
+TROISIEME LAYER:
 
-faire la croix jaune:
+FAIRE LA CROIX JAUNE:
 - Si juste point au centre => F R U R' U' F'
  .Y.
 .....
@@ -50,6 +50,9 @@ cela devrait former une croix (les autres cases peuvent etre colores aussi)
 ..Y..
  ...
 
+
+REMPLIR LA FACE JAUNE
+
 - Si la croix a une case en plus, incliner la face et mettre la case en bas a gauche
  Y..
 ..Y.Y
@@ -65,14 +68,61 @@ Y.YY.
  Y..
 binaire: 001101000111001101000
 
-- Si 
+- Si aucun coin n'est jaune, faire en sorte de mettre une des facettes en bas a gauche (soit en haut a droite de la face gauche)
+ ..Y
+Y.Y..
+.YYY.
+Y.Y..
+ ..Y
+binaire: 100001010111000101100
 
+ Y.Y
+..Y..
+.YYY.
+..Y..
+ Y.Y
+binaire: 101001000111000100101
+
+- Si 2 coins sont positionnes, faire en sorte de mettre une des facettes en bas a gauche (soit en haut a gauche de la face front)
+ Y.Y
+..Y..
+.YYY.
+.YYY.
+ ...
+binaire: 000011100111000100101
+
+ Y..
+..YY.
+.YYY.
+..YY.
+ Y..
+binaire: 001011000111001100001
+binaire: 001011000111001100001
+
+ ..Y
+.YY..
+.YYY.
+Y.YY.
+ ...
+binaire: 000011010111000110100
+binaire: 000011010111000110100
+
+et faire la combinaison R U R' U R U2 R'
+
+
+FINALISATION
+
+permutation des coins:
+R' F R' B2 R F' R' B2 R2
+(tout les coins tournent dans le sens des aiguilles sauf celui en haut a gauche de la face)
+
+si deux coins opposes sont a la bonne place et deux autres a la mauvaise place: mettre un des coins a la mauvaise place en bas a droite => F R U’ R’ U’ R U R’ F’ R U R’ U’ R’ F R F
 
 
 peut etre parcourir toutes les cases de la face du dessous (down), et stocker les cases en jaune dans un int a l'aide de bitwise
 ex: 	colors = 0
 	for index, box in enumerate(down) 
-		colors |= (box<<i)
+		colors |= (box<<index)
 
  .Y.
 .....
