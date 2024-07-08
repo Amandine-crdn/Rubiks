@@ -17,6 +17,24 @@ aligner les couleurs sur les cotes avec leurs centres
 	O
 	O
 
+commencer resolution de la croix : F
+
+sexy move : R U R' U' (a faire autant de fois aue necessaire)
+
+fin de resolution : F'
+
+-Si croix, c'est OK
+
+-Si ligne [arete, milieu, arete], mettre de ligne a l'horizontale et faire une fois F R U R' U' F'
+
+Faire F R U R' U' F' tant que pas de L
+
+Quand L apparait, le mettre en haut a gauche et faire F sexy move x2 F'
+
+-Si il n'y a aucune arete en jaune, faire le sexy move 3 fois
+
+-Si il y a un L
+
 
 
 TROISIEME LAYER:
