@@ -11,8 +11,8 @@ import sys
 def start_resolve(list_actions):
 
     first_layer(list_actions) #40 et 60 mouvements  
-    # second_layer()
-    # third_layer()
+    second_layer()
+    third_layer()
 
     moved = True
     return_solution_opti(cube.solution)

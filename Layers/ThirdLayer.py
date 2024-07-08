@@ -2,6 +2,18 @@ from Start.NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A
 from Utils.Functions import action
 from Start.CubeClass import cube
 
+def resolve_yellow_face():
+    # try with python3 main.py "F2 D2 L' F2 L D2 F D' F"
+       yellow_faces_list = [C5, A11, C4, A10, A6, C7, A8, C6]
+       binary_yellow = 0
+       current_color = " "
+       for index, n in enumerate(yellow_faces_list):
+           print(n.get_color()[1])
+           current_color = n.get_color()
+           binary_yellow |= (((current_color[1], current_color[0])[len(current_color) == 2] == 'Y')<<index)
+       print(bin(binary_yellow))
+
+
 def check_cross():
         #a11
     #a6     a10

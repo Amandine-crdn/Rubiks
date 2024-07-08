@@ -5,7 +5,7 @@ from Layers.SolveWhiteCorners import insert_corner, out_corner, swap_corner
 from Layers.SolveWhiteCross import turn_edge_front, turn_edge_back, turn_edge_left, turn_edge_right
 from Layers.FirstLayer import best_cross
 from Layers.SecondLayer import edges_from_three_layer, reverse_edge, out_edge_back, out_edge_left, out_edge_right, out_edge_up
-from Layers.ThirdLayer import check_cross, make_cross, check_L, check_trait
+from Layers.ThirdLayer import resolve_yellow_face, check_cross, make_cross, check_L, check_trait
 from Start.RotationsStart import cmd_map, action_start
 
 def compass_corners():
@@ -170,10 +170,11 @@ def second_layer():
 def third_layer(): # L R B F R' L' 
     #checker si la cross est deja faite
     print("\n🔻")
-    if check_cross() == False:
-        print("false")
-        check_L()
-
+    resolve_yellow_face()
+#    if check_cross() == False:
+#        print("false")
+#        check_L()
+#
     cube.print_cube()
 
 
