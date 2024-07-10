@@ -16,7 +16,7 @@ def start_resolve():
         
     first_layer()
     second_layer()
-    # third_layer()
+    third_layer()
 
     moved = True
     print(len(cube.solution))

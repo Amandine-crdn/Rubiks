@@ -5,7 +5,7 @@ from utils.SolveWhiteCorners import insert_corner, out_corner, swap_corner
 from utils.SolveWhiteCross import resolve_cross, backtracking, speeder_path, ft_protection, turn_edge_up, turn_edge_back, turn_edge_left, turn_edge_right
 from Rotations import Rien, Right, RightPrime, Left, LeftPrime, Up, UpPrime, Back, BackPrime, Down, DownPrime, Front, FrontPrime, R2, L2, B2, D2, U2, F2
 from SecondLayer import edges_from_three_layer, reverse_edge, out_edge_back, out_edge_left, out_edge_right, out_edge_up
-from ThirdLayer import check_cross, make_cross, check_L, check_trait
+from ThirdLayer import resolve_yellow_face, check_cross, make_cross, check_L, check_trait
 
 def compass_corners():
     final_color = ["WBR", "WRG", "WOB", "WGO"]
@@ -141,9 +141,10 @@ def second_layer():
 def third_layer(): # L R B F R' L' 
     #checker si la cross est deja faite
     print("\n🔻")
-    if check_cross() == False:
-        print("false")
-        check_L()
+    resolve_yellow_face()
+#    if check_cross() == False:
+#        print("false")
+#        check_L()
 
     cube.print_cube()
 
