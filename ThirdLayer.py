@@ -1,56 +1,32 @@
 from NodeClass import Node, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, C0, C1, C2, C3, C4, C5, C6, C7
 from Functions import action
 from CubeClass import cube
+from pll import all_pll_binary
 
 #def set_binary_face(color: str, N1: Node, N2: Node, N3: Node, N4: Node, N5: Node, N6: Node, N7: Node, N8: Node) -> int:
 def set_binary_face() -> int:
        binary_buffer = 0
        current_color = " "
        binary_buffer |= ((C5.get_color()[2] == 'Y')<<19)
-#       print(C5.get_color()[2])
        binary_buffer |= ((A11.get_color()[0] == 'Y')<<18)
-#       print(A11.get_color()[0])
        binary_buffer |= ((C4.get_color()[1] == 'Y')<<17)
-#       print(C4.get_color()[1])
        binary_buffer |= ((C5.get_color()[1] == 'Y')<<16)
-#       print(C5.get_color()[1])
        binary_buffer |= ((C5.get_color()[0] == 'Y')<<15)
-#       print(C5.get_color()[0])
        binary_buffer |= ((A11.get_color()[1] == 'Y')<<14)
-#       print(A11.get_color()[1])
        binary_buffer |= ((C4.get_color()[0] == 'Y')<<13)
-#       print(C4.get_color()[0])
        binary_buffer |= ((C4.get_color()[2] == 'Y')<<12)
-#       print(C4.get_color()[2])
        binary_buffer |= ((A10.get_color()[0] == 'Y')<<11)
-#       print(A10.get_color()[0])
        binary_buffer |= ((A10.get_color()[1] == 'Y')<<10)
-#       print(A10.get_color()[1])
        binary_buffer |= ((A6.get_color()[1] == 'Y')<<9)
-#       print(A6.get_color()[1])
        binary_buffer |= ((A6.get_color()[0] == 'Y')<<8)
-#       print(A6.get_color()[0])
        binary_buffer |= ((C7.get_color()[2] == 'Y')<<7)
-#       print(C7.get_color()[2])
        binary_buffer |= ((C7.get_color()[0] == 'Y')<<6)
-#       print(C7.get_color()[0])
        binary_buffer |= ((A8.get_color()[1] == 'Y')<<5)
-#       print(A8.get_color()[1])
        binary_buffer |= ((C6.get_color()[0] == 'Y')<<4)
-#       print(C6.get_color()[0])
        binary_buffer |= ((C6.get_color()[1] == 'Y')<<3)
-#       print(C6.get_color()[1])
        binary_buffer |= ((C7.get_color()[1] == 'Y')<<2)
-#       print(C7.get_color()[1])
        binary_buffer |= ((A8.get_color()[0] == 'Y')<<1)
-#       print(A8.get_color()[0])
        binary_buffer |= ((C6.get_color()[2] == 'Y')<<0)
-#       print(C6.get_color()[2])
-#       for index, n in enumerate(faces_list):
-#           current_color = n.get_color()
-#           binary_buffer |= (((current_color[1], current_color[0])[len(current_color) == 3] == color[0])<<(len(faces_list) - index - 1))
-#           print("test", bin(binary_buffer), (current_color[1], current_color[0])[len(current_color) == 3])
-       print(bin(binary_buffer))
        return binary_buffer
 
 def resolve_yellow_cross():
@@ -255,11 +231,76 @@ def second_step_two_look_oll():
         action(i)()
     cube.print_cube()
 
+def stock_PLL():
+    binary_colors = [0, 0, 0, 0]
+    all_colors = []
+    all_colors.append(C5.get_color()[2])
+    all_colors.append(A11.get_color()[0])
+    all_colors.append(C4.get_color()[1])
+
+    all_colors.append(C4.get_color()[2])
+    all_colors.append(A6.get_color()[0])
+    all_colors.append(C6.get_color()[1])
+
+    all_colors.append(C6.get_color()[2])
+    all_colors.append(A8.get_color()[0])
+    all_colors.append(C7.get_color()[1])
+
+    all_colors.append(C7.get_color()[2])
+    all_colors.append(A10.get_color()[0])
+    all_colors.append(C5.get_color()[1])
+
+
+
+    for index, c in enumerate(all_colors):
+        binary_colors[0] |= ((c == 'R')<<(len(all_colors) - index - 1))
+    for index, c in enumerate(all_colors):
+        binary_colors[1] |= ((c == 'G')<<(len(all_colors) - index - 1))
+    for index, c in enumerate(all_colors):
+        binary_colors[2] |= ((c == 'B')<<(len(all_colors) - index - 1))
+    for index, c in enumerate(all_colors):
+        binary_colors[3] |= ((c == 'O')<<(len(all_colors) - index - 1))
+    return binary_colors
+
+
+def PLL():
+    binary_colors = stock_PLL()
+    print("R", bin(binary_colors[0]), binary_colors[0])
+    print("G", bin(binary_colors[1]), binary_colors[1])
+    print("B", bin(binary_colors[2]), binary_colors[2])
+    print("O", bin(binary_colors[3]), binary_colors[3])
+    print(all_pll_binary)
+    for pll in all_pll_binary:
+        if binary_colors[0] in pll and binary_colors[1] in pll and binary_colors[2] in pll and binary_colors[3] in pll:
+            print(pll[0])
+            break
+    action(10)()
+    binary_colors = stock_PLL()
+    for pll in all_pll_binary:
+        if binary_colors[0] in pll and binary_colors[1] in pll and binary_colors[2] in pll and binary_colors[3] in pll:
+            print(pll[0])
+            break
+    action(10)()
+    binary_colors = stock_PLL()
+    for pll in all_pll_binary:
+        if binary_colors[0] in pll and binary_colors[1] in pll and binary_colors[2] in pll and binary_colors[3] in pll:
+            print(pll[0])
+            break
+    action(10)()
+    binary_colors = stock_PLL()
+    for pll in all_pll_binary:
+        if binary_colors[0] in pll and binary_colors[1] in pll and binary_colors[2] in pll and binary_colors[3] in pll:
+            print(pll[0])
+            break
+
+
+
 def resolve_yellow_face():
     print("")
     # try with python3 main.py "F2 D2 L' F2 L D2 F D' F"
     first_step_two_look_oll()
     second_step_two_look_oll()
+    PLL()
 #    resolve_yellow_cross();
 #       yellow_faces_list = [C5, A11, C4, A10, A6, C7, A8, C6]
 #       binary_yellow = 0
