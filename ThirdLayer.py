@@ -262,6 +262,21 @@ def stock_PLL():
         binary_colors[3] |= ((c == 'O')<<(len(all_colors) - index - 1))
     return binary_colors
 
+def turn_pll_binary(copy_all_pll_binary):
+    tmp = 0
+    for c_index,c in enumerate(copy_all_pll_binary):
+#        print(c, ' ')
+        for b_index, b in enumerate(c):
+            if b_index == 0:
+                continue
+#            print(bin(b), ' ')
+            tmp = b & 0b000000000111
+            b = (b>>3) | (tmp<<9)
+            copy_all_pll_binary[c_index][b_index] = b
+#            print(bin(b), '\n')
+#        print(c, '\n')
+    return copy_all_pll_binary
+
 
 def PLL():
     binary_colors = stock_PLL()
@@ -269,29 +284,34 @@ def PLL():
     print("G", bin(binary_colors[1]), binary_colors[1])
     print("B", bin(binary_colors[2]), binary_colors[2])
     print("O", bin(binary_colors[3]), binary_colors[3])
-    print(all_pll_binary)
-    for pll in all_pll_binary:
-        if binary_colors[0] in pll and binary_colors[1] in pll and binary_colors[2] in pll and binary_colors[3] in pll:
-            print(pll[0])
-            break
-    action(10)()
-    binary_colors = stock_PLL()
-    for pll in all_pll_binary:
-        if binary_colors[0] in pll and binary_colors[1] in pll and binary_colors[2] in pll and binary_colors[3] in pll:
-            print(pll[0])
-            break
-    action(10)()
-    binary_colors = stock_PLL()
-    for pll in all_pll_binary:
-        if binary_colors[0] in pll and binary_colors[1] in pll and binary_colors[2] in pll and binary_colors[3] in pll:
-            print(pll[0])
-            break
-    action(10)()
-    binary_colors = stock_PLL()
-    for pll in all_pll_binary:
-        if binary_colors[0] in pll and binary_colors[1] in pll and binary_colors[2] in pll and binary_colors[3] in pll:
-            print(pll[0])
-            break
+    copy_all_pll_binary = all_pll_binary
+    print(copy_all_pll_binary, "\n")
+    for i in range(0,4):
+        print(i)
+        for pll in copy_all_pll_binary:
+            if binary_colors[0] in pll and binary_colors[1] in pll and binary_colors[2] in pll and binary_colors[3] in pll:
+                print("\n HERE",pll[0], '\n')
+                break
+        copy_all_pll_binay = turn_pll_binary(copy_all_pll_binary)
+
+#    action(10)()
+#    binary_colors = stock_PLL()
+#    for pll in copy_all_pll_binary:
+#        if binary_colors[0] in pll and binary_colors[1] in pll and binary_colors[2] in pll and binary_colors[3] in pll:
+#            print(pll[0])
+#            break
+#    action(10)()
+#    binary_colors = stock_PLL()
+#    for pll in copy_all_pll_binary:
+#        if binary_colors[0] in pll and binary_colors[1] in pll and binary_colors[2] in pll and binary_colors[3] in pll:
+#            print(pll[0])
+#            break
+#    action(10)()
+#    binary_colors = stock_PLL()
+#    for pll in all_pll_binary:
+#        if binary_colors[0] in pll and binary_colors[1] in pll and binary_colors[2] in pll and binary_colors[3] in pll:
+#            print(pll[0])
+#            break
 
 
 
