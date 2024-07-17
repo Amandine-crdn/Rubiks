@@ -1,0 +1,1 @@
+python3 main.py "B U' R U L' B2 R2 B2 L U2 B' D' B' U2 L' R2 B' D2 F2 U"
