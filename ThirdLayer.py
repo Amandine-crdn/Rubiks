@@ -267,7 +267,7 @@ def turn_pll_binary(copy_all_pll_binary):
     for c_index,c in enumerate(copy_all_pll_binary):
 #        print(c, ' ')
         for b_index, b in enumerate(c):
-            if b_index == 0:
+            if b_index == 0 or b_index == 5:
                 continue
 #            print(bin(b), ' ')
             tmp = b & 0b000000000111
@@ -277,21 +277,41 @@ def turn_pll_binary(copy_all_pll_binary):
 #        print(c, '\n')
     return copy_all_pll_binary
 
+def PUa():
+    return ["R", "U'", "R", "U", "R", "U", "R", "U'", "R'", "U'", "R", "R"]
+    return ["L", "D'", "L", "D", "L", "D", "L", "D'", "L'", "D'", "L", "L"]
+
 
 def PLL():
     binary_colors = stock_PLL()
+    instructions = []
     print("R", bin(binary_colors[0]), binary_colors[0])
     print("G", bin(binary_colors[1]), binary_colors[1])
     print("B", bin(binary_colors[2]), binary_colors[2])
     print("O", bin(binary_colors[3]), binary_colors[3])
     copy_all_pll_binary = all_pll_binary
     print(copy_all_pll_binary, "\n")
+    done = False
     for i in range(0,4):
         print(i)
         for pll in copy_all_pll_binary:
             if binary_colors[0] in pll and binary_colors[1] in pll and binary_colors[2] in pll and binary_colors[3] in pll:
+                match i:
+                    case 1:
+                        instructions = convert_moves(["D'"])
+                    case 2:
+                        instructions = convert_moves(["D", "D"])
+                    case 3:
+                        instructions = convert_moves(["D"])
+
+                instructions.extend(convert_moves(pll[5]))
+                for a in instructions:
+                    action(a)()
                 print("\n HERE",pll[0], '\n')
+                done = True
                 break
+        if done:
+            break
         copy_all_pll_binay = turn_pll_binary(copy_all_pll_binary)
 
 #    action(10)()
