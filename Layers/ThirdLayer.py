@@ -234,7 +234,7 @@ def PLL():
 def last_rotary():
     '''Make movements to align the last layer with the correct color'''
     binary_colors = stock_PLL()
-    tmp = 0;
+    tmp = 0
     for i in range(0, 4):
         if binary_colors[0] == 0b111000000000:
             match i:
@@ -253,4 +253,3 @@ def resolve_third_layer():
     second_step_two_look_oll()
     PLL()
     last_rotary()
-    print("LAST")

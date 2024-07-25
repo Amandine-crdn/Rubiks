@@ -65,7 +65,7 @@ def simulation(nodes_index, colors, map_node, nodes_blocked):
             for i in range(0, 4):
                 if target_path[0] == i :
                     nodes_blocked[nodes_index[i]] = map_node[nodes_index[i]]
-                    print(nodes_blocked[nodes_index[i]].get_color())
+                    # print(nodes_blocked[nodes_index[i]].get_color())
         count += 1
     
 

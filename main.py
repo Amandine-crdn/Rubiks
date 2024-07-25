@@ -19,14 +19,12 @@ def start_resolve(list_actions):
     opt_mov = cube.solution.split()
     while moved == True:
         opt_mov, moved = optimize_moves(opt_mov)
-    print(len(opt_mov))
-    print("🏁 Moves:", opt_mov)
+    print(' '.join(opt_mov))
 
 
 
 
-print("\n🐋 Start :")
-cube.print_cube()
+# cube.print_cube()
 commandes = ' '.join(sys.argv[1::])
 split_cmd = commandes.split()
 list_actions = []
@@ -42,7 +40,5 @@ if split_cmd:
     # print("\n🐋 input to shake: ",list_actions)
     for l in list_actions:
         action_start(l)()
-    print("\n🐋 State of rubik after shake :")
-    cube.print_cube()
     if len(list_actions) > 0:
         start_resolve(list_actions)

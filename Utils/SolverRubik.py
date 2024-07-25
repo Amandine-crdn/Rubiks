@@ -43,7 +43,8 @@ def first_layer(list_action):
     # for play in to_play:
     #     action_start(play)()
     
-    print("index ", index)
+    
+    # print("index ", index)
     from Layers.FirstLayer import nodes_blocked, map_node, nodes_index, colors
     from Layers.SolveWhiteCross import speeder_path, resolve_cross, ft_protection
 
@@ -70,9 +71,7 @@ def first_layer(list_action):
         count += 1
     #faire le renversement des aretes à la fin du backtracking
     #orienter les aretes vers leur centre
-    print("\n🐋 Cross done :")
     compass_edges()
-    cube.print_cube()
 
 
 
@@ -108,9 +107,6 @@ def first_layer(list_action):
     # orienter les coins
 
     compass_corners()
-    print("\n🐋 Corners' White Face Cube Done : ")
-    cube.print_cube()
-
 
 
 
@@ -121,9 +117,7 @@ def first_layer(list_action):
 ########################################################################## SECOND LAYER
 
 def second_layer():
-    
     nodes_blocked = { 0: False, 1: False, 2: False, 3: False }
-
     colors = ["BR", "BO", "OG", "GR"]
     # down_edges = [A6, A8, A10, A11]
     center_edges = [A4, A5, A7, A9]
@@ -148,50 +142,15 @@ def second_layer():
             if nodes_blocked[i] == False:
                 functions_out[i]()                       
         all_locked = all(nodes_blocked.values())
-    
-    print("\n🐋 Second Layer Done : ")
-    cube.print_cube()
-    
+
 
 
 
 
 ########################################################################## THIRD LAYER
 
-
-#etage 3
-def third_layer(): # L R B F R' L' 
+def third_layer():
     resolve_third_layer()
-    cube.print_cube()
-
-
-    #si 2 aretes opposé bien placer en fonction des milieux:
-        #mettre ce trait là face à nous et faire l'algo pour mettre en 2 à coté
-        #finir par encore l'algo 
-    #si 2 aretes a cote:
-        # faire une seule fois l'algo
-
-        # 🍪 r u r' u r u2 r' dans l'aute sens  et replacer avec un down
-        # l d l' d l d2 l'
-        #liste_actions = [2, 10, 3, 10, 2, 10, 10, 3]
-
-
-
-    #bien placer les coins en fonction de la couleur de ces centres
-    # 🍪 l' u r  u' l u r' u' à l'envers
-    # r' d l' d' r d l' d'
-    #liste_actions = [1, 10, 3, 11, 0, 10, 3, 11]
-
-
-    #faire le sexy move sur les 4 coins
-    #🍪 la on est à l'endroit, a faire sur les coins qui faut changer
-    #  r u r' u'    #puis down
-    #fin... avec je pense 150 coups à la fin
-
-    #
-
-    
-#si un motif de rubik est deviné faire son mouvement inverse
 
 
     
