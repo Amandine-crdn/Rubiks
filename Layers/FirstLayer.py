@@ -57,6 +57,7 @@ def simulation(nodes_index, colors, map_node, nodes_blocked):
     while count != 4:
         list_path_to_resolve_node, nodes_blocked = resolve_cross(nodes_index, colors, map_node, nodes_blocked)
         target_path = speeder_path(list_path_to_resolve_node) 
+
         if target_path : #si l'action existe, l'executer 
             #proteger les nodes_blocked, executer l'action et remettre les nodes_blocked à leur place
             ft_protection(nodes_blocked, target_path)  
@@ -77,7 +78,7 @@ def best_cross(list_action): #sans checker le sens des aretes
   
   
     for i in range(0, 24):
-    # for i in range(0, 1):
+#    for i in range(0, 1):
         simulation(nodes_index[i], colors[i], map_node[i], nodes_blocked[i])
         possibility_solutions.append((i, cube.solution)) #ajouter l'indice de la solution a choisir et la taille de la solution pour permettre de comaprer apres
         #remettre les mouvements choisi par l'utilisateur

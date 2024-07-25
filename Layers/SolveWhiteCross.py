@@ -64,7 +64,7 @@ def backtracking(node: Node, old_node: Node, node_init: Node, path: list[int], d
 
 
 def resolve_cross(nodes_index, colors, map_node, nodes_blocked: dict[int, Node]): #R F B R2 U' L F2
-    print("⛑️ resolve cross ⛑️")
+    # print("⛑️ resolve cross ⛑️")
     list_path_to_resolve_node = []
     
     for index_node, n in enumerate(map_node):
@@ -82,7 +82,7 @@ def resolve_cross(nodes_index, colors, map_node, nodes_blocked: dict[int, Node])
             
             # print("\nsearch to replace ", index_node, n.get_color())
 
-            print(f"\n 🔍 backtracking W{colors[index_node]}" )
+            # print(f"\n 🔍 backtracking W{colors[index_node]}" )
             while node :
                 node, dico_target_path, path, i = backtracking(node, old_node, node_init, path, dico_target_path, i, colors[index_node], nodes_blocked, index_node, map_node,nodes_index)
             target_path = select_shorter_action(dico_target_path, index_node)
@@ -138,7 +138,6 @@ def check_is_locked(next_node: Node, nodes_blocked: dict[int, Node]):
 def protection_rotation_up(nodes_blocked: dict[int, Node], direction: int):
     protection = []
     number_nodes_locked = get_number_nodes_locked(nodes_blocked)
-
     if number_nodes_locked == 1:
         if nodes_blocked[0]:
             action(6)() #back
@@ -208,6 +207,7 @@ def protection_rotation_up(nodes_blocked: dict[int, Node], direction: int):
 
 def protection_other_rotations(nodes_blocked: dict[int, Node], direction: int):
     other_protection = []
+    number_nodes_locked = get_number_nodes_locked(nodes_blocked)
     for k, v in nodes_blocked.items():
         
         #backs rotation

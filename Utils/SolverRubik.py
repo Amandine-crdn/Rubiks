@@ -5,9 +5,9 @@ from Layers.SolveWhiteCorners import insert_corner, out_corner, swap_corner
 from Layers.SolveWhiteCross import turn_edge_front, turn_edge_back, turn_edge_left, turn_edge_right
 from Layers.FirstLayer import best_cross
 from Layers.SecondLayer import edges_from_three_layer, reverse_edge, out_edge_back, out_edge_left, out_edge_right, out_edge_up
-from Layers.ThirdLayer import check_cross, make_cross, check_L, check_trait
+from Layers.ThirdLayer import resolve_third_layer
 from Start.RotationsStart import cmd_map, action_start
-
+from Utils.Functions import action
 def compass_corners():
     final_color = ["WBR", "WRG", "WOB", "WGO"]
     whites_corners = [C0, C1, C2, C3]
@@ -71,52 +71,45 @@ def first_layer(list_action):
     #faire le renversement des aretes à la fin du backtracking
     #orienter les aretes vers leur centre
     print("\n🐋 Cross done :")
+    compass_edges()
     cube.print_cube()
-    # print("\n🐋 Edges'Cross Compass : ")
-    # compass_edges()
-    # cube.print_cube()
 
 
 
 
 
     # #-----------------------------------------------------------------------------corners
-    # nodes_blocked = {
-    #     0: None,
-    #     1: None,
-    #     2: None,
-    #     3: None
-    # }
+                                                  
 
-    # whites_corners = [C0, C1, C2, C3]
-    # colors = ['RB', 'RG', 'BO', 'OG']
-    # nodes = [C0, C1, C2, C3, C4, C5, C6, C7]
-    # down_corners = [C4, C5, C6, C7]
-        
-    # for index_corner, c in enumerate(whites_corners):
-    #     #pour chaque coin on va chercher sa couleur
-    #     for index_node, n in enumerate(nodes):
-    #         if nodes_blocked[index_corner] is None and {'W', colors[index_corner][0], colors[index_corner][1]}.issubset(n.get_color()) :
-    #         # if 'W' in n.get_color() and colors[index_corner][0] in n.get_color() and colors[index_corner][1] in n.get_color() and nodes_blocked[index_corner] is None : #on choppe le node qu'on veut ramener à c
-    #             #on chercher à savoir c'est quel node:
-    #             if index_node == index_corner: #si le noeud est au bon endroit
-    #                 nodes_blocked[index_corner] = n
-    #                 continue
-    #             elif index_node >= 0 and index_node <= 3: #faire sortir le node recherché pour le placer apres
-    #                 out_corner(index_node)
+    whites_corners = [C0, C1, C2, C3]
+    colors = ['RB', 'RG', 'BO', 'OG']
+    nodes = [C0, C1, C2, C3, C4, C5, C6, C7]                          
+    down_corners = [C4, C5, C6, C7]
+    nodes_blocked = {0: None, 1: None, 2: None, 3: None}
+
+    for index_corner, c in enumerate(whites_corners):
+        #pour chaque coin on va chercher sa couleur
+        for index_node, n in enumerate(nodes):
+            # if nodes_blocked[index_corner] is None and {'W', colors[index_corner][0], colors[index_corner][1]}.issubset(n.get_color()) :
+            if 'W' in n.get_color() and colors[index_corner][0] in n.get_color() and colors[index_corner][1] in n.get_color() and nodes_blocked[index_corner] is None : #on choppe le node qu'on veut ramener à c
+                #on chercher à savoir c'est quel node:
+                if index_node == index_corner: #si le noeud est au bon endroit
+                    nodes_blocked[index_corner] = n
+                    continue
+                elif index_node >= 0 and index_node <= 3: #faire sortir le node recherché pour le placer apres
+                    out_corner(index_node)
     
-    #             while True:
-    #                 if 'W' in down_corners[index_corner].get_color() and colors[index_corner][0] in down_corners[index_corner].get_color() and colors[index_corner][1] in down_corners[index_corner].get_color() : #on choppe le node qu'on veut ramener à c
-    #                     break
-    #                 action(10)()
-    #             insert_corner(index_corner)
-    # print("\n🐋 Corners' Done : ")
-    # cube.print_cube()
-    # # orienter les coins
+                while True:
+                    if 'W' in down_corners[index_corner].get_color() and colors[index_corner][0] in down_corners[index_corner].get_color() and colors[index_corner][1] in down_corners[index_corner].get_color() : #on choppe le node qu'on veut ramener à c
+                        break
+                    action(10)()
+                insert_corner(index_corner)
 
-    # compass_corners()
-    # print("\n🐋 Corners' White Face Cube Done : ")
-    # cube.print_cube()
+    # orienter les coins
+
+    compass_corners()
+    print("\n🐋 Corners' White Face Cube Done : ")
+    cube.print_cube()
 
 
 
@@ -168,12 +161,7 @@ def second_layer():
 
 #etage 3
 def third_layer(): # L R B F R' L' 
-    #checker si la cross est deja faite
-    print("\n🔻")
-    if check_cross() == False:
-        print("false")
-        check_L()
-
+    resolve_third_layer()
     cube.print_cube()
 
 

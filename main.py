@@ -11,8 +11,8 @@ import sys
 def start_resolve(list_actions):
 
     first_layer(list_actions) #40 et 60 mouvements  
-    # second_layer()
-    # third_layer()
+    second_layer()
+    third_layer()
 
     moved = True
     return_solution_opti(cube.solution)
@@ -27,7 +27,7 @@ def start_resolve(list_actions):
 
 print("\n🐋 Start :")
 cube.print_cube()
-commandes = ' '.join(sys.argv[1::]);
+commandes = ' '.join(sys.argv[1::])
 split_cmd = commandes.split()
 list_actions = []
 if split_cmd:
@@ -35,6 +35,7 @@ if split_cmd:
         acts = cmd_map.get(c, None)
         if acts is None:
             list_actions = []
+            print("ERROR: bad argument")
             break
         else:
             list_actions.extend(acts)
